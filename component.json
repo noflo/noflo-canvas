@@ -1,0 +1,24 @@
+{
+  "name": "noflo-canvas",
+  "description": "Canvas 2D to NoFlo.",
+  "author": "Vilson Vieira <vilson@void.cc>",
+  "repo": "vilson/noflo-canvas",
+  "version": "0.1.0",
+  "keywords": [
+  ],
+  "dependencies": {
+    "noflo/noflo": "*"
+  },
+  "scripts": [
+    "components/Get2dContext.coffee",
+    "index.js"
+  ],
+  "json": [
+    "component.json"
+  ],
+  "noflo": {
+    "components": {
+      "Get2dContext": "components/Get2dContext.coffee"
+    }
+  }
+}

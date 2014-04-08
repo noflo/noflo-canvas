@@ -1,0 +1,41 @@
+{
+  "name": "noflo-canvas",
+  "description": "Canvas 2D to NoFlo.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Vilson Vieira",
+    "email": "vilson@void.cc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/automata/noflo-canvas.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "undefined/blob/master/LICENSE-MIT"
+    }
+  ],
+  "scripts": {
+    "test": "grunt test"
+  },
+  "dependencies": {
+    "noflo": "~0.4.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-coffee": "~0.6.6",
+    "grunt-coffeelint": "~0.0.6",
+    "grunt-cafe-mocha": "~0.1.2",
+    "chai": "~1.5.0",
+    "mocha": "~1.9.0",
+    "grunt-mocha-phantomjs": "~0.2.2",
+    "grunt-component-build": "~0.2.7",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-watch": "~0.3.1",
+    "component-json": "~0.1.4",
+    "grunt-combine": "~0.8.3",
+    "grunt-component": "~0.1.2"
+  },
+  "keywords": []
+}
