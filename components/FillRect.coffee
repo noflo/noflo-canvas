@@ -1,7 +1,7 @@
 noflo = require 'noflo'
 
 class FillRect extends noflo.Component
-  description: 'Paints the given rectangle onto the canvas, using the current fill style'
+  description: 'Paints the given rectangle onto the canvas'
   icon: 'pencil-square'
   constructor: ->
     @context = null
