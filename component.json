@@ -2,7 +2,7 @@
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
   "author": "Vilson Vieira <vilson@void.cc>",
-  "repo": "vilson/noflo-canvas",
+  "repo": "automata/noflo-canvas",
   "version": "0.1.0",
   "keywords": [
   ],
@@ -10,15 +10,17 @@
     "noflo/noflo": "*"
   },
   "scripts": [
+    "index.js",
     "components/Get2dContext.coffee",
-    "index.js"
+    "components/FillRect.coffee"
   ],
   "json": [
     "component.json"
   ],
   "noflo": {
     "components": {
-      "Get2dContext": "components/Get2dContext.coffee"
+      "Get2dContext": "components/Get2dContext.coffee",
+      "FillRect": "components/FillRect.coffee"
     }
   }
 }
