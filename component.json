@@ -12,7 +12,12 @@
   "scripts": [
     "index.js",
     "components/Get2dContext.coffee",
-    "components/FillRect.coffee"
+    "components/FillRect.coffee",
+    "components/Vector.coffee",
+    "components/Polyline.coffee",
+    "components/Stroke.coffee",
+    "components/Draw.coffee",
+    "components/Clear.coffee"
   ],
   "json": [
     "component.json"
@@ -20,7 +25,12 @@
   "noflo": {
     "components": {
       "Get2dContext": "components/Get2dContext.coffee",
-      "FillRect": "components/FillRect.coffee"
+      "FillRect": "components/FillRect.coffee",
+      "Vector": "components/Vector.coffee",
+      "Polyline": "components/Polyline.coffee",
+      "Stroke": "components/Stroke.coffee",
+      "Draw": "components/Draw.coffee",
+      "Clear": "components/Clear.coffee"
     }
   }
 }
