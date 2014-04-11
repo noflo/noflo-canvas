@@ -16,6 +16,9 @@
     "components/Vector.coffee",
     "components/Polyline.coffee",
     "components/Stroke.coffee",
+    "components/StrokeStyle.coffee",
+    "components/Fill.coffee",
+    "components/FillStyle.coffee",
     "components/Draw.coffee",
     "components/Clear.coffee"
   ],
@@ -29,6 +32,9 @@
       "Vector": "components/Vector.coffee",
       "Polyline": "components/Polyline.coffee",
       "Stroke": "components/Stroke.coffee",
+      "StrokeStyle": "components/StrokeStyle.coffee",
+      "Fill": "components/Fill.coffee",
+      "FillStyle": "components/FillStyle.coffee",
       "Draw": "components/Draw.coffee",
       "Clear": "components/Clear.coffee"
     }

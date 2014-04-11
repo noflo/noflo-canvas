@@ -11,9 +11,9 @@ class Polyline extends noflo.Component
     @outPorts =
       polyline: new noflo.Port 'object'
 
-    @inPorts.points.on 'data', (points) =>
-      @points = points
+    @inPorts.points.on 'data', (points, i) =>
+      @points[i] = points
       if @outPorts.polyline.isAttached()
-        @outPorts.polyline.send {'polyline': @points}
+          @outPorts.polyline.send {'polyline': @points}
 
 exports.getComponent = -> new Polyline
