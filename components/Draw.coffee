@@ -4,12 +4,13 @@ class Draw extends noflo.Component
   description: 'Draws received drawing commands'
   icon: 'pencil-square'
   constructor: ->
+    @canvas = null
     @context = null
     @commands = []
     
     @inPorts =
       tick: new noflo.Port 'number'
-      context: new noflo.Port 'object'
+      canvas: new noflo.Port 'object'
       commands: new noflo.ArrayPort 'object'
 
     @inPorts.tick.on 'data', (tick) =>
@@ -20,8 +21,9 @@ class Draw extends noflo.Component
         loglevel: 'error'
         message: 'Received commands but there\'s any 2d context attached.'
 
-    @inPorts.context.on 'data', (context) =>
-      @context = context
+    @inPorts.canvas.on 'data', (canvas) =>
+      @canvas = canvas
+      @context = canvas.getContext('2d')
       
     @inPorts.commands.on 'data', (commands, i) =>
       @commands[i] = commands
@@ -35,9 +37,7 @@ class Draw extends noflo.Component
     if rectangle
       @context.clearRect.apply @context, rectangle
     else
-      w = @context.canvas.width
-      h = @context.canvas.height
-      @context.clearRect.apply @context, [0, 0, w, h]
+      @context.clearRect.apply @context, [0, 0, @canvas.width, @canvas.height]
 
   stroke: (strokableThings) =>
     for thing, arguments of strokableThings
