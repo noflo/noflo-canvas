@@ -20,7 +20,8 @@
     "components/Fill.coffee",
     "components/FillStyle.coffee",
     "components/Draw.coffee",
-    "components/Clear.coffee"
+    "components/Clear.coffee",
+    "components/DrawImage.coffee"
   ],
   "json": [
     "component.json"
@@ -36,7 +37,8 @@
       "Fill": "components/Fill.coffee",
       "FillStyle": "components/FillStyle.coffee",
       "Draw": "components/Draw.coffee",
-      "Clear": "components/Clear.coffee"
+      "Clear": "components/Clear.coffee",
+      "DrawImage": "components/DrawImage.coffee"
     }
   }
 }

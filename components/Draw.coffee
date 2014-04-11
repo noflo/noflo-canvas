@@ -63,5 +63,8 @@ class Draw extends noflo.Component
         @context.moveTo.apply @context, vector
       else
         @context.lineTo.apply @context, vector
-      
+
+  drawImage: (args) =>
+    @context.drawImage.apply @context, args
+                  
 exports.getComponent = -> new Draw
