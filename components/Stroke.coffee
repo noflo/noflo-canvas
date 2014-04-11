@@ -14,6 +14,6 @@ class Stroke extends noflo.Component
     @inPorts.polyline.on 'data', (polyline) =>
       @polyline = polyline
       if @outPorts.stroke.isAttached()
-          @outPorts.stroke.send {'stroke': @polyline}
+        @outPorts.stroke.send {'stroke': @polyline}
 
 exports.getComponent = -> new Stroke

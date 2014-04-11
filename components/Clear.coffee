@@ -16,4 +16,8 @@ class Clear extends noflo.Component
       if @outPorts.rectangle.isAttached()
         @outPorts.rectangle.send {'clear': @coords}
 
+    @outPorts.rectangle.on 'attach', =>
+      if @coords is null
+        @outPorts.rectangle.send {'clear': null}
+
 exports.getComponent = -> new Clear
