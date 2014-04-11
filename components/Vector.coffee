@@ -13,7 +13,7 @@ class Vector extends noflo.Component
       coords: new noflo.Port 'array'
 
     @outPorts =
-      vector: new noflo.Port 'object'
+      vector: new noflo.Port 'array'
 
     @inPorts.x.on 'data', (data) =>
       @x = data
