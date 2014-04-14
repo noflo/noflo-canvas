@@ -1,8 +1,8 @@
 {
   "name": "noflo-canvas",
-  "description": "Canvas 2D to NoFlo.",
+  "description": "Canvas 2D components for NoFlo",
   "author": "Vilson Vieira <vilson@void.cc>",
-  "repo": "automata/noflo-canvas",
+  "repo": "noflo/noflo-canvas",
   "version": "0.1.0",
   "keywords": [
   ],
@@ -14,6 +14,8 @@
     "components/Get2dContext.coffee",
     "components/FillRect.coffee",
     "components/Vector.coffee",
+    "components/Rectangle.coffee",
+    "components/Circle.coffee",
     "components/Polyline.coffee",
     "components/Stroke.coffee",
     "components/StrokeStyle.coffee",
@@ -29,9 +31,11 @@
   "noflo": {
     "components": {
       "Get2dContext": "components/Get2dContext.coffee",
-      "FillRect": "components/FillRect.coffee",
       "Vector": "components/Vector.coffee",
+      "Rectangle": "components/Rectangle.coffee",
+      "Circle": "components/Circle.coffee",
       "Polyline": "components/Polyline.coffee",
+      "FillRect": "components/FillRect.coffee",
       "Stroke": "components/Stroke.coffee",
       "StrokeStyle": "components/StrokeStyle.coffee",
       "Fill": "components/Fill.coffee",

@@ -4,16 +4,18 @@ class Fill extends noflo.Component
   description: 'Paints the received polyline as a polygon'
   icon: 'pencil-square'
   constructor: ->
-    @polyline = null
+    @fillables = []
 
     @inPorts =
-      polyline: new noflo.Port 'object'
+      fillables: new noflo.ArrayPort 'object'
     @outPorts =
       fill: new noflo.Port 'object'
 
-    @inPorts.polyline.on 'data', (polyline) =>
-      @polyline = polyline
+    @inPorts.fillables.on 'data', (fillable, i) =>
+      @fillables[i] = fillable
       if @outPorts.fill.isAttached()
-        @outPorts.fill.send {'fill': @polyline}
+        @outPorts.fill.send {'fill': @fillables}
+
+    # TODO listen for detach / reindex
 
 exports.getComponent = -> new Fill

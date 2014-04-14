@@ -9,7 +9,7 @@ class Draw extends noflo.Component
     @commands = []
     
     @inPorts =
-      tick: new noflo.Port 'number'
+      tick: new noflo.Port 'bang'
       canvas: new noflo.Port 'object'
       commands: new noflo.ArrayPort 'object'
 
@@ -28,10 +28,14 @@ class Draw extends noflo.Component
     @inPorts.commands.on 'data', (commands, i) =>
       @commands[i] = commands
 
+    # TODO listen for detach / reindex
+
+
   parse: (commands) =>
     for command in commands
       for instr, args of command
-        @[instr].apply @, [args]
+        if @[instr]?
+          @[instr].apply @, [args]
 
   clear: (rectangle) =>
     if rectangle
@@ -40,19 +44,27 @@ class Draw extends noflo.Component
       @context.clearRect.apply @context, [0, 0, @canvas.width, @canvas.height]
 
   stroke: (strokableThings) =>
-    for thing, arguments of strokableThings
-      @context.beginPath()
-      @[thing].apply @, [arguments]
-      @context.stroke()
+    @context.beginPath()
+    for thing in strokableThings
+      for name, args of thing
+        if name is "rectangle"
+          @rectanglePath.apply @, args
+        else if @[name]?
+          @[name].apply @, [args]
+    @context.stroke()
 
   strokeStyle: (color) =>
     @context.strokeStyle = color
 
   fill: (fillableThings) =>
-    for thing, arguments of fillableThings
-      @context.beginPath()
-      @[thing].apply @, [arguments]
-      @context.fill()
+    @context.beginPath()
+    for thing in fillableThings
+      for name, args of thing
+        if name is "rectangle"
+          @rectanglePath.apply @, args
+        else if @[name]?
+          @[name].apply @, [args]
+    @context.fill()
 
   fillStyle: (color) =>
     @context.fillStyle = color
@@ -63,6 +75,19 @@ class Draw extends noflo.Component
         @context.moveTo.apply @context, vector
       else
         @context.lineTo.apply @context, vector
+
+  rectanglePath: (x, y, w, h) =>
+    @context.moveTo x, y
+    @context.lineTo x+w, y
+    @context.lineTo x+w, y+h
+    @context.lineTo x, y+h
+    @context.lineTo x, y
+
+  fillRect: (args) =>
+    @context.fillRect.apply @context, args
+
+  arc: (args) =>
+    @context.arc.apply @context, args
 
   drawImage: (args) =>
     @context.drawImage.apply @context, args

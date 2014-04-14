@@ -4,16 +4,18 @@ class Stroke extends noflo.Component
   description: 'Paints the received polyline as a line'
   icon: 'pencil-square'
   constructor: ->
-    @polyline = null
+    @strokables = []
     
     @inPorts =
-      polyline: new noflo.Port 'object'
+      strokables: new noflo.ArrayPort 'object'
     @outPorts =
       stroke: new noflo.Port 'object'
 
-    @inPorts.polyline.on 'data', (polyline) =>
-      @polyline = polyline
+    @inPorts.strokables.on 'data', (strokable, i) =>
+      @strokables[i] = strokable
       if @outPorts.stroke.isAttached()
-        @outPorts.stroke.send {'stroke': @polyline}
+        @outPorts.stroke.send {'stroke': @strokables}
+
+    # TODO listen for detach / reindex
 
 exports.getComponent = -> new Stroke
