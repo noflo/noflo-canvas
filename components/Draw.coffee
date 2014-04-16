@@ -45,6 +45,7 @@ class Draw extends noflo.Component
   parse: (commands) =>
     return unless @context
     for command in commands
+      continue unless command
       for instr, args of command
         if @[instr]?
           @[instr].apply @, [args]
@@ -60,6 +61,7 @@ class Draw extends noflo.Component
   stroke: (strokableThings) =>
     @context.beginPath()
     for thing in strokableThings
+      continue unless thing
       for name, args of thing
         if name is "rectangle"
           @rectanglePath.apply @, args
@@ -73,6 +75,7 @@ class Draw extends noflo.Component
   fill: (fillableThings) =>
     @context.beginPath()
     for thing in fillableThings
+      continue unless thing
       for name, args of thing
         if name is "rectangle"
           @rectanglePath.apply @, args
@@ -85,6 +88,7 @@ class Draw extends noflo.Component
 
   polyline: (vectors) =>
     for vector, i in vectors
+      continue unless vector
       if i == 0
         @context.moveTo.apply @context, vector
       else
