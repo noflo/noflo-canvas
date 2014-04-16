@@ -39,10 +39,14 @@ class Draw extends noflo.Component
         @parse @commands
 
 
-    # TODO listen for detach / reindex
+    # @inPorts.commands.on 'detach', (i) =>
+    #   @commands.splice i, 1
+    #   if @every
+    #     @parse @commands
 
 
   parse: (commands) =>
+    console.log commands
     return unless @context
     for command in commands
       continue unless command
@@ -61,12 +65,8 @@ class Draw extends noflo.Component
   stroke: (strokableThings) =>
     @context.beginPath()
     for thing in strokableThings
-      continue unless thing
-      for name, args of thing
-        if name is "rectangle"
-          @rectanglePath.apply @, args
-        else if @[name]?
-          @[name].apply @, [args]
+      continue unless thing and thing.type and @[thing.type]?
+      @[thing.type].apply @, [thing]
     @context.stroke()
 
   strokeStyle: (color) =>
@@ -75,26 +75,29 @@ class Draw extends noflo.Component
   fill: (fillableThings) =>
     @context.beginPath()
     for thing in fillableThings
-      continue unless thing
-      for name, args of thing
-        if name is "rectangle"
-          @rectanglePath.apply @, args
-        else if @[name]?
-          @[name].apply @, [args]
+      continue unless thing and thing.type and @[thing.type]?
+      @[thing.type].apply @, [thing]
     @context.fill()
 
   fillStyle: (color) =>
     @context.fillStyle = color
 
-  polyline: (vectors) =>
-    for vector, i in vectors
-      continue unless vector
-      if i == 0
-        @context.moveTo.apply @context, vector
-      else
-        @context.lineTo.apply @context, vector
+  path: (pathableThings) =>
+    for thing, i in pathableThings
+      continue unless thing and thing.type
+      if thing.type is 'beziercurve'
+        @context.bezierCurveTo.apply @context, thing
+      else if thing.type is 'point'
+        if i is 0
+          @context.moveTo.apply @context, thing
+        else
+          @context.lineTo.apply @context, thing
 
-  rectanglePath: (x, y, w, h) =>
+  rectangle: (args) =>
+    x = args[0]
+    y = args[1]
+    w = args[2]
+    h = args[3]
     @context.moveTo x, y
     @context.lineTo x+w, y
     @context.lineTo x+w, y+h

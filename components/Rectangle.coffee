@@ -1,49 +1,51 @@
 noflo = require 'noflo'
 
 class Rectangle extends noflo.Component
-  description: 'Creates a rectangle path'
+  description: 'Creates an array representing a rectangle'
   icon: 'pencil-square'
   constructor: ->
-    @x = null
-    @y = null
-    @width = null
-    @height = null
+    @rectangle = []
+    @rectangle[0] = null # x
+    @rectangle[1] = null # y
+    @rectangle[2] = null # w
+    @rectangle[3] = null # h
+    @rectangle.type = 'rectangle'
 
     @inPorts =
       x: new noflo.Port 'number'
       y: new noflo.Port 'number'
       width: new noflo.Port 'number'
       height: new noflo.Port 'number'
-      rect: new noflo.Port 'array'
+      rectangle: new noflo.Port 'array'
 
     @outPorts =
-      rect: new noflo.Port 'array'
+      rectangle: new noflo.Port 'array'
 
     @inPorts.x.on 'data', (data) =>
-      @x = data
+      @rectangle[0] = data
       @compute()
 
     @inPorts.y.on 'data', (data) =>
-      @y = data
+      @rectangle[1] = data
       @compute()
 
     @inPorts.width.on 'data', (data) =>
-      @width = data
+      @rectangle[2] = data
       @compute()
 
     @inPorts.height.on 'data', (data) =>
-      @height = data
+      @rectangle[3] = data
       @compute()
 
-    @inPorts.rect.on 'data', (data) =>
-      @x = data[0]
-      @y = data[1]
-      @width = data[2]
-      @height = data[3]
+    @inPorts.rectangle.on 'data', (data) =>
+      @rectangle[0] = data[0]
+      @rectangle[1] = data[1]
+      @rectangle[2] = data[2]
+      @rectangle[3] = data[3]
       @compute()
 
   compute: ->
-    if @outPorts.rect.isAttached() and @x? and @y? and @width? and @height?
-      @outPorts.rect.send {"rectangle": [@x, @y, @width, @height]}
+    if @outPorts.rectangle.isAttached() and @rectangle.indexOf(null) is -1
+      @outPorts.rectangle.send @rectangle
 
 exports.getComponent = -> new Rectangle

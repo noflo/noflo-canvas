@@ -1,14 +1,16 @@
 noflo = require 'noflo'
 
-TAU = Math.PI*2
-
 class Circle extends noflo.Component
-  description: 'Creates a circle (full arc)'
+  description: 'Creates an array representing a circle (full arc)'
   icon: 'pencil-square'
   constructor: ->
-    @x = null
-    @y = null
-    @radius = null
+    @circle = []
+    @circle[0] = null # x
+    @circle[1] = null # y
+    @circle[2] = null # radius
+    @circle[3] = 0 # start radians
+    @circle[4] = Math.PI*2 # end radians = Tau for a full arc
+    @circle.type = 'arc'
 
     @inPorts =
       x: new noflo.Port 'number'
@@ -20,25 +22,25 @@ class Circle extends noflo.Component
       circle: new noflo.Port 'array'
 
     @inPorts.x.on 'data', (data) =>
-      @x = data
+      @circle[0] = data
       @compute()
 
     @inPorts.y.on 'data', (data) =>
-      @y = data
+      @circle[1] = data
       @compute()
 
     @inPorts.radius.on 'data', (data) =>
-      @radius = data
+      @circle[2] = data
       @compute()
 
     @inPorts.circle.on 'data', (data) =>
-      @x = data[0]
-      @y = data[1]
-      @radius = data[2]
+      @circle[0] = data[0]
+      @circle[1] = data[1]
+      @circle[2] = data[2]
       @compute()
 
   compute: ->
-    if @outPorts.circle.isAttached() and @x? and @y? and @radius
-      @outPorts.circle.send {"arc": [@x, @y, @radius, 0, TAU]}
+    if @outPorts.circle.isAttached() and @circle.indexOf(null) is -1
+      @outPorts.circle.send @circle
 
 exports.getComponent = -> new Circle
