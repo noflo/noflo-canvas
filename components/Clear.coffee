@@ -4,20 +4,17 @@ class Clear extends noflo.Component
   description: 'Makes a clear rectangle with given dimensions'
   icon: 'pencil-square'
   constructor: ->
-    @coords = null
+    @rectangle = null
 
     @inPorts =
-      coords: new noflo.Port 'array'
-    @outPorts =
       rectangle: new noflo.Port 'array'
+    @outPorts =
+      clear: new noflo.Port 'object'
 
-    @inPorts.coords.on 'data', (data) =>
-      @coords = data
-      if @outPorts.rectangle.isAttached()
-        @outPorts.rectangle.send {'clear': @coords}
+    @inPorts.rectangle.on 'data', (data) =>
+      @rectangle = data
+      if @outPorts.clear.isAttached()
+        @outPorts.clear.send {'clear': @rectangle}
 
-    @outPorts.rectangle.on 'attach', =>
-      if @coords is null
-        @outPorts.rectangle.send {'clear': null}
 
 exports.getComponent = -> new Clear
