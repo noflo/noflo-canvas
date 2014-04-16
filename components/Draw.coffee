@@ -46,52 +46,74 @@ class Draw extends noflo.Component
 
 
   parse: (commands) =>
-    console.log commands
     return unless @context
-    for command in commands
-      continue unless command
-      for instr, args of command
-        if @[instr]?
-          @[instr].apply @, [args]
+    for thing in commands
+      continue unless thing? and thing.type? and @[thing.type]?
+      @[thing.type].call @, thing
     if @outPorts.canvas.isAttached()
       @outPorts.fill.send @canvas
 
-  clear: (rectangle) =>
-    if rectangle
-      @context.clearRect.apply @context, rectangle
-    else
-      @context.clearRect.apply @context, [0, 0, @canvas.width, @canvas.height]
+  clear: (clear) =>
+    @context.clearRect.apply @context, clear.rectangle
 
-  stroke: (strokableThings) =>
+  stroke: (stroke) =>
+    # Cache current style
+    if stroke.strokeStyle?
+      oldStyle = @context.strokeStyle
+      @context.strokeStyle = stroke.strokeStyle
+    if stroke.lineWidth?
+      oldWidth = @context.lineWidth
+      @context.lineWidth = stroke.lineWidth
+    # Build the path
     @context.beginPath()
-    for thing in strokableThings
-      continue unless thing and thing.type and @[thing.type]?
+    for thing in stroke.strokables
+      continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].apply @, [thing]
     @context.stroke()
+    # Restore style
+    if oldStyle?
+      @context.strokeStyle = oldStyle
+    if oldWidth?
+      @context.lineWidth = oldWidth
 
-  strokeStyle: (color) =>
-    @context.strokeStyle = color
+  strokeStyle: (data) =>
+    @context.strokeStyle = data.value
 
-  fill: (fillableThings) =>
+  lineWidth: (data) =>
+    @context.lineWidth = data.value
+
+  fill: (fill) =>
+    # Cache current style
+    if fill.fillStyle?
+      oldStyle = @context.fillStyle
+      @context.fillStyle = fill.fillStyle
+    # Build the path
     @context.beginPath()
-    for thing in fillableThings
-      continue unless thing and thing.type and @[thing.type]?
+    for thing in fill.fillables
+      continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].apply @, [thing]
     @context.fill()
+    # Restore style
+    if oldStyle?
+      @context.fillStyle = oldStyle
 
-  fillStyle: (color) =>
-    @context.fillStyle = color
+  fillStyle: (data) =>
+    @context.fillStyle = data.value
 
-  path: (pathableThings) =>
-    for thing, i in pathableThings
-      continue unless thing and thing.type
-      if thing.type is 'beziercurve'
-        @context.bezierCurveTo.apply @context, thing
-      else if thing.type is 'point'
-        if i is 0
-          @context.moveTo.apply @context, thing
-        else
-          @context.lineTo.apply @context, thing
+  path: (path) =>
+    for thing, i in path.pathables
+      continue unless thing? and thing.type?
+      switch thing.type
+        when 'point'
+          if i is 0
+            @context.moveTo.apply @context, thing
+          else
+            @context.lineTo.apply @context, thing
+        when 'beziercurve'
+          @context.bezierCurveTo.apply @context, thing
+        when 'arc'
+          @context.arc.apply @context, thing
+
 
   rectangle: (args) =>
     x = args[0]

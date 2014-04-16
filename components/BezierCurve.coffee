@@ -37,7 +37,7 @@ class BezierCurve extends noflo.Component
       @curve[5] = data[1]
       @compute()
 
-    @inPorts.circle.on 'data', (data) =>
+    @inPorts.curve.on 'data', (data) =>
       @curve[0] = data[0]
       @curve[1] = data[1]
       @curve[2] = data[2]

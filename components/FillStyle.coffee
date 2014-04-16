@@ -4,16 +4,18 @@ class FillStyle extends noflo.Component
   description: 'Sets the fill style'
   icon: 'pencil-square'
   constructor: ->
-    @color = null
+    @fillstyle =
+      type: 'fillStyle'
+      value: null
 
     @inPorts =
-      color: new noflo.Port 'string'
+      color: new noflo.Port 'color'
     @outPorts =
-      style: new noflo.Port 'object'
+      fillstyle: new noflo.Port 'object'
 
     @inPorts.color.on 'data', (color) =>
-      @color = color
+      @fillstyle.value = color
       if @outPorts.style.isAttached()
-        @outPorts.style.send {'fillStyle': @color}
+        @outPorts.style.send @fillstyle
 
 exports.getComponent = -> new FillStyle

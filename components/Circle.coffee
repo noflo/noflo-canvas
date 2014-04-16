@@ -2,31 +2,28 @@ noflo = require 'noflo'
 
 class Circle extends noflo.Component
   description: 'Creates an array representing a circle (full arc)'
-  icon: 'pencil-square'
+  icon: 'circle-o'
   constructor: ->
     @circle = []
     @circle[0] = null # x
     @circle[1] = null # y
     @circle[2] = null # radius
     @circle[3] = 0 # start radians
-    @circle[4] = Math.PI*2 # end radians = Tau for a full arc
+    @circle[4] = Math.PI*2 # end radians = TAU for a full circle
+    @circle[5] = false # anticlockwise
     @circle.type = 'arc'
 
     @inPorts =
-      x: new noflo.Port 'number'
-      y: new noflo.Port 'number'
+      center: new noflo.Port 'array'
       radius: new noflo.Port 'number'
       circle: new noflo.Port 'array'
 
     @outPorts =
       circle: new noflo.Port 'array'
 
-    @inPorts.x.on 'data', (data) =>
-      @circle[0] = data
-      @compute()
-
-    @inPorts.y.on 'data', (data) =>
-      @circle[1] = data
+    @inPorts.center.on 'data', (data) =>
+      @circle[0] = data[0]
+      @circle[1] = data[1]
       @compute()
 
     @inPorts.radius.on 'data', (data) =>

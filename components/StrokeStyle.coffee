@@ -4,16 +4,18 @@ class StrokeStyle extends noflo.Component
   description: 'Sets the stroke style'
   icon: 'pencil-square'
   constructor: ->
-    @color = null
+    @strokestyle =
+      type: 'strokeStyle'
+      value: null
 
     @inPorts =
-      color: new noflo.Port 'string'
+      color: new noflo.Port 'color'
     @outPorts =
-      style: new noflo.Port 'object'
+      strokestyle: new noflo.Port 'object'
 
     @inPorts.color.on 'data', (color) =>
-      @color = color
+      @strokestyle.value = color
       if @outPorts.style.isAttached()
-        @outPorts.style.send {'strokeStyle': @color}
+        @outPorts.style.send @strokestyle
 
 exports.getComponent = -> new StrokeStyle

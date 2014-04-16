@@ -2,10 +2,11 @@ noflo = require 'noflo'
 
 class Path extends noflo.Component
   description: 'Makes a path given a number of points, curves, etc'
-  icon: 'pencil-square'
+  icon: 'star-o'
   constructor: ->
-    @pathables = []
-    @pathables.type = 'path'
+    @path =
+      type: 'path'
+      pathables: []
 
     @inPorts =
       pathables: new noflo.ArrayPort 'array'
@@ -14,9 +15,9 @@ class Path extends noflo.Component
       path: new noflo.Port 'array'
 
     @inPorts.pathables.on 'data', (pathable, i) =>
-      @pathables[i] = pathable
-      if @outPorts.path.isAttached() and @pathables.indexOf(null) is -1
-        @outPorts.path.send @pathables
+      @path.pathables[i] = pathable
+      if @outPorts.path.isAttached()
+        @outPorts.path.send @path
 
     # TODO listen for detach / reindex
 

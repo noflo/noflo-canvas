@@ -2,9 +2,11 @@ noflo = require 'noflo'
 
 class Clear extends noflo.Component
   description: 'Makes a clear rectangle with given dimensions'
-  icon: 'pencil-square'
+  icon: 'eraser'
   constructor: ->
-    @rectangle = null
+    @clear = 
+      type: 'clear'
+      rectangle: null
 
     @inPorts =
       rectangle: new noflo.Port 'array'
@@ -12,9 +14,9 @@ class Clear extends noflo.Component
       clear: new noflo.Port 'object'
 
     @inPorts.rectangle.on 'data', (data) =>
-      @rectangle = data
+      @clear.rectangle = data
       if @outPorts.clear.isAttached()
-        @outPorts.clear.send {'clear': @rectangle}
+        @outPorts.clear.send @clear
 
 
 exports.getComponent = -> new Clear
