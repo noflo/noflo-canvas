@@ -2,7 +2,7 @@ noflo = require 'noflo'
 
 class Draw extends noflo.Component
   description: 'Draws received drawing commands'
-  icon: 'pencil-square'
+  icon: 'pencil'
   constructor: ->
     @every = false
     @canvas = null

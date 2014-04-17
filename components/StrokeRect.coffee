@@ -2,7 +2,7 @@ noflo = require 'noflo'
 
 class StrokeRect extends noflo.Component
   description: 'Paints the given rectangle onto the canvas'
-  icon: 'pencil-square'
+  icon: 'pencil-square-o'
   constructor: ->
     @strokerect = 
       type: 'strokeRect'
