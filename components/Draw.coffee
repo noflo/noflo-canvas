@@ -56,6 +56,15 @@ class Draw extends noflo.Component
   clear: (clear) =>
     @context.clearRect.apply @context, clear.rectangle
 
+  strokeStyle: (data) =>
+    @context.strokeStyle = data.value
+
+  lineWidth: (data) =>
+    @context.lineWidth = data.value
+
+  fillStyle: (data) =>
+    @context.fillStyle = data.value
+
   stroke: (stroke) =>
     # Cache current style
     if stroke.strokeStyle?
@@ -76,12 +85,6 @@ class Draw extends noflo.Component
     if oldWidth?
       @context.lineWidth = oldWidth
 
-  strokeStyle: (data) =>
-    @context.strokeStyle = data.value
-
-  lineWidth: (data) =>
-    @context.lineWidth = data.value
-
   fill: (fill) =>
     # Cache current style
     if fill.fillStyle?
@@ -92,13 +95,11 @@ class Draw extends noflo.Component
     for thing in fill.fillables
       continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].apply @, [thing]
+    @context.closePath()
     @context.fill()
     # Restore style
     if oldStyle?
       @context.fillStyle = oldStyle
-
-  fillStyle: (data) =>
-    @context.fillStyle = data.value
 
   path: (path) =>
     for thing, i in path.pathables
@@ -112,7 +113,27 @@ class Draw extends noflo.Component
         when 'beziercurve'
           @context.bezierCurveTo.apply @context, thing
         when 'arc'
-          @context.arc.apply @context, thing
+          @arc.call @context, thing
+
+  transform: (transform) =>
+    # Apply transformations
+    if transform.translate?
+      @context.translate.call @context, transform.translate[0], transform.translate[1]
+    if transform.rotate?
+      @context.rotate.call @context, transform.rotate
+    if transform.scale?
+      @context.scale.call @context, transform.scale[0], transform.scale[1]
+    # Apply drawing operations
+    for thing in transform.transformables
+      continue unless thing? and thing.type? and @[thing.type]?
+      @[thing.type].apply @, [thing]
+    # Undo transformations
+    if transform.scale?
+      @context.scale.call @context, 1/transform.scale[0], 1/transform.scale[1]
+    if transform.rotate?
+      @context.rotate.call @context, 0-transform.rotate
+    if transform.translate?
+      @context.translate.call @context, 0-transform.translate[0], 0-transform.translate[1]
 
 
   rectangle: (args) =>
@@ -133,6 +154,7 @@ class Draw extends noflo.Component
     @context.strokeRect.apply @context, strokerect.rectangle
 
   arc: (args) =>
+    @context.moveTo.call @context, args[0], args[1]
     @context.arc.apply @context, args
 
   drawImage: (args) =>

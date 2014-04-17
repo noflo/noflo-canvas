@@ -2,4 +2,4 @@
 
 Canvas 2D to NoFlo.
 
-![yin yang hello world](https://cloud.githubusercontent.com/assets/395307/2725820/4a43e85a-c5b1-11e3-8e1a-8a20d3b0b4e1.png)
+[![yin yang hello world](https://cloud.githubusercontent.com/assets/395307/2731522/3d21a9be-c62e-11e3-9eaa-0ad98b9cc93f.png)](https://github.com/noflo/noflo-canvas/issues/3#issue-31725306)
