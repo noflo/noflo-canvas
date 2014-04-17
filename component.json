@@ -11,44 +11,44 @@
   },
   "scripts": [
     "index.js",
-    "components/Get2dContext.coffee",
-    "components/FillRect.coffee",
     "components/Point.coffee",
     "components/Rectangle.coffee",
     "components/Circle.coffee",
     "components/BezierCurve.coffee",
     "components/Arc.coffee",
     "components/Path.coffee",
-    "components/Stroke.coffee",
     "components/StrokeStyle.coffee",
     "components/LineWidth.coffee",
-    "components/Fill.coffee",
     "components/FillStyle.coffee",
-    "components/Draw.coffee",
+    "components/Stroke.coffee",
+    "components/Fill.coffee",
+    "components/StrokeRect.coffee",
+    "components/FillRect.coffee",
     "components/Clear.coffee",
-    "components/DrawImage.coffee"
+    "components/DrawImage.coffee",
+    "components/Draw.coffee"
   ],
   "json": [
     "component.json"
   ],
   "noflo": {
     "components": {
-      "Get2dContext": "components/Get2dContext.coffee",
       "Point": "components/Point.coffee",
       "Rectangle": "components/Rectangle.coffee",
       "Circle": "components/Circle.coffee",
       "BezierCurve": "components/BezierCurve.coffee",
       "Arc": "components/Arc.coffee",
       "Path": "components/Path.coffee",
-      "FillRect": "components/FillRect.coffee",
-      "Stroke": "components/Stroke.coffee",
       "StrokeStyle": "components/StrokeStyle.coffee",
       "LineWidth": "components/LineWidth.coffee",
-      "Fill": "components/Fill.coffee",
       "FillStyle": "components/FillStyle.coffee",
-      "Draw": "components/Draw.coffee",
+      "Stroke": "components/Stroke.coffee",
+      "Fill": "components/Fill.coffee",
+      "StrokeRect": "components/StrokeRect.coffee",
+      "FillRect": "components/FillRect.coffee",
       "Clear": "components/Clear.coffee",
-      "DrawImage": "components/DrawImage.coffee"
+      "DrawImage": "components/DrawImage.coffee",
+      "Draw": "components/Draw.coffee"
     }
   }
 }
