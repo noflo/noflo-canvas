@@ -12,8 +12,7 @@ class Rectangle extends noflo.Component
     @rectangle.type = 'rectangle'
 
     @inPorts =
-      x: new noflo.Port 'number'
-      y: new noflo.Port 'number'
+      point: new noflo.Port 'array'
       width: new noflo.Port 'number'
       height: new noflo.Port 'number'
       rectangle: new noflo.Port 'array'
@@ -21,12 +20,9 @@ class Rectangle extends noflo.Component
     @outPorts =
       rectangle: new noflo.Port 'array'
 
-    @inPorts.x.on 'data', (data) =>
-      @rectangle[0] = data
-      @compute()
-
-    @inPorts.y.on 'data', (data) =>
-      @rectangle[1] = data
+    @inPorts.point.on 'data', (data) =>
+      @rectangle[0] = data[0]
+      @rectangle[1] = data[1]
       @compute()
 
     @inPorts.width.on 'data', (data) =>

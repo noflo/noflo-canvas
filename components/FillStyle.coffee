@@ -9,13 +9,13 @@ class FillStyle extends noflo.Component
       value: null
 
     @inPorts =
-      color: new noflo.Port 'color'
+      style: new noflo.Port 'color'
     @outPorts =
       fillstyle: new noflo.Port 'object'
 
-    @inPorts.color.on 'data', (color) =>
-      @fillstyle.value = color
-      if @outPorts.style.isAttached()
-        @outPorts.style.send @fillstyle
+    @inPorts.style.on 'data', (data) =>
+      @fillstyle.value = data
+      if @outPorts.fillstyle.isAttached()
+        @outPorts.fillstyle.send @fillstyle
 
 exports.getComponent = -> new FillStyle

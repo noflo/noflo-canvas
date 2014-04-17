@@ -126,8 +126,11 @@ class Draw extends noflo.Component
     @context.lineTo x, y+h
     @context.lineTo x, y
 
-  fillRect: (args) =>
-    @context.fillRect.apply @context, args
+  fillRect: (fillrect) =>
+    @context.fillRect.apply @context, fillrect.rectangle
+
+  strokeRect: (strokerect) =>
+    @context.strokeRect.apply @context, strokerect.rectangle
 
   arc: (args) =>
     @context.arc.apply @context, args

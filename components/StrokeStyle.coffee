@@ -9,13 +9,13 @@ class StrokeStyle extends noflo.Component
       value: null
 
     @inPorts =
-      color: new noflo.Port 'color'
+      style: new noflo.Port 'color'
     @outPorts =
       strokestyle: new noflo.Port 'object'
 
-    @inPorts.color.on 'data', (color) =>
-      @strokestyle.value = color
-      if @outPorts.style.isAttached()
-        @outPorts.style.send @strokestyle
+    @inPorts.style.on 'data', (data) =>
+      @strokestyle.value = data
+      if @outPorts.strokestyle.isAttached()
+        @outPorts.strokestyle.send @strokestyle
 
 exports.getComponent = -> new StrokeStyle
