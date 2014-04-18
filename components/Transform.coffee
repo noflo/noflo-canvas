@@ -48,6 +48,8 @@ class Transform extends noflo.Component
       @transform.rotate = data
       @compute()
 
+    @inPorts.rotate.description = 'in radians'
+
   compute: ->
     if @outPorts.transform.isAttached() and @transform.transformables.length > 0
       @outPorts.transform.send @transform

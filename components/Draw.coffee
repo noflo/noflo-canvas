@@ -80,12 +80,12 @@ class Draw extends noflo.Component
     if stroke.lineWidth?
       oldWidth = @context.lineWidth
       @context.lineWidth = stroke.lineWidth
-    # Build the path
-    @context.beginPath()
+    # Stroke each thing
     for thing in stroke.strokables
+      @context.beginPath()
       continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].apply @, [thing]
-    @context.stroke()
+      @context.stroke()
     # Restore style
     if oldStyle?
       @context.strokeStyle = oldStyle
@@ -97,18 +97,19 @@ class Draw extends noflo.Component
     if fill.fillStyle?
       oldStyle = @context.fillStyle
       @context.fillStyle = fill.fillStyle
-    # Build the path
-    @context.beginPath()
+    # Fill each thing
     for thing in fill.fillables
+      @context.beginPath()
       continue unless thing? and thing.type? and @[thing.type]?
-      @[thing.type].apply @, [thing]
-    @context.closePath()
-    @context.fill()
+      @[thing.type].call @, thing
+      @context.closePath()
+      @context.fill()
     # Restore style
     if oldStyle?
       @context.fillStyle = oldStyle
 
   path: (path) =>
+    # Build the path
     for thing, i in path.pathables
       continue unless thing? and thing.type?
       switch thing.type
@@ -120,7 +121,13 @@ class Draw extends noflo.Component
         when 'beziercurve'
           @context.bezierCurveTo.apply @context, thing
         when 'arc'
-          @arc.call @context, thing
+          @context.arc.apply @context, thing
+
+  group: (group) =>
+    # Apply drawing operations
+    for thing in group.groupables
+      continue unless thing? and thing.type? and @[thing.type]?
+      @[thing.type].call @, thing
 
   transform: (transform, recurse) =>
     # Apply transformations
@@ -133,7 +140,7 @@ class Draw extends noflo.Component
     # Apply drawing operations
     for thing in transform.transformables
       continue unless thing? and thing.type? and @[thing.type]?
-      @[thing.type].apply @, [thing]
+      @[thing.type].call @, thing
     # Recurse
     if recurse? and recurse > 0
       @transform transform, recurse-1
@@ -151,11 +158,11 @@ class Draw extends noflo.Component
       if thing.type is 'transform'
         @transform thing, recurse.count
 
-  rectangle: (args) =>
-    x = args[0]
-    y = args[1]
-    w = args[2]
-    h = args[3]
+  rectangle: (rect) =>
+    x = rect[0]
+    y = rect[1]
+    w = rect[2]
+    h = rect[3]
     @context.moveTo x, y
     @context.lineTo x+w, y
     @context.lineTo x+w, y+h
@@ -169,7 +176,6 @@ class Draw extends noflo.Component
     @context.strokeRect.apply @context, strokerect.rectangle
 
   arc: (args) =>
-    @context.moveTo.call @context, args[0], args[1]
     @context.arc.apply @context, args
 
   drawImage: (args) =>
