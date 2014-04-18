@@ -13,8 +13,8 @@ class Transform extends noflo.Component
 
     @inPorts =
       transformables: new noflo.ArrayPort 'array'
-      rotate: new noflo.Port 'number'
       translate: new noflo.Port 'array'
+      rotate: new noflo.Port 'number'
       scale: new noflo.Port 'array'
       scaleboth: new noflo.Port 'number'
     @outPorts =

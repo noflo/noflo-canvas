@@ -115,7 +115,7 @@ class Draw extends noflo.Component
         when 'arc'
           @arc.call @context, thing
 
-  transform: (transform) =>
+  transform: (transform, recurse) =>
     # Apply transformations
     if transform.translate?
       @context.translate.call @context, transform.translate[0], transform.translate[1]
@@ -127,6 +127,9 @@ class Draw extends noflo.Component
     for thing in transform.transformables
       continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].apply @, [thing]
+    # Recurse
+    if recurse? and recurse > 0
+      @transform transform, recurse-1
     # Undo transformations
     if transform.scale?
       @context.scale.call @context, 1/transform.scale[0], 1/transform.scale[1]
@@ -135,6 +138,11 @@ class Draw extends noflo.Component
     if transform.translate?
       @context.translate.call @context, 0-transform.translate[0], 0-transform.translate[1]
 
+  recurse: (recurse) =>
+    for thing in recurse.recursables
+      continue unless thing? 
+      if thing.type is 'transform'
+        @transform thing, recurse.count
 
   rectangle: (args) =>
     x = args[0]
