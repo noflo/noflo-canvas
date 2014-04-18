@@ -82,12 +82,22 @@ class Draw extends noflo.Component
       @context.lineWidth = stroke.lineWidth
     # Stroke each thing
     for thing in stroke.strokables
-      @context.beginPath()
-      continue unless thing? and thing.type? and @[thing.type]?
-      @[thing.type].apply @, [thing]
-      if stroke.closePath
-        @context.closePath()
-      @context.stroke()
+      continue unless thing?
+      if thing.type? and @[thing.type]?
+        @context.beginPath()
+        @[thing.type].call @, thing
+        if stroke.closePath
+          @context.closePath()
+        @context.stroke()
+      else if !thing.type? and thing instanceof Array
+        # deal with plain arrays
+        for item in thing
+          continue unless item? and item.type? and @[item.type]?
+          @context.beginPath()
+          @[item.type].call @, item
+          if stroke.closePath
+            @context.closePath()
+          @context.stroke()
     # Restore style
     if oldStyle?
       @context.strokeStyle = oldStyle
@@ -101,11 +111,20 @@ class Draw extends noflo.Component
       @context.fillStyle = fill.fillStyle
     # Fill each thing
     for thing in fill.fillables
-      @context.beginPath()
-      continue unless thing? and thing.type? and @[thing.type]?
-      @[thing.type].call @, thing
-      @context.closePath()
-      @context.fill()
+      continue unless thing?
+      if thing.type? and @[thing.type]?
+        @context.beginPath()
+        @[thing.type].call @, thing
+        @context.closePath()
+        @context.fill()
+      else if !thing.type? and thing instanceof Array
+        # deal with plain arrays
+        for item in thing
+          continue unless item? and item.type? and @[item.type]?
+          @context.beginPath()
+          @[item.type].call @, item
+          @context.closePath()
+          @context.fill()
     # Restore style
     if oldStyle?
       @context.fillStyle = oldStyle
