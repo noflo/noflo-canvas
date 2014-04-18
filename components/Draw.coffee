@@ -85,6 +85,8 @@ class Draw extends noflo.Component
       @context.beginPath()
       continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].apply @, [thing]
+      if stroke.closePath
+        @context.closePath()
       @context.stroke()
     # Restore style
     if oldStyle?

@@ -9,11 +9,13 @@ class Stroke extends noflo.Component
       strokables: []
       strokeStyle: null
       lineWidth: null
+      closePath: false
     
     @inPorts =
       strokables: new noflo.ArrayPort 'array'
-      strokestyle: new noflo.ArrayPort 'string'
-      linewidth: new noflo.ArrayPort 'number'
+      strokestyle: new noflo.Port 'string'
+      linewidth: new noflo.Port 'number'
+      closepath: new noflo.Port 'boolean'
     @outPorts =
       stroke: new noflo.Port 'object'
 
@@ -27,6 +29,10 @@ class Stroke extends noflo.Component
 
     @inPorts.linewidth.on 'data', (data) =>
       @stroke.lineWidth = data
+      @compute()
+
+    @inPorts.closepath.on 'data', (data) =>
+      @stroke.closePath = data
       @compute()
 
     # TODO listen for detach / reindex
