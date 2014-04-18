@@ -5,6 +5,7 @@ class Draw extends noflo.Component
   icon: 'pencil'
   constructor: ->
     @every = false
+    @clearevery = false
     @canvas = null
     @context = null
     @commands = []
@@ -12,6 +13,7 @@ class Draw extends noflo.Component
     @inPorts =
       tick: new noflo.Port 'bang'
       every: new noflo.Port 'boolean'
+      clearevery: new noflo.Port 'boolean'
       canvas: new noflo.Port 'object'
       commands: new noflo.ArrayPort 'object'
 
@@ -28,6 +30,9 @@ class Draw extends noflo.Component
 
     @inPorts.every.on 'data', (data) =>
       @every = data
+
+    @inPorts.clearevery.on 'data', (data) =>
+      @clearevery = data
 
     @inPorts.canvas.on 'data', (canvas) =>
       @canvas = canvas
@@ -47,6 +52,8 @@ class Draw extends noflo.Component
 
   parse: (commands) =>
     return unless @context
+    if @clearevery
+      @context.clearRect 0, 0, @canvas.width, @canvas.height
     for thing in commands
       continue unless thing? and thing.type? and @[thing.type]?
       @[thing.type].call @, thing
