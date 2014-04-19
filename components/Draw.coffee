@@ -4,7 +4,7 @@ class Draw extends noflo.Component
   description: 'Draws received drawing commands'
   icon: 'pencil'
   constructor: ->
-    @every = false
+    @drawevery = false
     @clearevery = false
     @canvas = null
     @context = null
@@ -12,7 +12,7 @@ class Draw extends noflo.Component
     
     @inPorts =
       tick: new noflo.Port 'bang'
-      every: new noflo.Port 'boolean'
+      drawevery: new noflo.Port 'boolean'
       clearevery: new noflo.Port 'boolean'
       canvas: new noflo.Port 'object'
       commands: new noflo.ArrayPort 'object'
@@ -28,8 +28,8 @@ class Draw extends noflo.Component
         loglevel: 'error'
         message: 'Received commands but there is not 2d context attached.'
 
-    @inPorts.every.on 'data', (data) =>
-      @every = data
+    @inPorts.drawevery.on 'data', (data) =>
+      @drawevery = data
 
     @inPorts.clearevery.on 'data', (data) =>
       @clearevery = data
@@ -40,13 +40,13 @@ class Draw extends noflo.Component
       
     @inPorts.commands.on 'data', (commands, i) =>
       @commands[i] = commands
-      if @every
+      if @drawevery
         @parse @commands
 
 
     # @inPorts.commands.on 'detach', (i) =>
     #   @commands.splice i, 1
-    #   if @every
+    #   if @drawevery
     #     @parse @commands
 
 
