@@ -1,46 +1,28 @@
 noflo = require 'noflo'
+{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
-class Stroke extends noflo.Component
+class Stroke extends MakeCanvasPrimative
   description: 'Strokes the received paths, rectangles, circles, and arcs as lines'
   icon: 'square-o'
   constructor: ->
-    @stroke =
-      type: 'stroke'
-      strokables: []
-      strokeStyle: null
-      lineWidth: null
-      closePath: false
-    
-    @inPorts =
-      strokables: new noflo.ArrayPort 'array'
-      strokestyle: new noflo.Port 'string'
-      linewidth: new noflo.Port 'number'
-      closepath: new noflo.Port 'boolean'
-    @outPorts =
-      stroke: new noflo.Port 'object'
+    ports =
+      items:
+        datatype: 'object'
+        description: 'shapes (paths, circles, and rectangles) to stroke'
+        addressable: true
+      strokestyle:
+        datatype: 'string'
+        description: 'css color string or canvas style'
+        required: false
+      linewidth:
+        datatype: 'number'
+        description: 'stroke width in pixels'
+        required: false
+      closepath:
+        datatype: 'boolean'
+        description: 'draw line back to start point'
+        value: false
 
-    @inPorts.strokables.on 'data', (data, i) =>
-      @stroke.strokables[i] = data
-      @compute()
-
-    @inPorts.strokestyle.on 'data', (data) =>
-      @stroke.strokeStyle = data
-      @compute()
-
-    @inPorts.linewidth.on 'data', (data) =>
-      @stroke.lineWidth = data
-      @compute()
-
-    @inPorts.closepath.on 'data', (data) =>
-      @stroke.closePath = data
-      @compute()
-
-    # TODO listen for detach / reindex
-
-  compute: ->
-    if @outPorts.stroke.isAttached() and @stroke.strokables.length > 0
-      @outPorts.stroke.send @stroke
-
-    # TODO listen for detach / reindex
+    super 'stroke', ports
 
 exports.getComponent = -> new Stroke

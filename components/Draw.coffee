@@ -1,5 +1,7 @@
 noflo = require 'noflo'
 
+TAU = Math.PI * 2
+
 class Draw extends noflo.Component
   description: 'Draws received drawing commands'
   icon: 'pencil'
@@ -54,17 +56,18 @@ class Draw extends noflo.Component
     return unless @context
     if @clearevery
       @context.clearRect 0, 0, @canvas.width, @canvas.height
-    @parseArray commands
+    @parseThing commands
     if @outPorts.canvas.isAttached()
       @outPorts.fill.send @canvas
 
-  parseArray: (arr) =>
-    for thing in arr
-      continue unless thing?
-      if thing.type? and @[thing.type]?
-        @[thing.type].call @, thing
-      else if thing instanceof Array
-        @parseArray thing
+  # Recursively parse things and arrays of things
+  parseThing: (thing) =>
+    if thing? and thing.type? and @[thing.type]?
+      @[thing.type].call @, thing
+    else if thing instanceof Array
+      for item in thing
+        continue unless item?
+        @parseThing item
 
   clear: (clear) =>
     @context.clearRect.apply @context, clear.rectangle
@@ -80,28 +83,28 @@ class Draw extends noflo.Component
 
   stroke: (stroke) =>
     # Cache current style
-    if stroke.strokeStyle?
+    if stroke.strokestyle?
       oldStyle = @context.strokeStyle
-      @context.strokeStyle = stroke.strokeStyle
-    if stroke.lineWidth?
-      oldWidth = @context.lineWidth
-      @context.lineWidth = stroke.lineWidth
+      @context.strokeStyle = stroke.strokestyle
+    if stroke.linewidth?
+      oldWidth = @context.linewidth
+      @context.lineWidth = stroke.linewidth
     # Stroke each thing
-    for thing in stroke.strokables
+    for thing in stroke.items
       continue unless thing?
       if thing.type? and @[thing.type]?
         @context.beginPath()
         @[thing.type].call @, thing
-        if stroke.closePath
+        if stroke.closepath
           @context.closePath()
         @context.stroke()
-      else if !thing.type? and thing instanceof Array
+      else if thing instanceof Array
         # deal with plain arrays
         for item in thing
           continue unless item? and item.type? and @[item.type]?
           @context.beginPath()
           @[item.type].call @, item
-          if stroke.closePath
+          if stroke.closepath
             @context.closePath()
           @context.stroke()
     # Restore style
@@ -123,7 +126,7 @@ class Draw extends noflo.Component
         @[thing.type].call @, thing
         @context.closePath()
         @context.fill()
-      else if !thing.type? and thing instanceof Array
+      else if thing instanceof Array
         # deal with plain arrays
         for item in thing
           continue unless item? and item.type? and @[item.type]?
@@ -159,25 +162,30 @@ class Draw extends noflo.Component
   transform: (transform, recurse) =>
     # Apply transformations
     if transform.translate?
-      @context.translate.call @context, transform.translate[0], transform.translate[1]
+      @context.translate transform.translate.x, transform.translate.y
     if transform.rotate?
-      @context.rotate.call @context, transform.rotate
-    if transform.scale?
-      @context.scale.call @context, transform.scale[0], transform.scale[1]
+      @context.rotate transform.rotate
+    if transform.scaleboth # non-zero
+      @context.scale transform.scaleboth, transform.scaleboth
+    else if transform.scale? and transform.scale.x and transform.scale.y # non-zero
+      @context.scale transform.scale.x, transform.scale.y
     # Apply drawing operations
-    for thing in transform.transformables
-      continue unless thing? and thing.type? and @[thing.type]?
-      @[thing.type].call @, thing
+    @parseThing transform.items
+    # for thing in transform.items
+    #   continue unless thing? and thing.type? and @[thing.type]?
+    #   @[thing.type].call @, thing
     # Recurse
     if recurse? and recurse > 0
       @transform transform, recurse-1
     # Undo transformations
-    if transform.scale?
-      @context.scale.call @context, 1/transform.scale[0], 1/transform.scale[1]
+    if transform.scaleboth # non-zero
+      @context.scale 1/transform.scaleboth, 1/transform.scaleboth
+    else if transform.scale? and transform.scale.x and transform.scale.y # non-zero
+      @context.scale 1/transform.scale.x, 1/transform.scale.y
     if transform.rotate?
-      @context.rotate.call @context, 0-transform.rotate
+      @context.rotate 0-transform.rotate
     if transform.translate?
-      @context.translate.call @context, 0-transform.translate[0], 0-transform.translate[1]
+      @context.translate 0-transform.translate.x, 0-transform.translate.y
 
   recurse: (recurse) =>
     for thing in recurse.recursables
@@ -204,6 +212,9 @@ class Draw extends noflo.Component
 
   arc: (arc) =>
     @context.arc(arc.center.x, arc.center.y, arc.radius, arc.start, arc.end, arc.reverse)
+
+  circle: (circle) =>
+    @context.arc(circle.center.x, circle.center.y, circle.radius, 0, TAU)
 
   drawImage: (args) =>
     @context.drawImage.apply @context, args

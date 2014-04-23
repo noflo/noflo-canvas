@@ -36,6 +36,7 @@ class exports.MakeCanvasPrimative extends noflo.Component
 
   setPropertyIndexed: (name, data, i) -> # this is bound, so use -> not =>
     @props[name][i] = data
+    @props[name].flat = null
     flat = @expandToArray @props[name]
     if flat?
       @props[name].flat = flat
