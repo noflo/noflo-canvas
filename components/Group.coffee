@@ -1,22 +1,31 @@
 noflo = require 'noflo'
 
 class Group extends noflo.Component
-  description: 'Group drawing commands.'
+  description: 'Group drawing commands or primatives into a flattened array.'
   icon: 'folder-o'
   constructor: ->
-    @group = 
-      type: 'group'
-      groupables: []
+    @group = []
 
     @inPorts =
-      groupables: new noflo.ArrayPort 'array'
+      items: new noflo.ArrayPort 'object'
     @outPorts =
-      group: new noflo.Port 'object'
+      group: new noflo.Port 'array'
 
-    @inPorts.groupables.on 'data', (data, i) =>
-      @group.groupables[i] = data
-      if @outPorts.group.isAttached() and @group.groupables.length > 0
-        @outPorts.group.send @group
+    @inPorts.items.on 'data', (data, i) =>
+      @group[i] = data
+      if @outPorts.group.isAttached()
+        # Flatten into one array
+        g = []
+        for child in @group
+          if child instanceof Array
+            for grandchild in child
+              g.push grandchild
+          else
+            g.push child
+        @outPorts.group.send g
+
+    # @inPorts.items.on 'detach', (socket, i) =>
+    #   console.log socket, i
 
 
 exports.getComponent = -> new Group

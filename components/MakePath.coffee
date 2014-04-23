@@ -1,24 +1,17 @@
 noflo = require 'noflo'
+{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
-class MakePath extends noflo.Component
+class MakePath extends MakeCanvasPrimative
   description: 'Makes a path given a number of points, curves, etc'
   icon: 'star-o'
   constructor: ->
-    @path =
-      type: 'path'
-      pathables: []
+    ports =
+      items:
+        datatype: 'object'
+        description: 'points, arcs, and curves to combine to make path'
+        addressable: true
 
-    @inPorts =
-      pathables: new noflo.ArrayPort 'array'
+    super 'path', ports
 
-    @outPorts =
-      path: new noflo.Port 'array'
-
-    @inPorts.pathables.on 'data', (pathable, i) =>
-      @path.pathables[i] = pathable
-      if @outPorts.path.isAttached()
-        @outPorts.path.send @path
-
-    # TODO listen for detach / reindex
 
 exports.getComponent = -> new MakePath

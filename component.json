@@ -11,6 +11,10 @@
   },
   "scripts": [
     "index.js",
+    "lib/MakeCanvasPrimative.coffee",
+    "components/MakeColor.coffee",
+    "components/MakeRange.coffee",
+    "components/MakeIncrement.coffee",
     "components/MakePoint.coffee",
     "components/MakeRectangle.coffee",
     "components/MakeCircle.coffee",
@@ -36,6 +40,9 @@
   ],
   "noflo": {
     "components": {
+      "MakeColor": "components/MakeColor.coffee",
+      "MakeRange": "components/MakeRange.coffee",
+      "MakeIncrement": "components/MakeIncrement.coffee",
       "MakePoint": "components/MakePoint.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
       "MakeCircle": "components/MakeCircle.coffee",

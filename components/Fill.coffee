@@ -1,32 +1,20 @@
 noflo = require 'noflo'
+{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
-class Fill extends noflo.Component
+class Fill extends MakeCanvasPrimative
   description: 'Fills the received paths, rectangles, circles, and arcs'
   icon: 'square'
   constructor: ->
-    @fill =
-      type: 'fill'
-      fillables: []
-      fillStyle: null
+    ports =
+      items:
+        datatype: 'object'
+        description: 'shapes (paths, circles, and rectangles) to fill'
+        addressable: true
+      fillstyle:
+        datatype: 'string'
+        description: 'css color string'
+        required: false
 
-    @inPorts =
-      fillables: new noflo.ArrayPort 'array'
-      fillstyle: new noflo.ArrayPort 'string'
-    @outPorts =
-      fill: new noflo.Port 'object'
-
-    @inPorts.fillables.on 'data', (data, i) =>
-      @fill.fillables[i] = data
-      @compute()
-
-    @inPorts.fillstyle.on 'data', (data) =>
-      @fill.fillStyle = data
-      @compute()
-
-    # TODO listen for detach / reindex
-
-  compute: ->
-    if @outPorts.fill.isAttached() and @fill.fillables.length > 0
-      @outPorts.fill.send @fill
+    super 'fill', ports
 
 exports.getComponent = -> new Fill

@@ -1,0 +1,45 @@
+noflo = require 'noflo'
+
+class MakeRange extends noflo.Component
+  description: 'Make an array of evenly-spaced numbers'
+  icon: 'folder-o'
+  constructor: ->
+    @from = null
+    @to = null
+    @count = 2
+
+    @inPorts = new noflo.InPorts
+      from: 
+        datatype: 'number'
+      to: 
+        datatype: 'number'
+      count: 
+        datatype: 'number'
+
+    @outPorts = new noflo.OutPorts
+      range: 
+        datatype: 'array'
+
+    @inPorts.from.on 'data', (data) =>
+      @from = data
+      @compute()
+
+    @inPorts.to.on 'data', (data) =>
+      @to = data
+      @compute()
+
+    @inPorts.count.on 'data', (data) =>
+      @count = data
+      @compute()
+
+  compute: ->
+    return unless @outPorts.range.isAttached() and @from? and @to? and @count? and @count > 0
+    range = []
+    f = @from
+    spread = @to - @from
+    increment = spread / @count
+    for i in [0..@count-1]
+      range[i] = @from + increment*i
+    @outPorts.range.send range
+
+exports.getComponent = -> new MakeRange

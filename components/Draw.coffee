@@ -54,11 +54,17 @@ class Draw extends noflo.Component
     return unless @context
     if @clearevery
       @context.clearRect 0, 0, @canvas.width, @canvas.height
-    for thing in commands
-      continue unless thing? and thing.type? and @[thing.type]?
-      @[thing.type].call @, thing
+    @parseArray commands
     if @outPorts.canvas.isAttached()
       @outPorts.fill.send @canvas
+
+  parseArray: (arr) =>
+    for thing in arr
+      continue unless thing?
+      if thing.type? and @[thing.type]?
+        @[thing.type].call @, thing
+      else if thing instanceof Array
+        @parseArray thing
 
   clear: (clear) =>
     @context.clearRect.apply @context, clear.rectangle
@@ -106,11 +112,11 @@ class Draw extends noflo.Component
 
   fill: (fill) =>
     # Cache current style
-    if fill.fillStyle?
+    if fill.fillstyle?
       oldStyle = @context.fillStyle
-      @context.fillStyle = fill.fillStyle
+      @context.fillStyle = fill.fillstyle
     # Fill each thing
-    for thing in fill.fillables
+    for thing in fill.items
       continue unless thing?
       if thing.type? and @[thing.type]?
         @context.beginPath()
@@ -131,18 +137,18 @@ class Draw extends noflo.Component
 
   path: (path) =>
     # Build the path
-    for thing, i in path.pathables
+    for thing, i in path.items
       continue unless thing? and thing.type?
       switch thing.type
         when 'point'
           if i is 0
-            @context.moveTo.apply @context, thing
+            @context.moveTo thing.x, thing.y
           else
-            @context.lineTo.apply @context, thing
+            @context.lineTo thing.x, thing.y
         when 'beziercurve'
           @context.bezierCurveTo.apply @context, thing
         when 'arc'
-          @context.arc.apply @context, thing
+          @arc thing
 
   group: (group) =>
     # Apply drawing operations
@@ -180,10 +186,10 @@ class Draw extends noflo.Component
         @transform thing, recurse.count
 
   rectangle: (rect) =>
-    x = rect[0]
-    y = rect[1]
-    w = rect[2]
-    h = rect[3]
+    x = rect.point.x
+    y = rect.point.y
+    w = rect.width
+    h = rect.height
     @context.moveTo x, y
     @context.lineTo x+w, y
     @context.lineTo x+w, y+h
@@ -196,8 +202,8 @@ class Draw extends noflo.Component
   strokeRect: (strokerect) =>
     @context.strokeRect.apply @context, strokerect.rectangle
 
-  arc: (args) =>
-    @context.arc.apply @context, args
+  arc: (arc) =>
+    @context.arc(arc.center.x, arc.center.y, arc.radius, arc.start, arc.end, arc.reverse)
 
   drawImage: (args) =>
     @context.drawImage.apply @context, args

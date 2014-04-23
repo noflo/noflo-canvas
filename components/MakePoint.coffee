@@ -1,37 +1,51 @@
 noflo = require 'noflo'
+{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
-class MakePoint extends noflo.Component
-  description: 'Creates an array representing a point'
-  icon: 'pencil-square'
+class MakePoint extends MakeCanvasPrimative
+  description: 'Creates a point or points'
+  icon: 'crosshairs'
   constructor: ->
-    @point = []
-    @point[0] = null
-    @point[1] = null
-    @point.type = 'point'
+    ports =
+      x:
+        datatype: 'number'
+      y:
+        datatype: 'number'
 
-    @inPorts =
-      x: new noflo.Port 'number'
-      y: new noflo.Port 'number'
-      point: new noflo.Port 'array'
+    super 'point', ports
 
-    @outPorts =
-      point: new noflo.Port 'array'
-
-    @inPorts.x.on 'data', (data) =>
-      @point[0] = data
-      @compute()
-
-    @inPorts.y.on 'data', (data) =>
-      @point[1] = data
-      @compute()
-
-    @inPorts.point.on 'data', (data) =>
-      @point[0] = data[0]
-      @point[1] = data[1]
-      @compute()
-
+  # OVERRIDE default to make x and y dimensional
   compute: ->
-    if @outPorts.point.isAttached() and @point.indexOf(null) is -1
-      @outPorts.point.send @point
+    if @outPorts.point.isAttached()
+      props = @props
+      if @props.x instanceof Array or @props.y instanceof Array
+        props = expandToArray @props
+      @outPorts.point.send props
+
+# Make x*y array
+expandToArray = (props) ->
+  length = 0
+  xLen = 1
+  yLen = 1
+  if props.x instanceof Array
+    xLen = props.x.length
+  if props.y instanceof Array
+    yLen = props.y.length
+  length = xLen*yLen
+  arr = []
+  for y in [0..yLen-1]
+    for x in [0..xLen-1]
+      obj = {}
+      obj.type = 'point'
+      if props.x instanceof Array
+        obj.x = if props.x[x]? then props.x[x] else props.x[xLen-1]
+      else
+        obj.x = props.x
+      if props.y instanceof Array
+        obj.y = if props.y[y]? then props.y[y] else props.y[yLen-1]
+      else
+        obj.y = props.y
+      if obj.x? and obj.y?
+        arr.push obj
+  return arr
 
 exports.getComponent = -> new MakePoint
