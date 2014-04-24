@@ -33,13 +33,16 @@ class MakeRange extends noflo.Component
       @compute()
 
   compute: ->
-    return unless @outPorts.range.isAttached() and @from? and @to? and @count? and @count > 0
-    range = []
-    f = @from
-    spread = @to - @from
-    increment = spread / @count
-    for i in [0..@count-1]
-      range[i] = @from + increment*i
-    @outPorts.range.send range
+    return unless @outPorts.range.isAttached() 
+    if @from? and @to? and @count? and @count > 1
+      range = []
+      f = @from
+      spread = @to - @from
+      increment = spread / (@count-1)
+      for i in [0..@count-1]
+        range[i] = @from + increment*i
+      @outPorts.range.send range
+    else if @from? and @count is 1
+      @outPorts.range.send @from
 
 exports.getComponent = -> new MakeRange
