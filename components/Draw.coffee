@@ -61,13 +61,17 @@ class Draw extends noflo.Component
       @outPorts.fill.send @canvas
 
   # Recursively parse things and arrays of things
-  parseThing: (thing) =>
+  parseThing: (thing, before, after) =>
     if thing? and thing.type? and @[thing.type]?
-      @[thing.type].call @, thing
+      if before?
+        before()
+      @[thing.type](thing)
+      if after?
+        after()
     else if thing instanceof Array
       for item in thing
         continue unless item?
-        @parseThing item
+        @parseThing item, before, after
 
   clear: (clear) =>
     @context.clearRect.apply @context, clear.rectangle
@@ -90,23 +94,13 @@ class Draw extends noflo.Component
       oldWidth = @context.linewidth
       @context.lineWidth = stroke.linewidth
     # Stroke each thing
-    for thing in stroke.items
-      continue unless thing?
-      if thing.type? and @[thing.type]?
-        @context.beginPath()
-        @[thing.type].call @, thing
-        if stroke.closepath
-          @context.closePath()
-        @context.stroke()
-      else if thing instanceof Array
-        # deal with plain arrays
-        for item in thing
-          continue unless item? and item.type? and @[item.type]?
-          @context.beginPath()
-          @[item.type].call @, item
-          if stroke.closepath
-            @context.closePath()
-          @context.stroke()
+    before = ->
+      @context.beginPath()
+    after = ->
+      if stroke.closepath
+        @context.closePath()
+      @context.stroke()
+    @parseThing stroke.items, before.bind(@), after.bind(@)
     # Restore style
     if oldStyle?
       @context.strokeStyle = oldStyle
@@ -119,21 +113,12 @@ class Draw extends noflo.Component
       oldStyle = @context.fillStyle
       @context.fillStyle = fill.fillstyle
     # Fill each thing
-    for thing in fill.items
-      continue unless thing?
-      if thing.type? and @[thing.type]?
-        @context.beginPath()
-        @[thing.type].call @, thing
-        @context.closePath()
-        @context.fill()
-      else if thing instanceof Array
-        # deal with plain arrays
-        for item in thing
-          continue unless item? and item.type? and @[item.type]?
-          @context.beginPath()
-          @[item.type].call @, item
-          @context.closePath()
-          @context.fill()
+    before = ->
+      @context.beginPath()
+    after = ->
+      @context.closePath()
+      @context.fill()
+    @parseThing fill.items, before.bind(@), after.bind(@)
     # Restore style
     if oldStyle?
       @context.fillStyle = oldStyle
@@ -171,9 +156,6 @@ class Draw extends noflo.Component
       @context.scale transform.scale.x, transform.scale.y
     # Apply drawing operations
     @parseThing transform.items
-    # for thing in transform.items
-    #   continue unless thing? and thing.type? and @[thing.type]?
-    #   @[thing.type].call @, thing
     # Recurse
     if recurse? and recurse > 0
       @transform transform, recurse-1

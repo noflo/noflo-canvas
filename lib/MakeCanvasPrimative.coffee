@@ -36,15 +36,19 @@ class exports.MakeCanvasPrimative extends noflo.Component
 
   setPropertyIndexed: (name, data, i) -> # this is bound, so use -> not =>
     @props[name][i] = data
-    @props[name].flat = null
-    flat = @expandToArray @props[name]
-    if flat?
-      @props[name].flat = flat
     @compute()
 
   compute: =>
     if @outPorts[@type].isAttached()
-      out = @expandToArray @props
+      out = {}
+      for own name, prop of @props
+        # Flatten array port if needed
+        if @inPorts[name]? and @inPorts[name].options.addressable
+          out[name] = @expandToArray prop
+        else
+          out[name] = prop
+      # Flatten output if needed
+      out = @expandToArray out
       if out
         @outPorts[@type].send out
 
@@ -58,9 +62,7 @@ class exports.MakeCanvasPrimative extends noflo.Component
       if prop instanceof Array
         # Short circuit with empty array
         return null unless prop.length > 0
-        if prop.flat? and length < prop.flat.length
-          length = prop.flat.length
-        else if length < prop.length
+        if length < prop.length
           length = prop.length
     if length is 0
       # No arrays, return props as given
@@ -75,9 +77,7 @@ class exports.MakeCanvasPrimative extends noflo.Component
           obj = {}
           obj.type = props.type
         for own name, prop of props
-          if prop.flat?
-            obj[name] = if prop.flat[i]? then prop.flat[i] else prop.flat[i%prop.flat.length]
-          else if prop instanceof Array
+          if prop instanceof Array
             obj[name] = if prop[i]? then prop[i] else prop[i%prop.length]
           else
             obj[name] = prop
