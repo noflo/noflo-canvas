@@ -12,6 +12,7 @@
   "scripts": [
     "index.js",
     "lib/MakeCanvasPrimative.coffee",
+    "components/CreateCanvas.coffee",
     "components/MakeColor.coffee",
     "components/MakeRange.coffee",
     "components/MakeIncrement.coffee",
@@ -40,6 +41,7 @@
   ],
   "noflo": {
     "components": {
+      "CreateCanvas": "components/CreateCanvas.coffee",
       "MakeColor": "components/MakeColor.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeIncrement": "components/MakeIncrement.coffee",

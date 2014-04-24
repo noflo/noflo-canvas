@@ -20,7 +20,8 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "noflo": "~0.4.0"
+    "noflo": "~0.4.0",
+    "canvas": ">=0.5.4"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -37,5 +38,31 @@
     "grunt-combine": "~0.8.3",
     "grunt-component": "~0.1.2"
   },
-  "keywords": []
-}
+  "keywords": [],
+  "noflo": {
+    "components": {
+      "CreateCanvas": "components/CreateCanvas.coffee",
+      "MakeColor": "components/MakeColor.coffee",
+      "MakeRange": "components/MakeRange.coffee",
+      "MakeIncrement": "components/MakeIncrement.coffee",
+      "MakePoint": "components/MakePoint.coffee",
+      "MakeRectangle": "components/MakeRectangle.coffee",
+      "MakeCircle": "components/MakeCircle.coffee",
+      "MakeCubicBezierCurve": "components/MakeCubicBezierCurve.coffee",
+      "MakeArc": "components/MakeArc.coffee",
+      "MakePath": "components/MakePath.coffee",
+      "Transform": "components/Transform.coffee",
+      "Group": "components/Group.coffee",
+      "Recurse": "components/Recurse.coffee",
+      "StrokeStyle": "components/StrokeStyle.coffee",
+      "LineWidth": "components/LineWidth.coffee",
+      "FillStyle": "components/FillStyle.coffee",
+      "Stroke": "components/Stroke.coffee",
+      "Fill": "components/Fill.coffee",
+      "StrokeRect": "components/StrokeRect.coffee",
+      "FillRect": "components/FillRect.coffee",
+      "Clear": "components/Clear.coffee",
+      "DrawImage": "components/DrawImage.coffee",
+      "Draw": "components/Draw.coffee"
+    }
+  }}
