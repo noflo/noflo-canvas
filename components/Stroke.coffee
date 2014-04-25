@@ -2,7 +2,7 @@ noflo = require 'noflo'
 {MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
 class Stroke extends MakeCanvasPrimative
-  description: 'Strokes the received paths, rectangles, circles, and arcs as lines'
+  description: 'Strokes lines for paths, rectangles, circles, and arcs'
   icon: 'square-o'
   constructor: ->
     ports =

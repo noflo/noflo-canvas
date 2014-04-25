@@ -4,7 +4,7 @@ class FillRect extends noflo.Component
   description: 'Paints the given rectangle onto the canvas'
   icon: 'pencil-square'
   constructor: ->
-    @fillrect = 
+    @fillrect =
       type: 'fillRect'
       rectangle: null
     

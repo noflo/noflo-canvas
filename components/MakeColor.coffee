@@ -29,16 +29,18 @@ class MakeColor extends MakeCanvasPrimative
   compute: ->
     if @outPorts.color.isAttached()
       color = @props
-      if @props.hue instanceof Array or @props.saturation instanceof Array or @props.lightness instanceof Array or @props.alpha instanceof Array
-        color = @expandToArray @props
-        color = color.map @colorToString
-      else 
+      if @props.hue instanceof Array or @props.saturation instanceof Array
+        if @props.lightness instanceof Array or @props.alpha instanceof Array
+          color = @expandToArray @props
+          color = color.map @colorToString
+      else
         color = @colorToString @props
       @outPorts.color.send color
 
   colorToString: (color) ->
     if color.alpha?
-      return "hsla(#{color.hue}, #{color.saturation}%, #{color.lightness}%, #{color.alpha})"
+      return "hsla(#{color.hue}, #{color.saturation}%, "+
+        "#{color.lightness}%, #{color.alpha})"
     else
       return "hsl(#{color.hue}, #{color.saturation}%, #{color.lightness}%)"
 

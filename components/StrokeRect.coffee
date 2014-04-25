@@ -4,7 +4,7 @@ class StrokeRect extends noflo.Component
   description: 'Paints the given rectangle onto the canvas'
   icon: 'pencil-square-o'
   constructor: ->
-    @strokerect = 
+    @strokerect =
       type: 'strokeRect'
       rectangle: null
     

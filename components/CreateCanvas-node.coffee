@@ -1,5 +1,5 @@
 noflo = require 'noflo'
-Canvas = require('canvas')
+Canvas = require 'canvas'
 
 class CreateCanvas extends noflo.Component
   description: 'Makes a Canvas with given dimensions'
@@ -14,7 +14,7 @@ class CreateCanvas extends noflo.Component
       height:
         datatype: "int"
     @outPorts = new noflo.OutPorts
-      canvas: 
+      canvas:
         datatype: 'object'
 
     @inPorts.width.on 'data', (data) =>
@@ -29,6 +29,6 @@ class CreateCanvas extends noflo.Component
     return unless @width>0 and @height>0
     canvas = new Canvas @width, @height
     if @outPorts.canvas.isAttached()
-      @outPorts.clear.send canvas
+      @outPorts.canvas.send canvas
 
 exports.getComponent = -> new CreateCanvas

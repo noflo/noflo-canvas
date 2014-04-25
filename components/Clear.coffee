@@ -4,7 +4,7 @@ class Clear extends noflo.Component
   description: 'Makes a clear rectangle with given dimensions'
   icon: 'eraser'
   constructor: ->
-    @clear = 
+    @clear =
       type: 'clear'
       rectangle: null
 

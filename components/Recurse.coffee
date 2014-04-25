@@ -4,7 +4,7 @@ class Recurse extends noflo.Component
   description: 'Makes a translation recursive.'
   icon: 'retweet'
   constructor: ->
-    @recurse = 
+    @recurse =
       type: 'recurse'
       recursables: []
       count: null

@@ -38,9 +38,21 @@ module.exports = ->
         input: 'browser/noflo-canvas.js'
         output: 'browser/noflo-canvas.js'
         tokens: [
-          token: '.coffee'
-          string: '.js'
+          token: '.coffee"'
+          string: '.js"'
+        ,
+          token: ".coffee'"
+          string: ".js'"
         ]
+        
+    # combine:
+    #   browser:
+    #     input: 'browser/noflo-canvas.js'
+    #     output: 'browser/noflo-canvas.js'
+    #     tokens: [
+    #       token: '.coffee'
+    #       string: '.js'
+    #     ]
 
     # JavaScript minification for the browser
     uglify:

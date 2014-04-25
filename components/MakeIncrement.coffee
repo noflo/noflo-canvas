@@ -9,16 +9,16 @@ class MakeIncrement extends noflo.Component
     @increment = 1
 
     @inPorts = new noflo.InPorts
-      from: 
+      from:
         datatype: 'number'
-      to: 
+      to:
         datatype: 'number'
-      increment: 
+      increment:
         datatype: 'number'
         description: 'defaults to 1'
 
     @outPorts = new noflo.OutPorts
-      range: 
+      range:
         datatype: 'array'
 
     @inPorts.from.on 'data', (data) =>
@@ -34,7 +34,8 @@ class MakeIncrement extends noflo.Component
       @compute()
 
   compute: ->
-    return unless @outPorts.range.isAttached() and @from? and @to? and @increment?
+    return unless @outPorts.range.isAttached()
+    return unless @from? and @to? and @increment?
     range = []
     f = @from
     if @from <= @to

@@ -152,7 +152,7 @@ class Draw extends noflo.Component
       @context.rotate transform.rotate
     if transform.scaleboth # non-zero
       @context.scale transform.scaleboth, transform.scaleboth
-    else if transform.scale? and transform.scale.x and transform.scale.y # non-zero
+    else if transform.scale? and transform.scale.x and transform.scale.y # non-0
       @context.scale transform.scale.x, transform.scale.y
     # Apply drawing operations
     @parseThing transform.items
@@ -162,7 +162,7 @@ class Draw extends noflo.Component
     # Undo transformations
     if transform.scaleboth # non-zero
       @context.scale 1/transform.scaleboth, 1/transform.scaleboth
-    else if transform.scale? and transform.scale.x and transform.scale.y # non-zero
+    else if transform.scale? and transform.scale.x and transform.scale.y # non-0
       @context.scale 1/transform.scale.x, 1/transform.scale.y
     if transform.rotate?
       @context.rotate 0-transform.rotate
@@ -171,7 +171,7 @@ class Draw extends noflo.Component
 
   recurse: (recurse) =>
     for thing in recurse.recursables
-      continue unless thing? 
+      continue unless thing?
       if thing.type is 'transform'
         @transform thing, recurse.count
 
@@ -193,7 +193,8 @@ class Draw extends noflo.Component
     @context.strokeRect.apply @context, strokerect.rectangle
 
   arc: (arc) =>
-    @context.arc(arc.center.x, arc.center.y, arc.radius, arc.start, arc.end, arc.reverse)
+    @context.arc(arc.center.x, arc.center.y, arc.radius,
+      arc.start, arc.end, arc.reverse)
 
   circle: (circle) =>
     @context.arc(circle.center.x, circle.center.y, circle.radius, 0, TAU)

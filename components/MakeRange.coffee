@@ -9,15 +9,15 @@ class MakeRange extends noflo.Component
     @count = 2
 
     @inPorts = new noflo.InPorts
-      from: 
+      from:
         datatype: 'number'
-      to: 
+      to:
         datatype: 'number'
-      count: 
+      count:
         datatype: 'number'
 
     @outPorts = new noflo.OutPorts
-      range: 
+      range:
         datatype: 'array'
 
     @inPorts.from.on 'data', (data) =>
@@ -33,7 +33,7 @@ class MakeRange extends noflo.Component
       @compute()
 
   compute: ->
-    return unless @outPorts.range.isAttached() 
+    return unless @outPorts.range.isAttached()
     if @from? and @to? and @count? and @count > 1
       range = []
       f = @from
