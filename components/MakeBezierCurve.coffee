@@ -1,6 +1,6 @@
 noflo = require 'noflo'
 
-class MakeCubicBezierCurve extends noflo.Component
+class MakeBezierCurve extends noflo.Component
   description: 'Creates an array of Points representing a Bezier curve'
   icon: 'pencil-square'
   constructor: ->
@@ -50,4 +50,4 @@ class MakeCubicBezierCurve extends noflo.Component
     if @outPorts.curve.isAttached() and @curve.indexOf(null) is -1
       @outPorts.curve.send @curve
 
-exports.getComponent = -> new MakeCubicBezierCurve
+exports.getComponent = -> new MakeBezierCurve

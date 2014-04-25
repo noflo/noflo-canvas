@@ -48,7 +48,7 @@
       "MakePoint": "components/MakePoint.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
       "MakeCircle": "components/MakeCircle.coffee",
-      "MakeCubicBezierCurve": "components/MakeCubicBezierCurve.coffee",
+      "MakeBezierCurve": "components/MakeBezierCurve.coffee",
       "MakeArc": "components/MakeArc.coffee",
       "MakePath": "components/MakePath.coffee",
       "Transform": "components/Transform.coffee",
