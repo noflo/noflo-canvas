@@ -134,7 +134,8 @@ class Draw extends noflo.Component
           else
             @context.lineTo thing.x, thing.y
         when 'beziercurve'
-          @context.bezierCurveTo.apply @context, thing
+          @context.bezierCurveTo(thing.control1.x, thing.control1.y,
+            thing.control2.x, thing.control2.y, thing.end.x, thing.end.y)
         when 'arc'
           @arc thing
 
