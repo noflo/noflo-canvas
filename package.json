@@ -45,6 +45,7 @@
       "MakeColor": "components/MakeColor.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeIncrement": "components/MakeIncrement.coffee",
+      "MakeRandom": "components/MakeRandom.coffee",
       "MakePoint": "components/MakePoint.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
       "MakeCircle": "components/MakeCircle.coffee",

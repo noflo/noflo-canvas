@@ -14,7 +14,7 @@ class MakeRange extends noflo.Component
       to:
         datatype: 'number'
       count:
-        datatype: 'number'
+        datatype: 'int'
 
     @outPorts = new noflo.OutPorts
       range:

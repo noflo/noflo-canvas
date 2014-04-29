@@ -14,7 +14,7 @@ class MakeIncrement extends noflo.Component
       to:
         datatype: 'number'
       increment:
-        datatype: 'number'
+        datatype: 'int'
         description: 'defaults to 1'
 
     @outPorts = new noflo.OutPorts
