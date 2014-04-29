@@ -9,15 +9,12 @@ class MakeColor extends MakeCanvasPrimative
       hue:
         datatype: 'number'
         description: 'from 0 to 360'
-        value: 0
       saturation:
         datatype: 'number'
         description: 'from 0 to 100'
-        value: 0
       lightness:
         datatype: 'number'
         description: 'from 0 to 100'
-        value: 0
       alpha:
         datatype: 'number'
         description: 'from 0 to 1.0'
@@ -27,15 +24,16 @@ class MakeColor extends MakeCanvasPrimative
 
   # OVERRIDE default to make strings
   compute: ->
-    if @outPorts.color.isAttached()
-      color = @props
-      if @props.hue instanceof Array or @props.saturation instanceof Array
-        if @props.lightness instanceof Array or @props.alpha instanceof Array
-          color = @expandToArray @props
-          color = color.map @colorToString
-      else
-        color = @colorToString @props
-      @outPorts.color.send color
+    return unless @outPorts.color.isAttached()
+    return unless @props.hue? and @props.saturation? and @props.lightness?
+    color = @props
+    if (@props.hue instanceof Array or @props.saturation instanceof Array or
+    @props.lightness instanceof Array or @props.alpha instanceof Array)
+      color = @expandToArray @props
+      color = color.map @colorToString
+    else
+      color = @colorToString @props
+    @outPorts.color.send color
 
   colorToString: (color) ->
     if color.alpha?
