@@ -9,6 +9,9 @@
   "dependencies": {
     "noflo/noflo": "*"
   },
+  "remotes": [
+    "https://raw.githubusercontent.com"
+  ],
   "scripts": [
     "index.js",
     "lib/MakeCanvasPrimative.coffee",
