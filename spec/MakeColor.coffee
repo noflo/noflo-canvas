@@ -46,7 +46,7 @@ describe 'MakeColor component', ->
       sock_lightness.send 50
 
   describe 'multiple color output', ->
-    it 'should output an array of color strings', ->
+    it 'should output an array of color strings for hue', ->
       out.once "data", (data) ->
         chai.expect(data).to.be.an 'array'
         chai.expect(data[0]).to.equal 'hsl(0, 100%, 50%)'
@@ -54,3 +54,20 @@ describe 'MakeColor component', ->
       sock_hue.send [0, 1]
       sock_saturation.send 100
       sock_lightness.send 50
+    it 'should output an array of color strings for saturation', ->
+      out.once "data", (data) ->
+        chai.expect(data).to.be.an 'array'
+        chai.expect(data[0]).to.equal 'hsl(0, 50%, 50%)'
+        chai.expect(data[1]).to.equal 'hsl(0, 100%, 50%)'
+      sock_hue.send 0
+      sock_saturation.send [50, 100]
+      sock_lightness.send 50
+    it 'should output an array of color strings for all', ->
+      out.once "data", (data) ->
+        chai.expect(data).to.be.an 'array'
+        chai.expect(data[0]).to.equal 'hsla(0, 50%, 25%, 0.25)'
+        chai.expect(data[1]).to.equal 'hsla(1, 100%, 75%, 0.75)'
+      sock_alpha.send [0.25, 0.75]
+      sock_hue.send [0, 1]
+      sock_saturation.send [50, 100]
+      sock_lightness.send [25, 75]
