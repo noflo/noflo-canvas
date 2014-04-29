@@ -23,12 +23,12 @@ class MakeRandom extends noflo.Component
       numbers:
         datatype: 'array'
 
-    @inPorts.from.on 'data', (data) =>
-      @from = data
+    @inPorts.min.on 'data', (data) =>
+      @min = data
       @compute()
 
-    @inPorts.to.on 'data', (data) =>
-      @to = data
+    @inPorts.max.on 'data', (data) =>
+      @max = data
       @compute()
 
     @inPorts.count.on 'data', (data) =>
@@ -36,8 +36,8 @@ class MakeRandom extends noflo.Component
       @compute()
 
   compute: ->
-    return unless @outPorts.range.isAttached()
-    return unless @from? and @to? and @count? and @count >= 1
+    return unless @outPorts.numbers.isAttached()
+    return unless @min? and @max? and @count? and @count >= 1
     
     spread = @max - @min
     if @count is 1
