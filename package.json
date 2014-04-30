@@ -2,13 +2,20 @@
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
   "version": "0.1.0",
-  "author": {
-    "name": "Vilson Vieira, Forrest Oliphant",
-    "email": "vilson@void.cc"
-  },
+  "contributors": [
+    { 
+      "name" : "Forrest Oliphant",
+      "url" : "http://forresto.com/"
+    },
+    { 
+      "name" : "Vilson Vieira",
+      "email" : "vilson@void.cc",
+      "url" : "http://automata.cc/"
+    }
+  ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/automata/noflo-canvas.git"
+    "url": "git://github.com/noflo/noflo-canvas.git"
   },
   "licenses": [
     {
