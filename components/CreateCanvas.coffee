@@ -21,7 +21,7 @@ class CreateCanvas extends noflo.Component
       @create()
 
     @inPorts.height.on 'data', (data) =>
-      @width = data
+      @height = data
       @create()
 
   create: =>
