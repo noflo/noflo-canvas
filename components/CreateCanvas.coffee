@@ -29,9 +29,6 @@ class CreateCanvas extends noflo.Component
     canvas = document.createElement 'canvas'
     canvas.width = @width
     canvas.height = @height
-    canvas.id = 'createdCanvas'
-    unless document.getElementById canvas.id
-      document.body.appendChild canvas
 
     if @outPorts.canvas.isAttached()
       @outPorts.canvas.send canvas
