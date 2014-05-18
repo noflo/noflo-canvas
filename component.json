@@ -7,7 +7,8 @@
   "keywords": [
   ],
   "dependencies": {
-    "noflo/noflo": "*"
+    "noflo/noflo": "*",
+    "jonnor/color-thief": "*"
   },
   "remotes": [
     "https://raw.githubusercontent.com"
@@ -38,6 +39,7 @@
     "components/FillRect.coffee",
     "components/Clear.coffee",
     "components/DrawImage.coffee",
+    "components/GetColors.coffee",
     "components/Draw.coffee"
   ],
   "json": [
@@ -68,7 +70,8 @@
       "FillRect": "components/FillRect.coffee",
       "Clear": "components/Clear.coffee",
       "DrawImage": "components/DrawImage.coffee",
-      "Draw": "components/Draw.coffee"
+      "Draw": "components/Draw.coffee",
+      "GetColors": "components/GetColors.coffee"
     }
   }
 }

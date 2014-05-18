@@ -71,6 +71,7 @@
       "FillRect": "components/FillRect.coffee",
       "Clear": "components/Clear.coffee",
       "DrawImage": "components/DrawImage.coffee",
-      "Draw": "components/Draw.coffee"
+      "Draw": "components/Draw.coffee",
+      "GetColors": "components/GetColors.coffee"
     }
   }}
