@@ -1,16 +1,16 @@
 {
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "contributors": [
-    { 
-      "name" : "Forrest Oliphant",
-      "url" : "http://forresto.com/"
+    {
+      "name": "Forrest Oliphant",
+      "url": "http://forresto.com/"
     },
-    { 
-      "name" : "Vilson Vieira",
-      "email" : "vilson@void.cc",
-      "url" : "http://automata.cc/"
+    {
+      "name": "Vilson Vieira",
+      "email": "vilson@void.cc",
+      "url": "http://automata.cc/"
     }
   ],
   "repository": {
@@ -27,8 +27,9 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "noflo": "~0.5.0",
-    "canvas": "~1.1.1"
+    "canvas": "~1.1.1",
+    "color-thief": "^2.0.1",
+    "noflo": "~0.5.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -75,4 +76,5 @@
       "Draw": "components/Draw.coffee",
       "GetColors": "components/GetColors.coffee"
     }
-  }}
+  }
+}
