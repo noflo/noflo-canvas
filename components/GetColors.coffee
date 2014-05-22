@@ -21,6 +21,9 @@ class GetColors extends noflo.Component
   calculate: ->
     thief = new ColorThief
     colors = thief.getPalette @image
+    id = if noflo.isBrowser() then @image.src else @image
+    @outPorts.colors.beginGroup id
     @outPorts.colors.send colors
+    @outPorts.colors.endGroup()
 
 exports.getComponent = -> new GetColors
