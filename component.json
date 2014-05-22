@@ -4,8 +4,7 @@
   "author": "Vilson Vieira <vilson@void.cc>",
   "repo": "noflo/noflo-canvas",
   "version": "0.1.0",
-  "keywords": [
-  ],
+  "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
     "jonnor/color-thief": "*"
@@ -41,39 +40,40 @@
     "components/Clear.coffee",
     "components/DrawImage.coffee",
     "components/GetColors.coffee",
-    "components/Draw.coffee"
+    "components/Draw.coffee",
+    "components/CreateCanvas-node.coffee"
   ],
   "json": [
     "component.json"
   ],
   "noflo": {
     "components": {
-      "CreateCanvas": "components/CreateCanvas.coffee",
-      "MakeColor": "components/MakeColor.coffee",
-      "MakeRange": "components/MakeRange.coffee",
-      "MakeIncrement": "components/MakeIncrement.coffee",
-      "MakeRandom": "components/MakeRandom.coffee",
-      "MakePoint": "components/MakePoint.coffee",
-      "MakeGrid": "components/MakeGrid.coffee",
-      "MakeRectangle": "components/MakeRectangle.coffee",
-      "MakeCircle": "components/MakeCircle.coffee",
-      "MakeBezierCurve": "components/MakeBezierCurve.coffee",
-      "MakeArc": "components/MakeArc.coffee",
-      "MakePath": "components/MakePath.coffee",
-      "Transform": "components/Transform.coffee",
-      "Group": "components/Group.coffee",
-      "Recurse": "components/Recurse.coffee",
-      "StrokeStyle": "components/StrokeStyle.coffee",
-      "LineWidth": "components/LineWidth.coffee",
-      "FillStyle": "components/FillStyle.coffee",
-      "Stroke": "components/Stroke.coffee",
-      "Fill": "components/Fill.coffee",
-      "StrokeRect": "components/StrokeRect.coffee",
-      "FillRect": "components/FillRect.coffee",
       "Clear": "components/Clear.coffee",
-      "DrawImage": "components/DrawImage.coffee",
+      "CreateCanvas": "components/CreateCanvas.coffee",
       "Draw": "components/Draw.coffee",
-      "GetColors": "components/GetColors.coffee"
+      "DrawImage": "components/DrawImage.coffee",
+      "Fill": "components/Fill.coffee",
+      "FillRect": "components/FillRect.coffee",
+      "FillStyle": "components/FillStyle.coffee",
+      "GetColors": "components/GetColors.coffee",
+      "Group": "components/Group.coffee",
+      "LineWidth": "components/LineWidth.coffee",
+      "MakeArc": "components/MakeArc.coffee",
+      "MakeBezierCurve": "components/MakeBezierCurve.coffee",
+      "MakeCircle": "components/MakeCircle.coffee",
+      "MakeColor": "components/MakeColor.coffee",
+      "MakeGrid": "components/MakeGrid.coffee",
+      "MakeIncrement": "components/MakeIncrement.coffee",
+      "MakePath": "components/MakePath.coffee",
+      "MakePoint": "components/MakePoint.coffee",
+      "MakeRandom": "components/MakeRandom.coffee",
+      "MakeRange": "components/MakeRange.coffee",
+      "MakeRectangle": "components/MakeRectangle.coffee",
+      "Recurse": "components/Recurse.coffee",
+      "Stroke": "components/Stroke.coffee",
+      "StrokeRect": "components/StrokeRect.coffee",
+      "StrokeStyle": "components/StrokeStyle.coffee",
+      "Transform": "components/Transform.coffee"
     }
   }
 }
