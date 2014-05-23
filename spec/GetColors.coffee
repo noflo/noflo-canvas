@@ -2,9 +2,21 @@ noflo = require 'noflo'
 unless noflo.isBrowser()
   chai = require 'chai' unless chai
   fs = require 'fs'
+  Canvas = require 'canvas'
   GetColors = require '../components/GetColors.coffee'
 else
   GetColors = require 'noflo-canvas/components/GetColors.js'
+
+
+createCanvas = (width, height) ->
+  if noflo.isBrowser()
+    canvas = document.createElement 'canvas'
+    canvas.width = width
+    canvas.height = height
+  else
+    Canvas = require 'canvas'
+    canvas = new Canvas width, height
+  return canvas
 
 getImageData = (name, callback) ->
   if noflo.isBrowser()
@@ -15,8 +27,17 @@ getImageData = (name, callback) ->
     image.src = id
   else
     id = 'spec/data/'+name
-    image = fs.readFile id, (err, image) ->
+    fs.readFile id, (err, data) ->
+      image = new Canvas.Image
+      image.src = data
       callback image
+  return id
+
+getCanvasWithImage = (name, callback) ->
+  id = getImageData name, (img) ->
+    canvas = createCanvas img.width, img.height
+    canvas.getContext('2d').drawImage(img, 0, 0)
+    callback canvas
   return id
 
 describe 'GetColors component', ->
@@ -29,18 +50,18 @@ describe 'GetColors component', ->
     ins = noflo.internalSocket.createSocket()
     colors = noflo.internalSocket.createSocket()
     canvas = noflo.internalSocket.createSocket()
-    c.inPorts.image.attach ins
+    c.inPorts.canvas.attach ins
     c.outPorts.colors.attach colors
     c.outPorts.canvas.attach canvas
 
   describe 'when instantiated', ->
     it 'should have an input port', ->
-      chai.expect(c.inPorts.image).to.be.an 'object'
+      chai.expect(c.inPorts.canvas).to.be.an 'object'
     it 'should have output ports', ->
       chai.expect(c.outPorts.colors).to.be.an 'object'
       chai.expect(c.outPorts.canvas).to.be.an 'object'
 
-  describe 'when passed an image', ->
+  describe 'when passed a canvas', ->
     input = 'colorful-octagon.png'
     expected = [
       [ 4, 251, 251 ]
@@ -67,9 +88,9 @@ describe 'GetColors component', ->
         chai.expect(groups).to.have.length 1
         chai.expect(groups[0]).to.equal id
         done()
-      id = getImageData input, (image) ->
+      id = getCanvasWithImage input, (canvas) ->
         ins.beginGroup id
-        ins.send image
+        ins.send canvas
         ins.endGroup()
 
     it 'should send canvas out', (done) ->
@@ -82,7 +103,7 @@ describe 'GetColors component', ->
         chai.expect(groups).to.have.length 1
         chai.expect(groups[0]).to.equal id
         done()
-      id = getImageData input, (image) ->
+      id = getCanvasWithImage input, (canvas) ->
         ins.beginGroup id
-        ins.send image
+        ins.send canvas
         ins.endGroup()

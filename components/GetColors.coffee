@@ -7,24 +7,27 @@ class GetColors extends noflo.Component
   constructor: ->
 
     @inPorts =
-      image: new noflo.Port 'object'
+      canvas: new noflo.Port 'object'
     @outPorts =
       colors: new noflo.Port 'array'
       canvas: new noflo.Port 'object'
 
-    @inPorts.image.on 'begingroup', (group) =>
+    @inPorts.canvas.on 'begingroup', (group) =>
       @outPorts.canvas.beginGroup group
       @outPorts.colors.beginGroup group
-    @inPorts.image.on 'endgroup', (group) =>
+    @inPorts.canvas.on 'endgroup', (group) =>
       @outPorts.canvas.endGroup group
       @outPorts.colors.endGroup group
-    @inPorts.image.on 'disconnect', () =>
+    @inPorts.canvas.on 'disconnect', () =>
       @outPorts.colors.disconnect()
       @outPorts.canvas.disconnect()
-    @inPorts.image.on 'data', (image) =>
+    @inPorts.canvas.on 'data', (canvas) =>
       thief = new ColorThief
-      colors = thief.getPalette image, 10, 10
+      context = canvas.getContext '2d'
+      pixels = (context.getImageData 0, 0, canvas.width, canvas.height).data
+      pixelCount = canvas.width*canvas.height
+      colors = thief.getPaletteFromPixels pixels, pixelCount, 10, 10
       @outPorts.colors.send colors
-      @outPorts.canvas.send {s: "f"}
+      @outPorts.canvas.send canvas
 
 exports.getComponent = -> new GetColors
