@@ -32,6 +32,12 @@ module.exports = ->
       files: ['spec/*.coffee', 'components/*.coffee']
       tasks: ['test']
 
+    # Run a server for the tests so we can actually do AJAX
+    connect:
+      test:
+        options:
+          port: 9000
+
     # BDD tests on Node.js
     cafemocha:
       nodejs:
@@ -41,10 +47,11 @@ module.exports = ->
 
     # BDD tests on browser
     mocha_phantomjs:
-      options:
-        output: 'spec/result.xml'
-        reporter: 'dot'
-      all: ['spec/runner.html']
+      all:
+        options:
+          output: 'spec/result.xml'
+          reporter: 'spec'
+          urls: ['http://localhost:9000/spec/runner.html']
 
     # Coding standards
     coffeelint:
@@ -56,6 +63,7 @@ module.exports = ->
   @loadNpmTasks 'grunt-contrib-coffee'
 
   # Grunt plugins used for testing
+  @loadNpmTasks 'grunt-contrib-connect'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-cafe-mocha'
   @loadNpmTasks 'grunt-mocha-phantomjs'
@@ -74,6 +82,7 @@ module.exports = ->
       @task.run 'cafemocha'
     if target is 'all' or target is 'browser'
       @task.run 'coffee'
+      @task.run 'connect'
       @task.run 'mocha_phantomjs'
 
   @registerTask 'default', ['test']
