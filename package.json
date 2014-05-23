@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "canvas": "~1.1.1",
-    "color-thief": "^2.0.1",
+    "color-thief": "git://github.com/jonnor/color-thief.git#master",
     "noflo": "~0.5.0"
   },
   "devDependencies": {
