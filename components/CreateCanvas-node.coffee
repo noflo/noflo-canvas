@@ -1,4 +1,5 @@
 # @runtime noflo-nodejs
+# @name CreateCanvas
 
 noflo = require 'noflo'
 Canvas = require 'canvas'

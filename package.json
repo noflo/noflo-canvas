@@ -49,8 +49,7 @@
   "noflo": {
     "components": {
       "Clear": "components/Clear.coffee",
-      "CreateCanvas-node": "components/CreateCanvas-node.coffee",
-      "CreateCanvas": "components/CreateCanvas.coffee",
+      "CreateCanvas": "components/CreateCanvas-node.coffee",
       "Draw": "components/Draw.coffee",
       "DrawImage": "components/DrawImage.coffee",
       "Fill": "components/Fill.coffee",

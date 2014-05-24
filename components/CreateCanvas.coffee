@@ -1,4 +1,5 @@
 # @runtime noflo-browser
+# @name CreateCanvas
 
 noflo = require 'noflo'
 
