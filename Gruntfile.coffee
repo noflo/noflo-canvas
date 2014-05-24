@@ -14,85 +14,56 @@ module.exports = ->
         dest: 'spec'
         ext: '.js'
 
-    # Browser version building
-    component:
-      install:
-        options:
-          action: 'install'
-    component_build:
-      'noflo-canvas':
-        output: './browser/'
-        config: './component.json'
-        scripts: true
-        styles: false
-        plugins: ['coffee']
-        configure: (builder) ->
-          # Enable Component plugins
-          json = require 'component-json'
-          builder.use json()
-
-    # Fix broken Component aliases, as mentioned in
-    # https://github.com/anthonyshort/component-coffee/issues/3
-    combine:
-      browser:
-        input: 'browser/noflo-canvas.js'
-        output: 'browser/noflo-canvas.js'
-        tokens: [
-          token: '.coffee"'
-          string: '.js"'
-        ,
-          token: ".coffee'"
-          string: ".js'"
-        ]
-        
-    # combine:
-    #   browser:
-    #     input: 'browser/noflo-canvas.js'
-    #     output: 'browser/noflo-canvas.js'
-    #     tokens: [
-    #       token: '.coffee'
-    #       string: '.js'
-    #     ]
-
-    # JavaScript minification for the browser
-    uglify:
-      options:
-        report: 'min'
-      noflo:
+    # Updating the package manifest files
+    noflo_manifest:
+      update:
         files:
-          './browser/noflo-canvas.min.js': ['./browser/noflo-canvas.js']
+          'component.json': ['graphs/*', 'components/*']
+          'package.json': ['graphs/*', 'components/*']
+
+    # Browser build of NoFlo
+    noflo_browser:
+      build:
+        files:
+          'browser/noflo-canvas.js': ['component.json']
 
     # Automated recompilation and testing when developing
     watch:
       files: ['spec/*.coffee', 'components/*.coffee']
       tasks: ['test']
 
+    # Run a server for the tests so we can actually do AJAX
+    connect:
+      test:
+        options:
+          port: 9000
+
     # BDD tests on Node.js
     cafemocha:
       nodejs:
         src: ['spec/*.coffee']
         options:
-          reporter: 'dot'
+          reporter: 'spec'
 
     # BDD tests on browser
     mocha_phantomjs:
-      options:
-        output: 'spec/result.xml'
-        reporter: 'dot'
-      all: ['spec/runner.html']
+      all:
+        options:
+          output: 'spec/result.xml'
+          reporter: 'spec'
+          urls: ['http://localhost:9000/spec/runner.html']
 
     # Coding standards
     coffeelint:
       components: ['components/*.coffee']
 
   # Grunt plugins used for building
+  @loadNpmTasks 'grunt-noflo-manifest'
+  @loadNpmTasks 'grunt-noflo-browser'
   @loadNpmTasks 'grunt-contrib-coffee'
-  @loadNpmTasks 'grunt-component'
-  @loadNpmTasks 'grunt-component-build'
-  @loadNpmTasks 'grunt-combine'
-  @loadNpmTasks 'grunt-contrib-uglify'
 
   # Grunt plugins used for testing
+  @loadNpmTasks 'grunt-contrib-connect'
   @loadNpmTasks 'grunt-contrib-watch'
   @loadNpmTasks 'grunt-cafe-mocha'
   @loadNpmTasks 'grunt-mocha-phantomjs'
@@ -100,22 +71,18 @@ module.exports = ->
 
   # Our local tasks
   @registerTask 'build', 'Build NoFlo for the chosen target platform', (target = 'all') =>
-    @task.run 'coffee'
+    @task.run 'noflo_manifest'
     if target is 'all' or target is 'browser'
-      @task.run 'component'
-      @task.run 'component_build'
-      @task.run 'combine'
-      @task.run 'uglify'
+      @task.run 'noflo_browser'
 
   @registerTask 'test', 'Build NoFlo and run automated tests', (target = 'all') =>
     @task.run 'coffeelint'
-    @task.run 'coffee'
+    @task.run 'build'
     if target is 'all' or target is 'nodejs'
       @task.run 'cafemocha'
     if target is 'all' or target is 'browser'
-      @task.run 'component'
-      @task.run 'component_build'
-      @task.run 'combine'
+      @task.run 'coffee'
+      @task.run 'connect'
       @task.run 'mocha_phantomjs'
 
   @registerTask 'default', ['test']

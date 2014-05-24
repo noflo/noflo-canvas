@@ -2,7 +2,7 @@ noflo = require 'noflo'
 
 class MakeRandom extends noflo.Component
   description: 'Make an array of random numbers'
-  icon: 'folder-o'
+  icon: 'random'
   constructor: ->
     @min = null
     @max = null
@@ -48,5 +48,7 @@ class MakeRandom extends noflo.Component
       for i in [0..@count-1]
         numbers[i] = @min + Math.random()*spread
       @outPorts.numbers.send numbers
+
+    @outPorts.numbers.disconnect()
 
 exports.getComponent = -> new MakeRandom
