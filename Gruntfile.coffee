@@ -56,6 +56,9 @@ module.exports = ->
     # Coding standards
     coffeelint:
       components: ['components/*.coffee']
+      options:
+        'max_line_length':
+          'level': 'ignore'
 
   # Grunt plugins used for building
   @loadNpmTasks 'grunt-noflo-manifest'
