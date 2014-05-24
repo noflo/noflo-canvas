@@ -19,8 +19,10 @@ class Draw extends noflo.LoggingComponent
       canvas: new noflo.Port 'object'
       commands: new noflo.ArrayPort 'object'
 
-    @outPorts =
-      canvas: new noflo.Port 'object'
+    @outPorts = new noflo.OutPorts
+      canvas:
+        datatype: 'object'
+        required: false
 
     @inPorts.tick.on 'data', (tick) =>
       if @context
@@ -29,6 +31,14 @@ class Draw extends noflo.LoggingComponent
       @sendLog
         loglevel: 'error'
         message: 'Received commands but there is not 2d context attached.'
+
+    @inPorts.tick.on 'begingroup', (group) =>
+      @outPorts.canvas.beginGroup group
+    @inPorts.tick.on 'endgroup', () =>
+      @outPorts.canvas.endGroup()
+    @inPorts.tick.on 'disconnect', () =>
+      @outPorts.canvas.disconnect()
+
 
     @inPorts.drawevery.on 'data', (data) =>
       @drawevery = data
@@ -57,8 +67,7 @@ class Draw extends noflo.LoggingComponent
     if @clearevery
       @context.clearRect 0, 0, @canvas.width, @canvas.height
     @parseThing commands
-    if @outPorts.canvas.isAttached()
-      @outPorts.fill.send @canvas
+    @outPorts.canvas.send @canvas
 
   # Recursively parse things and arrays of things
   parseThing: (thing, before, after) =>
@@ -200,7 +209,22 @@ class Draw extends noflo.LoggingComponent
   circle: (circle) =>
     @context.arc(circle.center.x, circle.center.y, circle.radius, 0, TAU)
 
-  drawImage: (args) =>
-    @context.drawImage.apply @context, args
+  drawimage: (drawimage) =>
+    return unless drawimage.image?
+    if drawimage.sourcerect? and drawimage.destrect?
+      d = drawimage.destrect
+      s = drawimage.sourcerect
+      @context.drawImage drawimage.image, d.point.x, d.point.y, d.width, d.height, s.point.x, s.point.y, s.width, s.height
+      return
+    if drawimage.destrect?
+      d = drawimage.destrect
+      @context.drawImage drawimage.image, d.point.x, d.point.y, d.width, d.height
+      return
+    if drawimage.destpoint?
+      p = drawimage.destpoint
+      @context.drawImage drawimage.image, p.x, p.y
+      return
+    # Default
+    @context.drawImage drawimage.image, 0, 0
                   
 exports.getComponent = -> new Draw
