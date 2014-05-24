@@ -1,4 +1,5 @@
 noflo = require 'noflo'
+{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
 class DrawImage extends MakeCanvasPrimative
   description: 'Draws the specified image'
