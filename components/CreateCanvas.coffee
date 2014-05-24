@@ -1,3 +1,5 @@
+# @runtime noflo-browser
+
 noflo = require 'noflo'
 
 class CreateCanvas extends noflo.Component
