@@ -3,7 +3,7 @@
   "description": "Canvas 2D components for NoFlo",
   "author": "Vilson Vieira <vilson@void.cc>",
   "repo": "noflo/noflo-canvas",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
