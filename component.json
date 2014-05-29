@@ -41,7 +41,8 @@
     "components/DrawImage.coffee",
     "components/GetColors.coffee",
     "components/Draw.coffee",
-    "components/CreateCanvas-node.coffee"
+    "components/CreateCanvas-node.coffee",
+    "components/ColorArrayToCss.coffee"
   ],
   "json": [
     "component.json"
@@ -49,6 +50,7 @@
   "noflo": {
     "components": {
       "Clear": "components/Clear.coffee",
+      "ColorArrayToCss": "components/ColorArrayToCss.coffee",
       "CreateCanvas": "components/CreateCanvas.coffee",
       "Draw": "components/Draw.coffee",
       "DrawImage": "components/DrawImage.coffee",
