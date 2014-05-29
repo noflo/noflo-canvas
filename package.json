@@ -77,7 +77,8 @@
       "Transform": "components/Transform.coffee"
     },
     "graphs": {
-      "PointFromObject": "graphs/PointFromObject.json"
+      "PointFromObject": "graphs/PointFromObject.json",
+      "RectangleFromObject": "graphs/RectangleFromObject.json"
     }
   }
 }

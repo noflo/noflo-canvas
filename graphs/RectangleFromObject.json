@@ -1,0 +1,203 @@
+{
+    "properties": {
+        "name": "RectangleFromObject",
+        "id": "RectangleFromObject",
+        "environment": {
+            "type": "all",
+            "content": ""
+        }
+    },
+    "inports": {
+        "in": {
+            "process": "core/Split_xvdlb",
+            "port": "in",
+            "metadata": {
+                "x": 540,
+                "y": -288
+            }
+        }
+    },
+    "outports": {
+        "rectangle": {
+            "process": "canvas/MakeRectangle_v3sfl",
+            "port": "rectangle",
+            "metadata": {
+                "x": 1296,
+                "y": -252
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "width": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "width",
+                "x": 828,
+                "y": -288
+            }
+        },
+        "adapters/PacketsToArray_smxrx": {
+            "component": "adapters/PacketsToArray",
+            "metadata": {
+                "label": "adapters/PacketsToArray",
+                "x": 972,
+                "y": -288
+            }
+        },
+        "adapters/PacketsToArray_gysu3": {
+            "component": "adapters/PacketsToArray",
+            "metadata": {
+                "label": "adapters/PacketsToArray",
+                "x": 972,
+                "y": -180
+            }
+        },
+        "height": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "height",
+                "x": 828,
+                "y": -180
+            }
+        },
+        "core/Split_xvdlb": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "core/Split",
+                "x": 684,
+                "y": -288
+            }
+        },
+        "canvas/MakeRectangle_v3sfl": {
+            "component": "canvas/MakeRectangle",
+            "metadata": {
+                "label": "canvas/MakeRectangle",
+                "x": 1152,
+                "y": -252
+            }
+        },
+        "canvas/PointFromObject_l1e2e": {
+            "component": "canvas/PointFromObject",
+            "metadata": {
+                "label": "canvas/PointFromObject",
+                "x": 828,
+                "y": -396
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "core/Split_xvdlb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "width",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "core/Split_xvdlb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "height",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "width",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "adapters/PacketsToArray_smxrx",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "adapters/PacketsToArray_smxrx",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangle_v3sfl",
+                "port": "width"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "height",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "adapters/PacketsToArray_gysu3",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "adapters/PacketsToArray_gysu3",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangle_v3sfl",
+                "port": "height"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_xvdlb",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/PointFromObject_l1e2e",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "canvas/PointFromObject_l1e2e",
+                "port": "point"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangle_v3sfl",
+                "port": "point"
+            },
+            "metadata": {}
+        },
+        {
+            "data": "width",
+            "tgt": {
+                "process": "width",
+                "port": "key"
+            }
+        },
+        {
+            "data": "height",
+            "tgt": {
+                "process": "height",
+                "port": "key"
+            }
+        }
+    ]
+}

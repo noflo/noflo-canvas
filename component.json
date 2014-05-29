@@ -43,11 +43,13 @@
     "components/Draw.coffee",
     "components/CreateCanvas-node.coffee",
     "components/ColorArrayToCss.coffee",
-    "graphs/PointFromObject.json"
+    "graphs/PointFromObject.json",
+    "graphs/RectangleFromObject.json"
   ],
   "json": [
     "component.json",
-    "graphs/PointFromObject.json"
+    "graphs/PointFromObject.json",
+    "graphs/RectangleFromObject.json"
   ],
   "noflo": {
     "components": {
@@ -80,7 +82,8 @@
       "Transform": "components/Transform.coffee"
     },
     "graphs": {
-      "PointFromObject": "graphs/PointFromObject.json"
+      "PointFromObject": "graphs/PointFromObject.json",
+      "RectangleFromObject": "graphs/RectangleFromObject.json"
     }
   }
 }
