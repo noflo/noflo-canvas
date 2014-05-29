@@ -1,0 +1,169 @@
+{
+    "properties": {
+        "name": "PointFromObject",
+        "id": "PointFromObject",
+        "environment": {
+            "type": "all",
+            "content": ""
+        }
+    },
+    "inports": {
+        "in": {
+            "process": "core/Split_2l54n",
+            "port": "in",
+            "metadata": {
+                "x": 36,
+                "y": 36
+            }
+        }
+    },
+    "outports": {
+        "point": {
+            "process": "canvas/MakePoint_h7co8",
+            "port": "point",
+            "metadata": {
+                "x": 792,
+                "y": 36
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "core/Split_2l54n": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "core/Split",
+                "x": 180,
+                "y": 36
+            }
+        },
+        "x": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "x",
+                "x": 324,
+                "y": 144
+            }
+        },
+        "y": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "y",
+                "x": 324,
+                "y": 36
+            }
+        },
+        "adapters/PacketsToArray_7a90h": {
+            "component": "adapters/PacketsToArray",
+            "metadata": {
+                "label": "adapters/PacketsToArray",
+                "x": 468,
+                "y": 144
+            }
+        },
+        "adapters/PacketsToArray_xtzm": {
+            "component": "adapters/PacketsToArray",
+            "metadata": {
+                "label": "adapters/PacketsToArray",
+                "x": 468,
+                "y": 36
+            }
+        },
+        "canvas/MakePoint_h7co8": {
+            "component": "canvas/MakePoint",
+            "metadata": {
+                "label": "canvas/MakePoint",
+                "x": 648,
+                "y": 36
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "x",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "adapters/PacketsToArray_7a90h",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "adapters/PacketsToArray_7a90h",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakePoint_h7co8",
+                "port": "x"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "y",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "adapters/PacketsToArray_xtzm",
+                "port": "in"
+            },
+            "metadata": {
+                "route": null
+            }
+        },
+        {
+            "src": {
+                "process": "adapters/PacketsToArray_xtzm",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakePoint_h7co8",
+                "port": "y"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_2l54n",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "x",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_2l54n",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "y",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "data": "x",
+            "tgt": {
+                "process": "x",
+                "port": "key"
+            }
+        },
+        {
+            "data": "y",
+            "tgt": {
+                "process": "y",
+                "port": "key"
+            }
+        }
+    ]
+}

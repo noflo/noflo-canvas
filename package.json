@@ -75,6 +75,9 @@
       "StrokeRect": "components/StrokeRect.coffee",
       "StrokeStyle": "components/StrokeStyle.coffee",
       "Transform": "components/Transform.coffee"
+    },
+    "graphs": {
+      "PointFromObject": "graphs/PointFromObject.json"
     }
   }
 }

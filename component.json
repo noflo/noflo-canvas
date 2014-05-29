@@ -42,10 +42,12 @@
     "components/GetColors.coffee",
     "components/Draw.coffee",
     "components/CreateCanvas-node.coffee",
-    "components/ColorArrayToCss.coffee"
+    "components/ColorArrayToCss.coffee",
+    "graphs/PointFromObject.json"
   ],
   "json": [
-    "component.json"
+    "component.json",
+    "graphs/PointFromObject.json"
   ],
   "noflo": {
     "components": {
@@ -76,6 +78,9 @@
       "StrokeRect": "components/StrokeRect.coffee",
       "StrokeStyle": "components/StrokeStyle.coffee",
       "Transform": "components/Transform.coffee"
+    },
+    "graphs": {
+      "PointFromObject": "graphs/PointFromObject.json"
     }
   }
 }
