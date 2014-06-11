@@ -43,6 +43,7 @@
     "components/Draw.coffee",
     "components/CreateCanvas-node.coffee",
     "components/ColorArrayToCss.coffee",
+    "components/SavePNG.coffee",
     "graphs/PointFromObject.json",
     "graphs/RectangleFromObject.json"
   ],
@@ -76,6 +77,7 @@
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
       "Recurse": "components/Recurse.coffee",
+      "SavePNG": "components/SavePNG.coffee",
       "Stroke": "components/Stroke.coffee",
       "StrokeRect": "components/StrokeRect.coffee",
       "StrokeStyle": "components/StrokeStyle.coffee",
