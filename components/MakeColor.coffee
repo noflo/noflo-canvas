@@ -3,7 +3,7 @@ noflo = require 'noflo'
 
 class MakeColor extends MakeCanvasPrimative
   description: 'Creates HSL or HSLA color or colors'
-  icon: 'palette'
+  icon: 'tint'
   constructor: ->
     ports =
       hue:

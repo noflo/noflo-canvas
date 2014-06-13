@@ -3,7 +3,7 @@ noflo = require 'noflo'
 
 class MakeRGBColor extends MakeCanvasPrimative
   description: 'Creates RGA or RGBA color or colors'
-  icon: 'palette'
+  icon: 'tint'
   constructor: ->
     ports =
       red:
