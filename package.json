@@ -70,6 +70,7 @@
       "MakeRandom": "components/MakeRandom.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
+      "MakeRGBColor": "components/MakeRGBColor.coffee",
       "Recurse": "components/Recurse.coffee",
       "SavePNG": "components/SavePNG-node.coffee",
       "Stroke": "components/Stroke.coffee",
