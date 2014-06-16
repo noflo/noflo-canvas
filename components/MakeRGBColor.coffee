@@ -7,13 +7,13 @@ class MakeRGBColor extends MakeCanvasPrimative
   constructor: ->
     ports =
       red:
-        datatype: 'number'
+        datatype: 'int'
         description: 'from 0 to 255'
       green:
-        datatype: 'number'
+        datatype: 'int'
         description: 'from 0 to 255'
       blue:
-        datatype: 'number'
+        datatype: 'int'
         description: 'from 0 to 255'
       alpha:
         datatype: 'number'
@@ -35,11 +35,15 @@ class MakeRGBColor extends MakeCanvasPrimative
     @outPorts.color.send color
 
   colorToString: (color) ->
+    console.log 'ha!'
+    r = Math.round(color.red)
+    g = Math.round(color.green)
+    b = Math.round(color.blue)
     if color.alpha?
-      return "rgba(#{color.red}, #{color.green}, "+
-        "#{color.blue}, #{color.alpha})"
+      a = color.alpha
+      return "rgba(#{r}, #{g}, #{b}, #{a})"
     else
-      return "rgb(#{color.red}, #{color.green}, #{color.blue})"
+      return "rgb(#{r}, #{g}, #{b})"
 
 
 exports.getComponent = -> new MakeRGBColor

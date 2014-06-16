@@ -1,7 +1,7 @@
 noflo = require 'noflo'
 
 class FillStyle extends noflo.Component
-  description: 'Sets the fill style'
+  description: 'Sets the global fill style'
   icon: 'pencil-square'
   constructor: ->
     @fillstyle =
@@ -9,7 +9,7 @@ class FillStyle extends noflo.Component
       value: null
 
     @inPorts =
-      style: new noflo.Port 'color'
+      style: new noflo.Port 'string'
     @outPorts =
       fillstyle: new noflo.Port 'object'
 

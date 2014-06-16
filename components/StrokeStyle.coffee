@@ -1,7 +1,7 @@
 noflo = require 'noflo'
 
 class StrokeStyle extends noflo.Component
-  description: 'Sets the stroke style'
+  description: 'Sets the global stroke style'
   icon: 'pencil-square'
   constructor: ->
     @strokestyle =
@@ -9,7 +9,7 @@ class StrokeStyle extends noflo.Component
       value: null
 
     @inPorts =
-      style: new noflo.Port 'color'
+      style: new noflo.Port 'string'
     @outPorts =
       strokestyle: new noflo.Port 'object'
 
