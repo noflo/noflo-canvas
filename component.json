@@ -37,7 +37,7 @@
     "components/Fill.coffee",
     "components/StrokeRect.coffee",
     "components/FillRect.coffee",
-    "components/Clear.coffee",
+    "components/ClearRect.coffee",
     "components/DrawImage.coffee",
     "components/GetColors.coffee",
     "components/Draw.coffee",
@@ -55,7 +55,7 @@
   ],
   "noflo": {
     "components": {
-      "Clear": "components/Clear.coffee",
+      "ClearRect": "components/ClearRect.coffee",
       "ColorArrayToCss": "components/ColorArrayToCss.coffee",
       "CreateCanvas": "components/CreateCanvas.coffee",
       "Draw": "components/Draw.coffee",

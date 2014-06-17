@@ -48,7 +48,7 @@
   "keywords": [],
   "noflo": {
     "components": {
-      "Clear": "components/Clear.coffee",
+      "ClearRect": "components/ClearRect.coffee",
       "ColorArrayToCss": "components/ColorArrayToCss.coffee",
       "CreateCanvas": "components/CreateCanvas-node.coffee",
       "Draw": "components/Draw.coffee",
