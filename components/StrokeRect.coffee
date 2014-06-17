@@ -1,22 +1,19 @@
 noflo = require 'noflo'
+{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
-class StrokeRect extends noflo.Component
-  description: 'Paints the given rectangle onto the canvas'
+class StrokeRect extends MakeCanvasPrimative
+  description: 'Strokes a rectangle'
   icon: 'pencil-square-o'
   constructor: ->
-    @strokerect =
-      type: 'strokeRect'
-      rectangle: null
+    ports =
+      point:
+        datatype: 'object'
+        description: 'top left point'
+      width:
+        datatype: 'number'
+      height:
+        datatype: 'number'
     
-    @inPorts =
-      rectangle: new noflo.Port 'array'
-
-    @outPorts =
-      strokerect: new noflo.Port 'object'
-
-    @inPorts.rectangle.on 'data', (context) =>
-      @strokerect.rectangle = context
-      if @outPorts.strokerect.isAttached()
-        @outPorts.strokerect.send @strokerect
+    super 'strokeRect', ports    
 
   exports.getComponent = -> new StrokeRect

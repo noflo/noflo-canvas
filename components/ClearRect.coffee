@@ -1,9 +1,9 @@
 noflo = require 'noflo'
 {MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
 
-class FillRect extends MakeCanvasPrimative
-  description: 'Fills a rectangle'
-  icon: 'pencil-square'
+class ClearRect extends MakeCanvasPrimative
+  description: 'Clear rectangle'
+  icon: 'eraser'
   constructor: ->
     ports =
       point:
@@ -14,6 +14,6 @@ class FillRect extends MakeCanvasPrimative
       height:
         datatype: 'number'
     
-    super 'fillRect', ports
+    super 'clearRect', ports
 
-  exports.getComponent = -> new FillRect
+exports.getComponent = -> new ClearRect

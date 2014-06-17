@@ -2,7 +2,7 @@ noflo = require 'noflo'
 
 class StrokeStyle extends noflo.Component
   description: 'Sets the global stroke style'
-  icon: 'pencil-square'
+  icon: 'pencil-square-o'
   constructor: ->
     @strokestyle =
       type: 'strokeStyle'

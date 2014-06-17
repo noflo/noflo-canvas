@@ -82,8 +82,12 @@ class Draw extends noflo.LoggingComponent
         continue unless item?
         @parseThing item, before, after
 
-  clear: (clear) =>
-    @context.clearRect.apply @context, clear.rectangle
+  clearRect: (clearRect) =>
+    x = clearRect.point.x
+    y = clearRect.point.y
+    w = clearRect.width
+    h = clearRect.height
+    @context.clearRect(x, y, w, h)
 
   strokeStyle: (data) =>
     @context.strokeStyle = data.value
@@ -197,10 +201,18 @@ class Draw extends noflo.LoggingComponent
     @context.lineTo x, y
 
   fillRect: (fillrect) =>
-    @context.fillRect.apply @context, fillrect.rectangle
+    x = fillrect.point.x
+    y = fillrect.point.y
+    w = fillrect.width
+    h = fillrect.height
+    @context.fillRect x, y, w, h
 
   strokeRect: (strokerect) =>
-    @context.strokeRect.apply @context, strokerect.rectangle
+    x = strokerect.point.x
+    y = strokerect.point.y
+    w = strokerect.width
+    h = strokerect.height
+    @context.strokeRect x, y, w, h
 
   arc: (arc) =>
     @context.arc(arc.center.x, arc.center.y, arc.radius,
