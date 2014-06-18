@@ -18,7 +18,7 @@ class MakePath extends MakeCanvasPrimative
   # OVERRIDE, discussion at noflo/noflo-canvas#24
   compute: =>
     return unless @outPorts['path'].isAttached()
-    out = 
+    out =
       type: 'path'
       items: []
     arrayCount = 0

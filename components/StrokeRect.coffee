@@ -14,6 +14,6 @@ class StrokeRect extends MakeCanvasPrimative
       height:
         datatype: 'number'
     
-    super 'strokeRect', ports    
+    super 'strokeRect', ports
 
   exports.getComponent = -> new StrokeRect
