@@ -136,10 +136,16 @@ class Draw extends noflo.LoggingComponent
     if oldStyle?
       @context.fillStyle = oldStyle
 
-  path: (path) =>
-    # Build the path
-    for thing, i in path.items
-      continue unless thing? and thing.type?
+  bezierCurve: (curve) =>
+    @context.bezierCurveTo(curve.control1.x, curve.control1.y, curve.control2.x, curve.control2.y, curve.end.x, curve.end.y)
+
+  pathItem: (thing, i) =>
+    # Handle arrays of points
+    if thing instanceof Array
+      for child, j in thing
+        @pathItem child, j
+      return
+    if thing.type?
       switch thing.type
         when 'point'
           if i is 0
@@ -147,10 +153,15 @@ class Draw extends noflo.LoggingComponent
           else
             @context.lineTo thing.x, thing.y
         when 'beziercurve'
-          @context.bezierCurveTo(thing.control1.x, thing.control1.y,
-            thing.control2.x, thing.control2.y, thing.end.x, thing.end.y)
+          @bezierCurve thing
         when 'arc'
           @arc thing
+
+  path: (path) =>
+    # Build the path
+    for thing, i in path.items
+      continue unless thing?
+      @pathItem thing, i
 
   group: (group) =>
     # Apply drawing operations
@@ -215,8 +226,7 @@ class Draw extends noflo.LoggingComponent
     @context.strokeRect x, y, w, h
 
   arc: (arc) =>
-    @context.arc(arc.center.x, arc.center.y, arc.radius,
-      arc.start, arc.end, arc.reverse)
+    @context.arc(arc.center.x, arc.center.y, arc.radius, arc.start, arc.end, arc.reverse)
 
   circle: (circle) =>
     @context.arc(circle.center.x, circle.center.y, circle.radius, 0, TAU)
