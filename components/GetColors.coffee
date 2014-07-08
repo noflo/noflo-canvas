@@ -11,6 +11,7 @@ class GetColors extends noflo.Component
     @outPorts =
       colors: new noflo.Port 'array'
       canvas: new noflo.Port 'object'
+      error: new noflo.Port 'object'
 
     @inPorts.canvas.on 'begingroup', (group) =>
       @outPorts.canvas.beginGroup group
@@ -26,7 +27,14 @@ class GetColors extends noflo.Component
       context = canvas.getContext '2d'
       pixels = (context.getImageData 0, 0, canvas.width, canvas.height).data
       pixelCount = canvas.width*canvas.height
-      colors = thief.getPaletteFromPixels pixels, pixelCount, 10, 10
+      try
+        colors = thief.getPaletteFromPixels pixels, pixelCount, 10, 10
+      catch e
+        @outPorts.canvas.send canvas
+        return unless @outPorts.error.isAttached()
+        @outPorts.error.send e
+        @outPorts.error.disconnect()
+        return
       @outPorts.colors.send colors
       @outPorts.canvas.send canvas
 
