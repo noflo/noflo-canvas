@@ -1,9 +1,9 @@
 {
   "name": "noflo-canvas",
   "description": "Canvas 2D components for NoFlo",
-  "author": "Vilson Vieira <vilson@void.cc>",
+  "author": "Forrest Oliphant <http://forresto.com/>, Vilson Vieira <vilson@void.cc>",
   "repo": "noflo/noflo-canvas",
-  "version": "0.1.7",
+  "version": "0.1.9",
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
