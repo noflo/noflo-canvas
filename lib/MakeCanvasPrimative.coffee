@@ -55,7 +55,9 @@ class exports.MakeCanvasPrimative extends noflo.Component
   # If any property of object is array, expand to a collection and fill rest
   expandToArray: (props) ->
     length = 0
-    for own name, prop of props
+    keys = Object.keys(props)
+    for name in keys
+      prop = props[name]
       # Short circuit with empty prop
       return null unless prop? 
       # See if any prop is an array
@@ -64,6 +66,7 @@ class exports.MakeCanvasPrimative extends noflo.Component
         return null unless prop.length > 0
         if length < prop.length
           length = prop.length
+
     if length is 0
       # No arrays, return props as given
       return props
@@ -76,7 +79,10 @@ class exports.MakeCanvasPrimative extends noflo.Component
         else
           obj = {}
           obj.type = props.type
-        for own name, prop of props
+        keys = Object.keys(props)
+        for name in keys
+          prop = props[name]
+        # for own name, prop of props
           if prop instanceof Array
             obj[name] = if prop[i]? then prop[i] else prop[i%prop.length]
           else
