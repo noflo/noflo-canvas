@@ -29,34 +29,32 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
     it 'should have one output port', ->
       chai.expect(c.outPorts.circle).to.be.an 'object'
 
-  describe 'single output', ->
+  describe 'single input', ->
     it 'should output one circle', ->
       center =
         x: 50
         y: 50
       radius = 50
+      expected = {type: 'circle', center, radius}
       out.once "data", (data) ->
         chai.expect(data).to.be.an 'object'
-        chai.expect(data.type).to.equal 'circle'
-        chai.expect(data.center).to.equal center
-        chai.expect(data.radius).to.equal radius
+        chai.expect(data).to.deep.equal expected
       sock_center.send center
       sock_radius.send radius
 
-  describe 'multiple output', ->
+  describe 'array input', ->
     it 'should output an array of circles', ->
       center =
         x: 50
         y: 50
       radius = [25, 50]
+      expected = [
+        {type: 'circle', center, radius: radius[0]}
+        {type: 'circle', center, radius: radius[1]}
+      ]
       out.once "data", (data) ->
         chai.expect(data).to.be.an 'array'
         chai.expect(data.length).to.equal 2
-        chai.expect(data[0].type).to.equal 'circle'
-        chai.expect(data[1].type).to.equal 'circle'
-        chai.expect(data[0].center).to.equal center
-        chai.expect(data[1].center).to.equal center
-        chai.expect(data[0].radius).to.equal radius[0]
-        chai.expect(data[1].radius).to.equal radius[1]
+        chai.expect(data).to.deep.equal expected
       sock_center.send center
       sock_radius.send radius
