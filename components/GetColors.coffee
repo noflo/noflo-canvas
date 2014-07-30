@@ -25,10 +25,12 @@ class GetColors extends noflo.Component
     @inPorts.canvas.on 'data', (canvas) =>
       thief = new ColorThief
       context = canvas.getContext '2d'
-      pixels = (context.getImageData 0, 0, canvas.width, canvas.height).data
+      pixels = context.getImageData(0, 0, canvas.width, canvas.height).data
       pixelCount = canvas.width*canvas.height
       try
         colors = thief.getPaletteFromPixels pixels, pixelCount, 10, 10
+        colors = colors.map (color) ->
+          return "rgb(#{color[0]}, #{color[1]}, #{color[2]})"
       catch e
         @outPorts.canvas.send canvas
         return unless @outPorts.error.isAttached()

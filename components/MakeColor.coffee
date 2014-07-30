@@ -37,10 +37,8 @@ class MakeColor extends MakeCanvasPrimative
 
   colorToString: (color) ->
     if color.alpha?
-      return "hsla(#{color.hue}, #{color.saturation}%, "+
-        "#{color.lightness}%, #{color.alpha})"
-    else
-      return "hsl(#{color.hue}, #{color.saturation}%, #{color.lightness}%)"
+      return "hsla(#{color.hue}, #{color.saturation}%, #{color.lightness}%, #{color.alpha})"
+    return "hsl(#{color.hue}, #{color.saturation}%, #{color.lightness}%)"
 
 
 exports.getComponent = -> new MakeColor
