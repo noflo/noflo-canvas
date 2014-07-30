@@ -10,8 +10,10 @@ class MakeCircle extends MakeCanvasPrimative
         datatype: 'object'
         type: 'noflo-canvas/point'
         description: 'center point'
+        required: true
       radius:
         datatype: 'number'
+        required: true
 
     super 'circle', ports
 

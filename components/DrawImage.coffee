@@ -9,6 +9,7 @@ class DrawImage extends MakeCanvasPrimative
       image:
         description: 'canvas, img, or video to draw'
         datatype: 'object'
+        required: true
       destpoint:
         description: 'destination point (full size)'
         datatype: 'object'

@@ -10,6 +10,7 @@ class Transform extends MakeCanvasPrimative
         datatype: 'object'
         description: 'fill and stroke commands to transform'
         addressable: true
+        required: true
       translate:
         datatype: 'object'
         type: 'noflo-canvas/point'

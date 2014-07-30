@@ -8,8 +8,10 @@ class MakePoint extends MakeCanvasPrimative
     ports =
       x:
         datatype: 'number'
+        required: true
       y:
         datatype: 'number'
+        required: true
 
     super 'point', ports
 

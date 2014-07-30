@@ -9,12 +9,15 @@ class MakeRGBColor extends MakeCanvasPrimative
       red:
         datatype: 'int'
         description: 'from 0 to 255'
+        required: true
       green:
         datatype: 'int'
         description: 'from 0 to 255'
+        required: true
       blue:
         datatype: 'int'
         description: 'from 0 to 255'
+        required: true
       alpha:
         datatype: 'number'
         description: 'from 0 to 1.0'

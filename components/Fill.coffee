@@ -10,6 +10,7 @@ class Fill extends MakeCanvasPrimative
         datatype: 'object'
         description: 'shapes (paths, circles, and rectangles) to fill'
         addressable: true
+        required: true
       fillstyle:
         datatype: 'string'
         description: 'css color string'

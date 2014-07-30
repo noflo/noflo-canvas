@@ -12,6 +12,7 @@ class MakePath extends MakeCanvasPrimative
         datatype: 'object'
         description: 'points, arcs, and curves to combine to make path'
         addressable: true
+        required: true
 
     super 'path', ports
 

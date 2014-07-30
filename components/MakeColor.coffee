@@ -9,12 +9,15 @@ class MakeColor extends MakeCanvasPrimative
       hue:
         datatype: 'number'
         description: 'from 0 to 360'
+        required: true
       saturation:
         datatype: 'number'
         description: 'from 0 to 100'
+        required: true
       lightness:
         datatype: 'number'
         description: 'from 0 to 100'
+        required: true
       alpha:
         datatype: 'number'
         description: 'from 0 to 1.0'

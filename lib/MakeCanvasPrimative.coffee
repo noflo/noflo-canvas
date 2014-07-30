@@ -12,6 +12,7 @@ class exports.MakeCanvasPrimative extends noflo.Component
     @outPorts[type] = new noflo.OutPort
       name: type
       datatype: 'object'
+      type: "noflo-canvas/#{type}"
     # Autosend on attach
     @outPorts[type].on 'attach', @compute.bind(@)
 

@@ -10,6 +10,7 @@ class Stroke extends MakeCanvasPrimative
         datatype: 'object'
         description: 'shapes (paths, circles, and rectangles) to stroke'
         addressable: true
+        required: true
       strokestyle:
         datatype: 'string'
         description: 'css color string or canvas style'

@@ -11,10 +11,13 @@ class MakeRange extends noflo.Component
     @inPorts = new noflo.InPorts
       from:
         datatype: 'number'
+        required: true
       to:
         datatype: 'number'
+        required: true
       count:
         datatype: 'int'
+        required: true
 
     @outPorts = new noflo.OutPorts
       range:

@@ -9,10 +9,13 @@ class MakeRectangle extends MakeCanvasPrimative
       point:
         datatype: 'object'
         description: 'top left point'
+        required: true
       width:
         datatype: 'number'
+        required: true
       height:
         datatype: 'number'
+        required: true
 
     super 'rectangle', ports
 

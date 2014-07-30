@@ -11,10 +11,13 @@ class MakeRandom extends noflo.Component
     @inPorts = new noflo.InPorts
       min:
         datatype: 'number'
+        required: true
       max:
         datatype: 'number'
+        required: true
       count:
         datatype: 'int'
+        required: true
       # integer:
       #   datatype: 'boolean'
       #   required: false
