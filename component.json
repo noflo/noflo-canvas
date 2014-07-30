@@ -6,8 +6,7 @@
   "version": "0.1.9",
   "keywords": [],
   "dependencies": {
-    "noflo/noflo": "*",
-    "jonnor/color-thief": "*"
+    "noflo/noflo": "*"
   },
   "remotes": [
     "https://raw.githubusercontent.com"
