@@ -44,12 +44,14 @@
     "components/SavePNG.coffee",
     "components/MakeRGBColor.coffee",
     "graphs/PointFromObject.json",
-    "graphs/RectangleFromObject.json"
+    "graphs/RectangleFromObject.json",
+    "graphs/CopyCanvas.json"
   ],
   "json": [
     "component.json",
     "graphs/PointFromObject.json",
-    "graphs/RectangleFromObject.json"
+    "graphs/RectangleFromObject.json",
+    "graphs/CopyCanvas.json"
   ],
   "noflo": {
     "components": {
@@ -83,6 +85,7 @@
       "Transform": "components/Transform.coffee"
     },
     "graphs": {
+      "CopyCanvas": "graphs/CopyCanvas.json",
       "PointFromObject": "graphs/PointFromObject.json",
       "RectangleFromObject": "graphs/RectangleFromObject.json"
     }

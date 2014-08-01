@@ -1,0 +1,216 @@
+{
+    "properties": {
+        "name": "CopyCanvas",
+        "id": "CopyCanvas",
+        "environment": {
+            "type": "all"
+        }
+    },
+    "inports": {
+        "canvas": {
+            "process": "core/Repeat_wuue3",
+            "port": "in",
+            "metadata": {
+                "x": 0,
+                "y": 36
+            }
+        }
+    },
+    "outports": {
+        "canvas_copy": {
+            "process": "Draw",
+            "port": "canvas",
+            "metadata": {
+                "x": 828,
+                "y": 72
+            }
+        }
+    },
+    "groups": [
+        {
+            "name": "create",
+            "nodes": [
+                "CreateCanvas",
+                "getHeight",
+                "getWidth"
+            ],
+            "metadata": {
+                "description": "make new canvas with original dimensions"
+            }
+        },
+        {
+            "name": "copy",
+            "nodes": [
+                "DrawImage",
+                "Draw"
+            ],
+            "metadata": {
+                "description": "draw original to new"
+            }
+        }
+    ],
+    "processes": {
+        "CreateCanvas": {
+            "component": "canvas/CreateCanvas",
+            "metadata": {
+                "label": "CreateCanvas",
+                "x": 396,
+                "y": 252
+            }
+        },
+        "DrawImage": {
+            "component": "canvas/DrawImage",
+            "metadata": {
+                "label": "DrawImage",
+                "x": 576,
+                "y": 72
+            }
+        },
+        "Draw": {
+            "component": "canvas/Draw",
+            "metadata": {
+                "label": "Draw",
+                "x": 684,
+                "y": 72
+            }
+        },
+        "core/Repeat_wuue3": {
+            "component": "core/Repeat",
+            "metadata": {
+                "label": "core/Repeat",
+                "x": 144,
+                "y": 36
+            }
+        },
+        "getHeight": {
+            "component": "dom/GetAttribute",
+            "metadata": {
+                "label": "getHeight",
+                "x": 288,
+                "y": 252
+            }
+        },
+        "getWidth": {
+            "component": "dom/GetAttribute",
+            "metadata": {
+                "label": "getWidth",
+                "x": 288,
+                "y": 144
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "core/Repeat_wuue3",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "getWidth",
+                "port": "element"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Repeat_wuue3",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "getHeight",
+                "port": "element"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "getWidth",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "CreateCanvas",
+                "port": "width"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "getHeight",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "CreateCanvas",
+                "port": "height"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "DrawImage",
+                "port": "drawimage"
+            },
+            "tgt": {
+                "process": "Draw",
+                "port": "commands"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "CreateCanvas",
+                "port": "canvas"
+            },
+            "tgt": {
+                "process": "Draw",
+                "port": "canvas"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Repeat_wuue3",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "DrawImage",
+                "port": "image"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "data": "width",
+            "tgt": {
+                "process": "getWidth",
+                "port": "attribute"
+            }
+        },
+        {
+            "data": "height",
+            "tgt": {
+                "process": "getHeight",
+                "port": "attribute"
+            }
+        },
+        {
+            "data": {
+                "x": 0,
+                "y": 0
+            },
+            "tgt": {
+                "process": "DrawImage",
+                "port": "destpoint"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "Draw",
+                "port": "drawevery"
+            }
+        }
+    ]
+}
