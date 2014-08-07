@@ -1,8 +1,8 @@
 noflo = require 'noflo'
-sinon = require 'sinon'
 
 unless noflo.isBrowser()
   chai = require 'chai' unless chai
+  sinon = require 'sinon' unless sinon
   MakeCircle = require '../components/MakeCircle.coffee'
 else
   MakeCircle = require 'noflo-canvas/components/MakeCircle.js'
