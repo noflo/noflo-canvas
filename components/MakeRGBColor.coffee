@@ -20,7 +20,7 @@ class MakeRGBColor extends MakeCanvasPrimative
         required: true
       alpha:
         datatype: 'number'
-        description: 'from 0 to 1.0'
+        description: 'optional, from 0 to 1.0'
         required: false
 
     super 'color', ports

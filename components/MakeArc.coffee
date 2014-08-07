@@ -9,17 +9,22 @@ class MakeArc extends MakeCanvasPrimative
       center:
         datatype: 'object'
         description: 'point for center'
+        required: true
       radius:
         datatype: 'number'
+        required: true
       start:
         datatype: 'number'
         description: 'start angle in radians'
+        required: true
       end:
         datatype: 'number'
         description: 'end angle in radians'
+        required: true
       reverse:
         datatype: 'boolean'
-        value: false
+        required: true
+        default: false
 
     super 'arc', ports
 

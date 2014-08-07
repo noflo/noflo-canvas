@@ -1,4 +1,5 @@
 noflo = require 'noflo'
+sinon = require 'sinon'
 
 unless noflo.isBrowser()
   chai = require 'chai' unless chai
@@ -28,6 +29,25 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
       chai.expect(c.inPorts.radius).to.be.an 'object'
     it 'should have one output port', ->
       chai.expect(c.outPorts.circle).to.be.an 'object'
+
+  describe 'insuffcient input', ->
+    sandbox = null
+    callback = null
+
+    beforeEach ->
+      sandbox = sinon.sandbox.create()
+      callback = sandbox.spy()
+
+    afterEach ->
+      sandbox.restore()
+
+    it "shouldn't output", ->
+      center =
+        x: 50
+        y: 50
+      out.once "data", callback
+      sock_center.send center
+      chai.expect(callback.called).to.be.false
 
   describe 'single input', ->
     it 'should output one circle', ->
