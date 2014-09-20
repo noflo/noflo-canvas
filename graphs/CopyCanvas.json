@@ -3,7 +3,7 @@
         "name": "CopyCanvas",
         "id": "CopyCanvas",
         "environment": {
-            "type": "all"
+            "type": "noflo-browser"
         }
     },
     "inports": {

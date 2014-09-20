@@ -78,7 +78,6 @@
       "Transform": "components/Transform.coffee"
     },
     "graphs": {
-      "CopyCanvas": "graphs/CopyCanvas.json",
       "PointFromObject": "graphs/PointFromObject.json",
       "RectangleFromObject": "graphs/RectangleFromObject.json"
     }
