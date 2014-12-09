@@ -1,7 +1,7 @@
 {
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "contributors": [
     {
       "name": "Forrest Oliphant",
@@ -79,7 +79,8 @@
     },
     "graphs": {
       "PointFromObject": "graphs/PointFromObject.json",
-      "RectangleFromObject": "graphs/RectangleFromObject.json"
+      "RectangleFromObject": "graphs/RectangleFromObject.json",
+      "ResizeCanvas": "graphs/ResizeCanvas.json"
     }
   }
 }

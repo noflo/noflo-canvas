@@ -3,7 +3,7 @@
   "description": "Canvas 2D components for NoFlo",
   "author": "Forrest Oliphant <http://forresto.com/>, Vilson Vieira <vilson@void.cc>",
   "repo": "noflo/noflo-canvas",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*"
@@ -45,13 +45,15 @@
     "components/MakeRGBColor.coffee",
     "graphs/PointFromObject.json",
     "graphs/RectangleFromObject.json",
-    "graphs/CopyCanvas.json"
+    "graphs/CopyCanvas.json",
+    "graphs/ResizeCanvas.json"
   ],
   "json": [
     "component.json",
     "graphs/PointFromObject.json",
     "graphs/RectangleFromObject.json",
-    "graphs/CopyCanvas.json"
+    "graphs/CopyCanvas.json",
+    "graphs/ResizeCanvas.json"
   ],
   "noflo": {
     "components": {
@@ -87,7 +89,8 @@
     "graphs": {
       "CopyCanvas": "graphs/CopyCanvas.json",
       "PointFromObject": "graphs/PointFromObject.json",
-      "RectangleFromObject": "graphs/RectangleFromObject.json"
+      "RectangleFromObject": "graphs/RectangleFromObject.json",
+      "ResizeCanvas": "graphs/ResizeCanvas.json"
     }
   }
 }
