@@ -46,7 +46,8 @@
     "graphs/PointFromObject.json",
     "graphs/RectangleFromObject.json",
     "graphs/CopyCanvas.json",
-    "graphs/ResizeCanvas.json"
+    "graphs/ResizeCanvas.json",
+    "components/SaveJPEG.coffee"
   ],
   "json": [
     "component.json",
@@ -80,6 +81,7 @@
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
       "Recurse": "components/Recurse.coffee",
+      "SaveJPEG": "components/SaveJPEG.coffee",
       "SavePNG": "components/SavePNG.coffee",
       "Stroke": "components/Stroke.coffee",
       "StrokeRect": "components/StrokeRect.coffee",

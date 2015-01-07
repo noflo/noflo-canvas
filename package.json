@@ -71,6 +71,7 @@
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
       "Recurse": "components/Recurse.coffee",
+      "SaveJPEG": "components/SaveJPEG-node.coffee",
       "SavePNG": "components/SavePNG-node.coffee",
       "Stroke": "components/Stroke.coffee",
       "StrokeRect": "components/StrokeRect.coffee",
