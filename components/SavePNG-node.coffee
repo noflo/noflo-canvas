@@ -16,6 +16,9 @@ class SavePNG extends noflo.Component
         datatype: "object"
       filename:
         datatype: "string"
+    @outPorts = new noflo.OutPorts
+      png:
+        datatype: 'string'
 
     @inPorts.canvas.on 'data', (canvas) =>
       out = fs.createWriteStream(@filename)
@@ -23,6 +26,8 @@ class SavePNG extends noflo.Component
       
       stream.on 'data', (chunk) ->
         out.write(chunk)
+      stream.on 'end',  () =>
+        @outPorts.png.send @filename if @outPorts.png.isAttached()
 
     @inPorts.filename.on 'data', (filename) =>
       @filename = filename
