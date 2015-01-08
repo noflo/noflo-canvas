@@ -6,7 +6,8 @@
   "version": "0.1.14",
   "keywords": [],
   "dependencies": {
-    "noflo/noflo": "*"
+    "noflo/noflo": "*",
+    "noflo/noflo-core": "*"
   },
   "remotes": [
     "https://raw.githubusercontent.com"
