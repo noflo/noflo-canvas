@@ -30,7 +30,7 @@ describe 'MakeGrid component', ->
       chai.expect(c.outPorts.point).to.be.an 'object'
 
   describe 'single output', ->
-    it 'should output one point', ->
+    it 'should output one point', (done) ->
       x = 100
       y = 100
       out.once "data", (data) ->
@@ -38,11 +38,12 @@ describe 'MakeGrid component', ->
         chai.expect(data.type).to.equal 'point'
         chai.expect(data.x).to.equal x
         chai.expect(data.y).to.equal y
+        done()
       sock_x.send x
       sock_y.send y
 
   describe 'multiple output', ->
-    it 'should output a grid array of points in correct order', ->
+    it 'should output a grid array of points in correct order', (done) ->
       x = [0, 100]
       y = [10, 50]
       out.once "data", (data) ->
@@ -60,5 +61,6 @@ describe 'MakeGrid component', ->
         chai.expect(data[2].y).to.equal y[1]
         chai.expect(data[3].x).to.equal x[1]
         chai.expect(data[3].y).to.equal y[1]
+        done()
       sock_x.send x
       sock_y.send y
