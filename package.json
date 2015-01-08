@@ -1,7 +1,7 @@
 {
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
-  "version": "0.1.13",
+  "version": "0.1.14",
   "contributors": [
     {
       "name": "Forrest Oliphant",
