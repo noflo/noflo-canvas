@@ -17,6 +17,7 @@ describe 'ResizeCanvas component', ->
   out = null
 
   beforeEach (done) ->
+    @timeout 10000
     loader.load 'canvas/ResizeCanvas', (err, inst) ->
       chai.expect(err).to.be.null
       c = inst
