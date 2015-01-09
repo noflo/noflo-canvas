@@ -3,7 +3,7 @@
   "description": "Canvas 2D components for NoFlo",
   "author": "Forrest Oliphant <http://forresto.com/>, Vilson Vieira <vilson@void.cc>",
   "repo": "noflo/noflo-canvas",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
@@ -49,7 +49,8 @@
     "graphs/RectangleFromObject.json",
     "graphs/CopyCanvas.json",
     "graphs/ResizeCanvas.json",
-    "components/SaveJPEG.coffee"
+    "components/SaveJPEG.coffee",
+    "components/MakeRectangleAspectRatio.coffee"
   ],
   "json": [
     "component.json",
@@ -82,6 +83,7 @@
       "MakeRandom": "components/MakeRandom.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
+      "MakeRectangleAspectRatio": "components/MakeRectangleAspectRatio.coffee",
       "Recurse": "components/Recurse.coffee",
       "SaveJPEG": "components/SaveJPEG.coffee",
       "SavePNG": "components/SavePNG.coffee",
@@ -93,8 +95,7 @@
     "graphs": {
       "CopyCanvas": "graphs/CopyCanvas.json",
       "PointFromObject": "graphs/PointFromObject.json",
-      "RectangleFromObject": "graphs/RectangleFromObject.json",
-      "ResizeCanvas": "graphs/ResizeCanvas.json"
+      "RectangleFromObject": "graphs/RectangleFromObject.json"
     }
   }
 }

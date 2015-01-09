@@ -1,7 +1,7 @@
 {
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
-  "version": "0.1.15",
+  "version": "0.1.16",
   "contributors": [
     {
       "name": "Forrest Oliphant",
@@ -72,6 +72,7 @@
       "MakeRandom": "components/MakeRandom.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
+      "MakeRectangleAspectRatio": "components/MakeRectangleAspectRatio.coffee",
       "Recurse": "components/Recurse.coffee",
       "SaveJPEG": "components/SaveJPEG-node.coffee",
       "SavePNG": "components/SavePNG-node.coffee",
