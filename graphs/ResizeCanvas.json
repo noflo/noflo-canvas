@@ -11,8 +11,8 @@
             "process": "core/Split_bsbm8",
             "port": "in",
             "metadata": {
-                "x": -216,
-                "y": 288,
+                "x": -252,
+                "y": 324,
                 "width": 72,
                 "height": 72
             }
@@ -21,8 +21,8 @@
             "process": "core/Split_ydrrp",
             "port": "in",
             "metadata": {
-                "x": -216,
-                "y": 396,
+                "x": -252,
+                "y": 432,
                 "width": 72,
                 "height": 72
             }
@@ -66,8 +66,8 @@
             "component": "canvas/DrawImage",
             "metadata": {
                 "label": "canvas/DrawImage",
-                "x": 432,
-                "y": 144,
+                "x": 324,
+                "y": 0,
                 "width": 72,
                 "height": 72
             }
@@ -76,7 +76,7 @@
             "component": "canvas/CreateCanvas",
             "metadata": {
                 "label": "canvas/CreateCanvas",
-                "x": 504,
+                "x": 468,
                 "y": 360,
                 "width": 72,
                 "height": 72
@@ -86,8 +86,8 @@
             "component": "core/Split",
             "metadata": {
                 "label": "core/Split",
-                "x": -72,
-                "y": 288,
+                "x": -108,
+                "y": 324,
                 "width": 72,
                 "height": 72
             }
@@ -96,8 +96,8 @@
             "component": "core/Split",
             "metadata": {
                 "label": "core/Split",
-                "x": -72,
-                "y": 396,
+                "x": -108,
+                "y": 432,
                 "width": 72,
                 "height": 72
             }
@@ -106,8 +106,8 @@
             "component": "canvas/MakeRectangleAspectRatio",
             "metadata": {
                 "label": "canvas/MakeRectangleAspectRatio",
-                "x": 252,
-                "y": 180,
+                "x": 180,
+                "y": 360,
                 "width": 72,
                 "height": 72
             }
@@ -116,7 +116,7 @@
             "component": "objects/ExtractProperty",
             "metadata": {
                 "label": "objects/ExtractProperty",
-                "x": 360,
+                "x": 324,
                 "y": 432,
                 "width": 72,
                 "height": 72
@@ -126,7 +126,7 @@
             "component": "objects/ExtractProperty",
             "metadata": {
                 "label": "objects/ExtractProperty",
-                "x": 360,
+                "x": 324,
                 "y": 324,
                 "width": 72,
                 "height": 72
@@ -136,8 +136,8 @@
             "component": "objects/ExtractProperty",
             "metadata": {
                 "label": "objects/ExtractProperty",
-                "x": 72,
-                "y": 36,
+                "x": 36,
+                "y": 108,
                 "width": 72,
                 "height": 72
             }
@@ -156,8 +156,8 @@
             "component": "objects/ExtractProperty",
             "metadata": {
                 "label": "objects/ExtractProperty",
-                "x": 72,
-                "y": 144,
+                "x": 36,
+                "y": 216,
                 "width": 72,
                 "height": 72
             }
@@ -174,7 +174,7 @@
                 "port": "commands"
             },
             "metadata": {
-                "route": null
+                "route": 5
             }
         },
         {
@@ -185,6 +185,9 @@
             "tgt": {
                 "process": "canvas/Draw_dar3o",
                 "port": "canvas"
+            },
+            "metadata": {
+                "route": 7
             }
         },
         {
@@ -317,6 +320,19 @@
                 "port": "origwidth"
             },
             "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_w82ui",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/DrawImage_vdtq9",
+                "port": "image"
+            },
+            "metadata": {
+                "route": 5
+            }
         },
         {
             "data": {
