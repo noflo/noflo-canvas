@@ -26,10 +26,13 @@ describe 'ResizeCanvas component', ->
       sock_canvas = noflo.internalSocket.createSocket()
       out = noflo.internalSocket.createSocket()
       c.on 'ready', () ->
+        c.network.on 'data', (edge) ->
+          # console.log edge.id, edge.data
         c.inPorts.width.attach sock_width
         c.inPorts.height.attach sock_height
         c.inPorts['in'].attach sock_canvas
         c.outPorts.out.attach out
+        c.network.start()
         done()
 
   describe 'when instantiated', ->
