@@ -41,6 +41,7 @@ describe 'ResizeCanvas component', ->
 
   describe 'specifying height+width', ->
     it 'should resize to specified size', (done) ->
+      @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
         chai.expect(canvas).to.be.an 'object'
@@ -53,6 +54,7 @@ describe 'ResizeCanvas component', ->
 
   describe.skip 'specifying only height', ->
     it 'should calculate width', (done) ->
+      @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
         chai.expect(canvas).to.be.an 'object'
@@ -65,6 +67,7 @@ describe 'ResizeCanvas component', ->
 
   describe.skip 'specifying only width', ->
     it 'should calculate height', (done) ->
+      @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
         chai.expect(canvas).to.be.an 'object'
