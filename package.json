@@ -29,7 +29,8 @@
   "dependencies": {
     "canvas": "~1.1.1",
     "noflo": "~0.5.9",
-    "noflo-core": "^0.1.11"
+    "noflo-core": "^0.1.11",
+    "noflo-objects": "^0.1.12"
   },
   "devDependencies": {
     "chai": "~1.9.0",

@@ -7,7 +7,8 @@
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
-    "noflo/noflo-core": "*"
+    "noflo/noflo-core": "*",
+    "noflo/noflo-objects": "*"
   },
   "remotes": [
     "https://raw.githubusercontent.com"
