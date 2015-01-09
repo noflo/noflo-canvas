@@ -56,29 +56,29 @@ describe 'ResizeCanvas component', ->
       sock_height.send 400
       sock_canvas.send input
 
-  describe.skip 'specifying only height', ->
+  describe 'specifying only height', ->
     it 'should calculate width', (done) ->
       @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
         chai.expect(canvas).to.be.an 'object'
-        chai.expect(canvas.width).to.equal 500
+        chai.expect(canvas.width).to.equal 533
         chai.expect(canvas.height).to.equal 400
         done()
-      sock_width.send 500
+      sock_width.send -1
       sock_height.send 400
       sock_canvas.send input
 
-  describe.skip 'specifying only width', ->
+  describe 'specifying only width', ->
     it 'should calculate height', (done) ->
       @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
         chai.expect(canvas).to.be.an 'object'
         chai.expect(canvas.width).to.equal 500
-        chai.expect(canvas.height).to.equal 400
+        chai.expect(canvas.height).to.equal 375
         done()
       sock_width.send 500
-      sock_height.send 400
+      sock_height.send -1
       sock_canvas.send input
 
