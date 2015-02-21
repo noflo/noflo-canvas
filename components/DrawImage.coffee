@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class DrawImage extends MakeCanvasPrimative
+class DrawImage extends noflo.Component
   description: 'Draws the specified image'
   icon: 'pencil-square'
   constructor: ->
@@ -29,6 +29,6 @@ class DrawImage extends MakeCanvasPrimative
         type: 'noflo-canvas/rectangle'
         required: false
 
-    super 'drawimage', ports
+    ArrayableHelper @, 'drawimage', ports
 
 exports.getComponent = -> new DrawImage

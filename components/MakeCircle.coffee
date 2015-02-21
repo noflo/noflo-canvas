@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeCircle extends MakeCanvasPrimative
+class MakeCircle extends noflo.Component
   description: 'Creates a circle or circles'
   icon: 'circle-o'
   constructor: ->
@@ -15,6 +15,6 @@ class MakeCircle extends MakeCanvasPrimative
         datatype: 'number'
         required: true
 
-    super 'circle', ports
+    ArrayableHelper @, 'circle', ports
 
 exports.getComponent = -> new MakeCircle

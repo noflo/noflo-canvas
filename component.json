@@ -2,18 +2,18 @@
   "name": "noflo-canvas",
   "description": "Canvas 2D components for NoFlo",
   "author": "Forrest Oliphant <http://forresto.com/>, Vilson Vieira <vilson@void.cc>",
-  "repo": "noflo/noflo-canvas",
+  "repository": "noflo/noflo-canvas",
   "version": "0.1.11",
   "keywords": [],
   "dependencies": {
-    "noflo/noflo": "*"
+    "noflo/noflo": "*",
+    "noflo/noflo-helper-arrayable": "*"
   },
   "remotes": [
     "https://raw.githubusercontent.com"
   ],
   "scripts": [
     "index.js",
-    "lib/MakeCanvasPrimative.coffee",
     "components/CreateCanvas.coffee",
     "components/MakeColor.coffee",
     "components/MakeRange.coffee",

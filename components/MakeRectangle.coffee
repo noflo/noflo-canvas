@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeRectangle extends MakeCanvasPrimative
+class MakeRectangle extends noflo.Component
   description: 'Creates a rectangle or rectangles'
   icon: 'square-o'
   constructor: ->
@@ -17,6 +17,6 @@ class MakeRectangle extends MakeCanvasPrimative
         datatype: 'number'
         required: true
 
-    super 'rectangle', ports
+    ArrayableHelper @, 'rectangle', ports
 
 exports.getComponent = -> new MakeRectangle

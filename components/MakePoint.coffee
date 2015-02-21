@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakePoint extends MakeCanvasPrimative
+class MakePoint extends noflo.Component
   description: 'Creates a point or points'
   icon: 'crosshairs'
   constructor: ->
@@ -13,6 +13,6 @@ class MakePoint extends MakeCanvasPrimative
         datatype: 'number'
         required: true
 
-    super 'point', ports
+    ArrayableHelper @, 'point', ports
 
 exports.getComponent = -> new MakePoint

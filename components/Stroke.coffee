@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class Stroke extends MakeCanvasPrimative
+class Stroke extends noflo.Component
   description: 'Strokes lines for paths, rectangles, circles, and arcs'
   icon: 'square-o'
   constructor: ->
@@ -24,6 +24,6 @@ class Stroke extends MakeCanvasPrimative
         description: 'draw line back to start point'
         value: false
 
-    super 'stroke', ports
+    ArrayableHelper @, 'stroke', ports
 
 exports.getComponent = -> new Stroke

@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class ClearRect extends MakeCanvasPrimative
+class ClearRect extends noflo.Component
   description: 'Clear rectangle'
   icon: 'eraser'
   constructor: ->
@@ -17,6 +17,6 @@ class ClearRect extends MakeCanvasPrimative
         datatype: 'number'
         required: true
     
-    super 'clearRect', ports
+    ArrayableHelper @, 'clearRect', ports
 
 exports.getComponent = -> new ClearRect

@@ -1,7 +1,17 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeRGBColor extends MakeCanvasPrimative
+colorToString = (color) ->
+  r = Math.round(color.red)
+  g = Math.round(color.green)
+  b = Math.round(color.blue)
+  if color.alpha?
+    a = color.alpha
+    return "rgba(#{r}, #{g}, #{b}, #{a})"
+  else
+    return "rgb(#{r}, #{g}, #{b})"
+
+class MakeRGBColor extends noflo.Component
   description: 'Creates RGA or RGBA color or colors'
   icon: 'tint'
   constructor: ->
@@ -23,30 +33,19 @@ class MakeRGBColor extends MakeCanvasPrimative
         description: 'optional, from 0 to 1.0'
         required: false
 
-    super 'color', ports
+    compute = (props) =>
+      return unless @outPorts.color.isAttached()
+      return unless props.red? and props.green? and props.blue?
+      color = props
+      if (props.red instanceof Array or props.green instanceof Array or
+      props.blue instanceof Array or props.alpha instanceof Array)
+        color = @expandToArray props
+        color = color.map colorToString
+      else
+        color = colorToString props
+      @outPorts.color.send color
 
-  compute: ->
-    return unless @outPorts.color.isAttached()
-    return unless @props.red? and @props.green? and @props.blue?
-    color = @props
-    if (@props.red instanceof Array or @props.green instanceof Array or
-    @props.blue instanceof Array or @props.alpha instanceof Array)
-      color = @expandToArray @props
-      color = color.map @colorToString
-    else
-      color = @colorToString @props
-    @outPorts.color.send color
-
-  colorToString: (color) ->
-    console.log 'ha!'
-    r = Math.round(color.red)
-    g = Math.round(color.green)
-    b = Math.round(color.blue)
-    if color.alpha?
-      a = color.alpha
-      return "rgba(#{r}, #{g}, #{b}, #{a})"
-    else
-      return "rgb(#{r}, #{g}, #{b})"
+    ArrayableHelper @, 'color', ports, {compute}
 
 
 exports.getComponent = -> new MakeRGBColor

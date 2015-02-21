@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeGrid extends MakeCanvasPrimative
+class MakeGrid extends noflo.Component
   description: 'Creates a grid or line of points'
   icon: 'crosshairs'
   constructor: ->
@@ -13,18 +13,16 @@ class MakeGrid extends MakeCanvasPrimative
         datatype: 'number'
         required: true
 
-    super 'point', ports
+    # OVERRIDE default to make x and y dimensional
+    compute = (props) =>
+      if @outPorts.point.isAttached()
+        return unless props.x? and props.y?
+        # Expand to grid
+        if props.x instanceof Array or props.y instanceof Array
+          props = expandToArray props
+        @outPorts.point.send props
 
-  # OVERRIDE default to make x and y dimensional
-  compute: ->
-    if @outPorts.point.isAttached()
-      props = @props
-      # Wait for both (should be smarter in MakeCanvasPrimative)
-      return unless @props.x? and @props.y?
-      # Expand to grid
-      if @props.x instanceof Array or @props.y instanceof Array
-        props = expandToArray @props
-      @outPorts.point.send props
+    ArrayableHelper @, 'point', ports, {compute}
 
 # Make x*y array
 expandToArray = (props) ->

@@ -1,7 +1,12 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeColor extends MakeCanvasPrimative
+colorToString = (color) ->
+  if color.alpha?
+    return "hsla(#{color.hue}, #{color.saturation}%, #{color.lightness}%, #{color.alpha})"
+  return "hsl(#{color.hue}, #{color.saturation}%, #{color.lightness}%)"
+
+class MakeColor extends noflo.Component
   description: 'Creates HSL or HSLA color or colors'
   icon: 'tint'
   constructor: ->
@@ -23,25 +28,18 @@ class MakeColor extends MakeCanvasPrimative
         description: 'from 0 to 1.0'
         required: false
 
-    super 'color', ports
+    compute = (props) =>
+      return unless @outPorts.color.isAttached()
+      return unless props.hue? and props.saturation? and props.lightness?
+      color = props
+      if (props.hue instanceof Array or props.saturation instanceof Array or
+      props.lightness instanceof Array or props.alpha instanceof Array)
+        color = @expandToArray props
+        color = color.map colorToString
+      else
+        color = colorToString props
+      @outPorts.color.send color
 
-  # OVERRIDE default to make strings
-  compute: ->
-    return unless @outPorts.color.isAttached()
-    return unless @props.hue? and @props.saturation? and @props.lightness?
-    color = @props
-    if (@props.hue instanceof Array or @props.saturation instanceof Array or
-    @props.lightness instanceof Array or @props.alpha instanceof Array)
-      color = @expandToArray @props
-      color = color.map @colorToString
-    else
-      color = @colorToString @props
-    @outPorts.color.send color
-
-  colorToString: (color) ->
-    if color.alpha?
-      return "hsla(#{color.hue}, #{color.saturation}%, #{color.lightness}%, #{color.alpha})"
-    return "hsl(#{color.hue}, #{color.saturation}%, #{color.lightness}%)"
-
+    ArrayableHelper @, 'color', ports, {compute}
 
 exports.getComponent = -> new MakeColor

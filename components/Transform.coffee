@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class Transform extends MakeCanvasPrimative
+class Transform extends noflo.Component
   description: 'Translate, rotate, and/or scale passed drawing commands.'
   icon: 'arrows'
   constructor: ->
@@ -31,6 +31,6 @@ class Transform extends MakeCanvasPrimative
         description: 'angle in radians'
         required: false
 
-    super 'transform', ports
+    ArrayableHelper @, 'transform', ports
 
 exports.getComponent = -> new Transform

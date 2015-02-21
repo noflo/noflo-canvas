@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeBezierCurve extends MakeCanvasPrimative
+class MakeBezierCurve extends noflo.Component
   description: 'Creates a Bezier curve'
   icon: 'pencil-square'
   constructor: ->
@@ -22,6 +22,6 @@ class MakeBezierCurve extends MakeCanvasPrimative
         description: 'end point'
         required: true
 
-    super 'beziercurve', ports
+    ArrayableHelper @, 'beziercurve', ports
 
 exports.getComponent = -> new MakeBezierCurve

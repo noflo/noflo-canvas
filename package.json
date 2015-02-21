@@ -28,7 +28,8 @@
   },
   "dependencies": {
     "canvas": "~1.1.1",
-    "noflo": "~0.5.9"
+    "noflo": "~0.5.9",
+    "noflo-helper-arrayable": "git+https://git@github.com/noflo/noflo-helper-arrayable.git"
   },
   "devDependencies": {
     "chai": "~1.5.0",

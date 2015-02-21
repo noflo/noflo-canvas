@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeArc extends MakeCanvasPrimative
+class MakeArc extends noflo.Component
   description: 'Creates an arc or arcs'
   icon: 'power-off'
   constructor: ->
@@ -26,7 +26,6 @@ class MakeArc extends MakeCanvasPrimative
         required: true
         default: false
 
-    super 'arc', ports
-
+    ArrayableHelper @, 'arc', ports
 
 exports.getComponent = -> new MakeArc
