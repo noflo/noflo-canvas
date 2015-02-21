@@ -3,10 +3,12 @@
   "description": "Canvas 2D components for NoFlo",
   "author": "Forrest Oliphant <http://forresto.com/>, Vilson Vieira <vilson@void.cc>",
   "repository": "noflo/noflo-canvas",
-  "version": "0.1.11",
+  "version": "0.1.16",
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
+    "noflo/noflo-core": "*",
+    "noflo/noflo-objects": "*",
     "noflo/noflo-helper-arrayable": "*"
   },
   "remotes": [
@@ -45,13 +47,17 @@
     "components/MakeRGBColor.coffee",
     "graphs/PointFromObject.json",
     "graphs/RectangleFromObject.json",
-    "graphs/CopyCanvas.json"
+    "graphs/CopyCanvas.json",
+    "graphs/ResizeCanvas.json",
+    "components/SaveJPEG.coffee",
+    "components/MakeRectangleAspectRatio.coffee"
   ],
   "json": [
     "component.json",
     "graphs/PointFromObject.json",
     "graphs/RectangleFromObject.json",
-    "graphs/CopyCanvas.json"
+    "graphs/CopyCanvas.json",
+    "graphs/ResizeCanvas.json"
   ],
   "noflo": {
     "components": {
@@ -77,7 +83,9 @@
       "MakeRandom": "components/MakeRandom.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
+      "MakeRectangleAspectRatio": "components/MakeRectangleAspectRatio.coffee",
       "Recurse": "components/Recurse.coffee",
+      "SaveJPEG": "components/SaveJPEG.coffee",
       "SavePNG": "components/SavePNG.coffee",
       "Stroke": "components/Stroke.coffee",
       "StrokeRect": "components/StrokeRect.coffee",

@@ -1,0 +1,390 @@
+{
+    "properties": {
+        "name": "ResizeCanvas",
+        "environment": {
+            "type": "noflo-nodejs"
+        },
+        "icon": ""
+    },
+    "inports": {
+        "width": {
+            "process": "core/Split_bsbm8",
+            "port": "in",
+            "metadata": {
+                "x": -252,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "height": {
+            "process": "core/Split_ydrrp",
+            "port": "in",
+            "metadata": {
+                "x": -252,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "in": {
+            "process": "core/Split_w82ui",
+            "port": "in",
+            "metadata": {
+                "x": -252,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "outports": {
+        "out": {
+            "process": "canvas/Draw_dar3o",
+            "port": "canvas",
+            "metadata": {
+                "x": 720,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "groups": [],
+    "processes": {
+        "canvas/Draw_dar3o": {
+            "component": "canvas/Draw",
+            "metadata": {
+                "label": "canvas/Draw",
+                "x": 576,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/DrawImage_vdtq9": {
+            "component": "canvas/DrawImage",
+            "metadata": {
+                "label": "canvas/DrawImage",
+                "x": 324,
+                "y": 0,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/CreateCanvas_twsnb": {
+            "component": "canvas/CreateCanvas",
+            "metadata": {
+                "label": "canvas/CreateCanvas",
+                "x": 468,
+                "y": 360,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Split_bsbm8": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "core/Split",
+                "x": -108,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Split_ydrrp": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "core/Split",
+                "x": -108,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "canvas/MakeRectangleAspectRatio_eiw0p": {
+            "component": "canvas/MakeRectangleAspectRatio",
+            "metadata": {
+                "label": "canvas/MakeRectangleAspectRatio",
+                "x": 180,
+                "y": 360,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "objects/ExtractProperty_nnsr8": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "objects/ExtractProperty",
+                "x": 324,
+                "y": 432,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "objects/ExtractProperty_w4et5": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "objects/ExtractProperty",
+                "x": 324,
+                "y": 324,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "objects/ExtractProperty_yrip3": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "objects/ExtractProperty",
+                "x": 36,
+                "y": 108,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "core/Split_w82ui": {
+            "component": "core/Split",
+            "metadata": {
+                "label": "core/Split",
+                "x": -108,
+                "y": 36,
+                "width": 72,
+                "height": 72
+            }
+        },
+        "objects/ExtractProperty_mts06": {
+            "component": "objects/ExtractProperty",
+            "metadata": {
+                "label": "objects/ExtractProperty",
+                "x": 36,
+                "y": 216,
+                "width": 72,
+                "height": 72
+            }
+        }
+    },
+    "connections": [
+        {
+            "src": {
+                "process": "canvas/DrawImage_vdtq9",
+                "port": "drawimage"
+            },
+            "tgt": {
+                "process": "canvas/Draw_dar3o",
+                "port": "commands"
+            },
+            "metadata": {
+                "route": 5
+            }
+        },
+        {
+            "src": {
+                "process": "canvas/CreateCanvas_twsnb",
+                "port": "canvas"
+            },
+            "tgt": {
+                "process": "canvas/Draw_dar3o",
+                "port": "canvas"
+            },
+            "metadata": {
+                "route": 7
+            }
+        },
+        {
+            "src": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "rectangle"
+            },
+            "tgt": {
+                "process": "canvas/DrawImage_vdtq9",
+                "port": "destrect"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_bsbm8",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "width"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "core/Split_ydrrp",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "height"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "objects/ExtractProperty_nnsr8",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/CreateCanvas_twsnb",
+                "port": "height"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "objects/ExtractProperty_w4et5",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/CreateCanvas_twsnb",
+                "port": "width"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "rectangle"
+            },
+            "tgt": {
+                "process": "objects/ExtractProperty_nnsr8",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "rectangle"
+            },
+            "tgt": {
+                "process": "objects/ExtractProperty_w4et5",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "core/Split_w82ui",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "objects/ExtractProperty_yrip3",
+                "port": "in"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "objects/ExtractProperty_yrip3",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "origheight"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_w82ui",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "objects/ExtractProperty_mts06",
+                "port": "in"
+            },
+            "metadata": {
+                "route": 0
+            }
+        },
+        {
+            "src": {
+                "process": "objects/ExtractProperty_mts06",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/MakeRectangleAspectRatio_eiw0p",
+                "port": "origwidth"
+            },
+            "metadata": {}
+        },
+        {
+            "src": {
+                "process": "core/Split_w82ui",
+                "port": "out"
+            },
+            "tgt": {
+                "process": "canvas/DrawImage_vdtq9",
+                "port": "image"
+            },
+            "metadata": {
+                "route": 5
+            }
+        },
+        {
+            "data": {
+                "x": 0,
+                "y": 0
+            },
+            "tgt": {
+                "process": "canvas/DrawImage_vdtq9",
+                "port": "destpoint"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "canvas/Draw_dar3o",
+                "port": "drawevery"
+            }
+        },
+        {
+            "data": true,
+            "tgt": {
+                "process": "canvas/Draw_dar3o",
+                "port": "clearevery"
+            }
+        },
+        {
+            "data": "height",
+            "tgt": {
+                "process": "objects/ExtractProperty_nnsr8",
+                "port": "key"
+            }
+        },
+        {
+            "data": "width",
+            "tgt": {
+                "process": "objects/ExtractProperty_w4et5",
+                "port": "key"
+            }
+        },
+        {
+            "data": "height",
+            "tgt": {
+                "process": "objects/ExtractProperty_yrip3",
+                "port": "key"
+            }
+        },
+        {
+            "data": "width",
+            "tgt": {
+                "process": "objects/ExtractProperty_mts06",
+                "port": "key"
+            }
+        }
+    ]
+}

@@ -42,7 +42,7 @@ describe 'MakePoint component', ->
       sock_y.send y
 
   describe 'multiple output', ->
-    it 'should output an array of points', ->
+    it 'should output an array of points', (done) ->
       x = [0, 100]
       y = [10, 50]
       out.once "data", (data) ->
@@ -54,5 +54,6 @@ describe 'MakePoint component', ->
         chai.expect(data[0].y).to.equal y[0]
         chai.expect(data[1].x).to.equal x[1]
         chai.expect(data[1].y).to.equal y[1]
+        done()
       sock_x.send x
       sock_y.send y

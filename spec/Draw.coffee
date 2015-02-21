@@ -4,18 +4,9 @@ unless noflo.isBrowser()
   fs = require 'fs'
   Canvas = require 'canvas'
   Draw = require '../components/Draw.coffee'
+  testutils = require './testutils'
 else
   Draw = require 'noflo-canvas/components/Draw.js'
-
-createCanvas = (width, height) ->
-  if noflo.isBrowser()
-    canvas = document.createElement 'canvas'
-    canvas.width = width
-    canvas.height = height
-  else
-    Canvas = require 'canvas'
-    canvas = new Canvas width, height
-  return canvas
 
 describe 'Draw component', ->
   c = null
@@ -29,7 +20,7 @@ describe 'Draw component', ->
       chai.expect(c.outPorts.canvas).to.be.an 'object'
 
   describe 'when passed commands', ->
-    canvas = createCanvas 200,200
+    canvas = testutils.createCanvas 200,200
     s_canvas = null
     s_commands = null
     s_tick = null

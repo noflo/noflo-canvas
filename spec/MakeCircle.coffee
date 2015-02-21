@@ -50,7 +50,7 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
       chai.expect(callback.called).to.be.false
 
   describe 'single input', ->
-    it 'should output one circle', ->
+    it 'should output one circle', (done) ->
       center =
         x: 50
         y: 50
@@ -59,11 +59,12 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
       out.once "data", (data) ->
         chai.expect(data).to.be.an 'object'
         chai.expect(data).to.deep.equal expected
+        done()
       sock_center.send center
       sock_radius.send radius
 
   describe 'array input', ->
-    it 'should output an array of circles', ->
+    it 'should output an array of circles', (done) ->
       center =
         x: 50
         y: 50
@@ -76,5 +77,6 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
         chai.expect(data).to.be.an 'array'
         chai.expect(data.length).to.equal 2
         chai.expect(data).to.deep.equal expected
+        done()
       sock_center.send center
       sock_radius.send radius

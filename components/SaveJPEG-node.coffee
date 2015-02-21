@@ -1,35 +1,34 @@
 # @runtime noflo-nodejs
-# @name SavePNG
+# @name SaveJPEG
 
 noflo = require 'noflo'
 Canvas = require 'canvas'
 fs = require 'fs'
 
-class SavePNG extends noflo.Component
-  description: 'Save a canvas to PNG'
+class SaveJPEG extends noflo.Component
+  description: 'Save a canvas to JPEG'
   icon: 'file-image-o'
   constructor: ->
-    @filename = 'out.png'
+    @filename = 'out.jpg'
 
     @inPorts = new noflo.InPorts
       canvas:
         datatype: "object"
       filename:
         datatype: "string"
-    @outPorts = new noflo.OutPorts
-      png:
-        datatype: 'string'
+    @outPorts =
+      jpeg: new noflo.Port 'string'
 
     @inPorts.canvas.on 'data', (canvas) =>
       out = fs.createWriteStream(@filename)
-      stream = canvas.createPNGStream()
+      stream = canvas.createJPEGStream()
       
       stream.on 'data', (chunk) ->
         out.write(chunk)
-      stream.on 'end',  () =>
-        @outPorts.png.send @filename if @outPorts.png.isAttached()
+      stream.on 'end', () =>
+        @outPorts.jpeg.send @filename if @outPorts.jpeg.isAttached()
 
     @inPorts.filename.on 'data', (filename) =>
       @filename = filename
 
-exports.getComponent = -> new SavePNG
+exports.getComponent = -> new SaveJPEG

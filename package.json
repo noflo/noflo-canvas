@@ -1,7 +1,7 @@
 {
   "name": "noflo-canvas",
   "description": "Canvas 2D to NoFlo.",
-  "version": "0.1.11",
+  "version": "0.1.16",
   "contributors": [
     {
       "name": "Forrest Oliphant",
@@ -29,21 +29,23 @@
   "dependencies": {
     "canvas": "~1.1.1",
     "noflo": "~0.5.9",
+    "noflo-core": "^0.1.11",
+    "noflo-objects": "^0.1.12",
     "noflo-helper-arrayable": "git+https://git@github.com/noflo/noflo-helper-arrayable.git"
   },
   "devDependencies": {
-    "chai": "~1.5.0",
+    "chai": "~1.9.0",
     "grunt": "~0.4.1",
     "grunt-cafe-mocha": "~0.1.2",
     "grunt-coffeelint": "~0.0.6",
-    "grunt-contrib-coffee": "~0.6.6",
+    "grunt-contrib-coffee": "~0.11.1",
     "grunt-contrib-connect": "^0.7.1",
-    "grunt-contrib-uglify": "~0.2.0",
-    "grunt-contrib-watch": "~0.3.1",
-    "grunt-mocha-phantomjs": "~0.2.2",
+    "grunt-contrib-uglify": "~0.6.0",
+    "grunt-contrib-watch": "~0.6.1",
+    "grunt-mocha-phantomjs": "~0.6.0",
     "grunt-noflo-browser": "^0.1.2",
     "grunt-noflo-manifest": "^0.1.5",
-    "mocha": "~1.9.0",
+    "mocha": "~1.21.0",
     "sinon": "^1.10.3"
   },
   "keywords": [],
@@ -71,7 +73,9 @@
       "MakeRandom": "components/MakeRandom.coffee",
       "MakeRange": "components/MakeRange.coffee",
       "MakeRectangle": "components/MakeRectangle.coffee",
+      "MakeRectangleAspectRatio": "components/MakeRectangleAspectRatio.coffee",
       "Recurse": "components/Recurse.coffee",
+      "SaveJPEG": "components/SaveJPEG-node.coffee",
       "SavePNG": "components/SavePNG-node.coffee",
       "Stroke": "components/Stroke.coffee",
       "StrokeRect": "components/StrokeRect.coffee",
@@ -79,9 +83,9 @@
       "Transform": "components/Transform.coffee"
     },
     "graphs": {
-      "CopyCanvas": "graphs/CopyCanvas.json",
       "PointFromObject": "graphs/PointFromObject.json",
-      "RectangleFromObject": "graphs/RectangleFromObject.json"
+      "RectangleFromObject": "graphs/RectangleFromObject.json",
+      "ResizeCanvas": "graphs/ResizeCanvas.json"
     }
   }
 }
