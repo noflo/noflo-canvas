@@ -1,7 +1,7 @@
 noflo = require 'noflo'
-{MakeCanvasPrimative} = require '../lib/MakeCanvasPrimative'
+ArrayableHelper = require 'noflo-helper-arrayable'
 
-class MakeRectangleAspectRatio extends MakeCanvasPrimative
+class MakeRectangleAspectRatio extends noflo.Component
   description: 'Creates a rectangle, maintaining original aspect ratio'
   icon: 'square-o'
   constructor: ->
@@ -23,20 +23,19 @@ class MakeRectangleAspectRatio extends MakeCanvasPrimative
         description: 'from 0 to 1.0'
         required: false
 
-    super 'rectangle', ports
+    compute = (props) =>
+      return unless @outPorts.rectangle.isAttached()
+      return unless @hasAllProps(props)
+      inputs = props
+      out = @computeRectangle inputs
+      out.type = 'rectangle'
+      out.point = { type: 'point', x: 0, y: 0 }
+      @outPorts.rectangle.send out
 
-  hasAllProps: () ->
-    @props.width? and @props.height? and @props.origwidth? and @props.origheight?
+    ArrayableHelper @, 'rectangle', ports, {compute}
 
-  # OVERRIDE default to make strings
-  compute: ->
-    return unless @outPorts.rectangle.isAttached()
-    return unless @hasAllProps()
-    inputs = @props
-    out = @computeRectangle inputs
-    out.type = 'rectangle'
-    out.point = { type: 'point', x: 0, y: 0 }
-    @outPorts.rectangle.send out
+  hasAllProps: (props) ->
+    props.width? and props.height? and props.origwidth? and props.origheight?
 
   computeRectangle: (inputs) ->
     aspectRatio = inputs.origheight / inputs.origwidth
@@ -56,7 +55,5 @@ class MakeRectangleAspectRatio extends MakeCanvasPrimative
       height: targetHeight
       width: targetWidth
     return o
-
-
 
 exports.getComponent = -> new MakeRectangleAspectRatio
