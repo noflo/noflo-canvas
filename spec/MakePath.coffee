@@ -9,14 +9,17 @@ else
 
 describe 'MakePath component', ->
   c = null
-  sock_items = null
+  sock_0 = null
+  sock_1 = null
   out = null
 
   beforeEach ->
     c = MakePath.getComponent()
-    sock_items = noflo.internalSocket.createSocket()
+    sock_0 = noflo.internalSocket.createSocket()
+    sock_1 = noflo.internalSocket.createSocket()
     out = noflo.internalSocket.createSocket()
-    c.inPorts.items.attach sock_items
+    c.inPorts.items.attach sock_0, 0
+    c.inPorts.items.attach sock_1, 1
     c.outPorts.path.attach out
 
   describe 'when instantiated', ->
@@ -34,10 +37,10 @@ describe 'MakePath component', ->
       expected = {type: 'path', items: input}
       out.once "data", (data) ->
         chai.expect(data).to.deep.equal expected
-      sock_items.send input
+      sock_0.send input
 
   describe 'with two points to two addressable ports', ->
-    it 'should output one path', ->
+    it 'should output one path', (done) ->
       input = [
         {type:'point', x: 0, y: 0}
         {type:'point', x: 10, y: 10}
@@ -46,8 +49,15 @@ describe 'MakePath component', ->
       # TODO a better way to test for the last output
       count = 0
       out.on "data", (data) ->
-        count++
-        if count is 3
+        console.log data
+        if count is 0
+          chai.expect(data).to.deep.equal {
+            type: 'path'
+            items: [input[0]]
+          }
+        if count is 1
           chai.expect(data).to.deep.equal expected
-      sock_items.send input[0], 0
-      sock_items.send input[1], 1
+          done()
+        count++
+      sock_0.send input[0]
+      sock_1.send input[1]

@@ -21,7 +21,6 @@ class MakePath extends noflo.Component
         type: 'path'
         items: []
       arrayCount = 0
-      return unless props.items?
       for item in props.items
         unless item?
           # Short-circuit
