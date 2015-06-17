@@ -29,9 +29,10 @@
   "dependencies": {
     "canvas": "~1.1.1",
     "noflo": "~0.5.11",
+    "noflo-adapters": "^0.1.3",
     "noflo-core": "^0.1.11",
-    "noflo-objects": "^0.1.12",
-    "noflo-helper-arrayable": "git+https://git@github.com/noflo/noflo-helper-arrayable.git"
+    "noflo-helper-arrayable": "git+https://git@github.com/noflo/noflo-helper-arrayable.git",
+    "noflo-objects": "^0.1.12"
   },
   "devDependencies": {
     "chai": "~1.9.0",
