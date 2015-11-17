@@ -1,7 +1,16 @@
 language: node_js
 node_js:
-  - "0.10"
-before_install: 
-  - sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential g++
+- '0.10'
+before_install:
+- sudo apt-get install libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev build-essential
+  g++
 before_script:
-  - npm install -g grunt-cli
+- npm install -g grunt-cli
+deploy:
+  provider: npm
+  email: jononor@gmail.com
+  api_key:
+    secure: XNPR9aJFCmw8OfQGIKbCMrWgbjf+TaDuEDiT/sY7zbWr8NMTL//Rfg6jGcTCZ/uNpEw6l+z8iSkIeDdrKgoKZ319mCTK8IrQVuot8TSaqR2Xf2pGCRIocUDnXkbGCtWEReRt575AAdDW52p4CibS/FJE6GHd+fo7I5RmcUtg/zA=
+  on:
+    tags: true
+    repo: noflo/noflo-canvas
