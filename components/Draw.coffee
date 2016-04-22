@@ -2,7 +2,7 @@ noflo = require 'noflo'
 
 TAU = Math.PI * 2
 
-class Draw extends noflo.LoggingComponent
+class Draw extends noflo.Component
   description: 'Draws received drawing commands'
   icon: 'pencil'
   constructor: ->
@@ -23,14 +23,16 @@ class Draw extends noflo.LoggingComponent
       canvas:
         datatype: 'object'
         required: false
+      error:
+        datatype: 'object'
+        required: false
 
     @inPorts.tick.on 'data', (tick) =>
       if @context
         @parse @commands
         return
-      @sendLog
-        loglevel: 'error'
-        message: 'Received commands but there is not 2d context attached.'
+
+      @outPorts.error.send new Error 'Received commands but there is not 2d context attached.'
 
     @inPorts.tick.on 'begingroup', (group) =>
       @outPorts.canvas.beginGroup group
