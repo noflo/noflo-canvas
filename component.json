@@ -3,7 +3,7 @@
   "description": "Canvas 2D components for NoFlo",
   "author": "Forrest Oliphant <http://forresto.com/>, Vilson Vieira <vilson@void.cc>",
   "repository": "noflo/noflo-canvas",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "keywords": [],
   "dependencies": {
     "noflo/noflo": "*",
