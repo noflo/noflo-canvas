@@ -28,11 +28,11 @@
   },
   "dependencies": {
     "canvas": "~1.3.1",
-    "noflo": "~0.5.13",
-    "noflo-adapters": "~0.1.3",
-    "noflo-core": "~0.2.0",
+    "noflo": "0.x >= 0.5",
+    "noflo-adapters": "~0.1.5",
+    "noflo-core": "~0.2.2",
     "noflo-helper-arrayable": "git+https://git@github.com/noflo/noflo-helper-arrayable.git",
-    "noflo-objects": "~0.1.12"
+    "noflo-objects": "~0.1.14"
   },
   "devDependencies": {
     "chai": "1.9.2",
