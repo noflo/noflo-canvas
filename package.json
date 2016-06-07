@@ -44,7 +44,10 @@
     "mocha": "^2.4.5",
     "sinon": "^1.17.2"
   },
-  "keywords": [],
+  "keywords": [
+    "noflo",
+    "canvas"
+  ],
   "noflo": {
     "components": {
       "ClearRect": "components/ClearRect.coffee",
