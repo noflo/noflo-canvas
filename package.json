@@ -17,12 +17,7 @@
     "type": "git",
     "url": "git://github.com/noflo/noflo-canvas.git"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "undefined/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "scripts": {
     "test": "grunt test"
   },
