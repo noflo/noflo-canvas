@@ -27,7 +27,7 @@
     "test": "grunt test"
   },
   "dependencies": {
-    "canvas": "~1.3.1",
+    "canvas": "~1.4.0",
     "noflo": "0.x >= 0.5",
     "noflo-adapters": "~0.1.5",
     "noflo-core": "~0.2.2",
