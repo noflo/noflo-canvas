@@ -1,26 +1,31 @@
 noflo = require 'noflo'
-
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  MakePath = require '../components/MakePath.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakePath = require 'noflo-canvas/components/MakePath.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakePath component', ->
   c = null
   sock_0 = null
   sock_1 = null
   out = null
-
-  beforeEach ->
-    c = MakePath.getComponent()
-    sock_0 = noflo.internalSocket.createSocket()
-    sock_1 = noflo.internalSocket.createSocket()
-    out = noflo.internalSocket.createSocket()
-    c.inPorts.items.attach sock_0, 0
-    c.inPorts.items.attach sock_1, 1
-    c.outPorts.path.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakePath', (err, instance) ->
+      return done err if err
+      c = instance
+      sock_0 = noflo.internalSocket.createSocket()
+      sock_1 = noflo.internalSocket.createSocket()
+      out = noflo.internalSocket.createSocket()
+      c.inPorts.items.attach sock_0, 0
+      c.inPorts.items.attach sock_1, 1
+      c.outPorts.path.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have one input ports', ->

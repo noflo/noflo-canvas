@@ -1,11 +1,10 @@
 noflo = require 'noflo'
-
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  MakeRectangle = require '../components/MakeRectangle.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakeRectangle = require 'noflo-canvas/components/MakeRectangle.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakeRectangle component', ->
   c = null
@@ -13,17 +12,23 @@ describe 'MakeRectangle component', ->
   sock_width = null
   sock_point = null
   out = null
-
-  beforeEach ->
-    c = MakeRectangle.getComponent()
-    sock_width = noflo.internalSocket.createSocket()
-    sock_height = noflo.internalSocket.createSocket()
-    sock_point = noflo.internalSocket.createSocket()
-    out = noflo.internalSocket.createSocket()
-    c.inPorts.width.attach sock_width
-    c.inPorts.height.attach sock_height
-    c.inPorts.point.attach sock_point
-    c.outPorts.rectangle.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakeRectangle', (err, instance) ->
+      return done err if err
+      c = instance
+      sock_width = noflo.internalSocket.createSocket()
+      sock_height = noflo.internalSocket.createSocket()
+      sock_point = noflo.internalSocket.createSocket()
+      out = noflo.internalSocket.createSocket()
+      c.inPorts.width.attach sock_width
+      c.inPorts.height.attach sock_height
+      c.inPorts.point.attach sock_point
+      c.outPorts.rectangle.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have two input ports', ->
