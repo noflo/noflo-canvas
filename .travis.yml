@@ -19,9 +19,9 @@ env:
 - CXX=g++-4.8
 deploy:
   provider: npm
-  email: jononor@gmail.com
+  email: henri.bergius@iki.fi
   api_key:
-    secure: XNPR9aJFCmw8OfQGIKbCMrWgbjf+TaDuEDiT/sY7zbWr8NMTL//Rfg6jGcTCZ/uNpEw6l+z8iSkIeDdrKgoKZ319mCTK8IrQVuot8TSaqR2Xf2pGCRIocUDnXkbGCtWEReRt575AAdDW52p4CibS/FJE6GHd+fo7I5RmcUtg/zA=
+    secure: VCeG+5BArq+OyO/9EkjlqW2LwNANEziG4f6MlJb2DM6iidRtzpBqt7jcdpbtKua861Eh9+o12z8UatIhkUGyZLIpQ8HTDDtRww79Zl1vXP7kFlGxkiEeKuzE3yQRUppM/Lhh+DRmwK6dsoKD7Fvkag0dQth4TKYg5szRqL8ROgk=
   on:
     tags: true
     repo: noflo/noflo-canvas
