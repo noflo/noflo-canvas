@@ -1,33 +1,38 @@
 noflo = require 'noflo'
-
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  MakeRectangleAspectRatio = require '../components/MakeRectangleAspectRatio.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakeRectangleAspectRatio = require 'noflo-canvas/components/MakeRectangleAspectRatio.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakeRectangleAspectRatio component', ->
   c = null
   sockets = null
   out = null
   zeropoint = null
-
-  beforeEach ->
-    c = MakeRectangleAspectRatio.getComponent()
-    zeropoint =
-      type: 'point'
-      x: 0
-      y: 0
-    sockets =
-      origwidth: new noflo.internalSocket.createSocket()
-      origheight: new noflo.internalSocket.createSocket()
-      width: new noflo.internalSocket.createSocket()
-      height: new noflo.internalSocket.createSocket()
-    for name, socket of sockets
-      c.inPorts[name].attach socket
-    out = new noflo.internalSocket.createSocket()
-    c.outPorts.rectangle.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakeRectangleAspectRatio', (err, instance) ->
+      return done err if err
+      c = instance
+      zeropoint =
+        type: 'point'
+        x: 0
+        y: 0
+      sockets =
+        origwidth: new noflo.internalSocket.createSocket()
+        origheight: new noflo.internalSocket.createSocket()
+        width: new noflo.internalSocket.createSocket()
+        height: new noflo.internalSocket.createSocket()
+      for name, socket of sockets
+        c.inPorts[name].attach socket
+      out = new noflo.internalSocket.createSocket()
+      c.outPorts.rectangle.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have 4 input ports', ->

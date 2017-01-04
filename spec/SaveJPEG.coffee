@@ -1,17 +1,24 @@
 noflo = require 'noflo'
 unless noflo.isBrowser()
-  testutils = require './testutils'
-  chai = require 'chai' unless chai
-  fs = require 'fs'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
   Canvas = require 'canvas'
-  SaveJPEG = require '../components/SaveJPEG-node.coffee'
+  testutils = require './testutils'
 else
-  SaveJPEG = require 'noflo-canvas/components/SaveJPEG.js'
+  baseDir = 'noflo-canvas'
 
 describe 'SaveJPEG component', ->
   c = null
-  beforeEach ->
-    c = SaveJPEG.getComponent()
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/SaveJPEG', (err, instance) ->
+      return done err if err
+      c = instance
+      done()
 
   describe 'when instantiated', ->
     it 'should have an input port', ->

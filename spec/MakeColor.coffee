@@ -1,11 +1,10 @@
 noflo = require 'noflo'
-
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  MakeColor = require '../components/MakeColor.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakeColor = require 'noflo-canvas/components/MakeColor.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakeColor component', ->
   c = null
@@ -14,19 +13,25 @@ describe 'MakeColor component', ->
   sock_lightness = null
   sock_alpha = null
   out = null
-
-  beforeEach ->
-    c = MakeColor.getComponent()
-    sock_hue = noflo.internalSocket.createSocket()
-    sock_saturation = noflo.internalSocket.createSocket()
-    sock_lightness = noflo.internalSocket.createSocket()
-    sock_alpha = noflo.internalSocket.createSocket()
-    out = noflo.internalSocket.createSocket()
-    c.inPorts.hue.attach sock_hue
-    c.inPorts.saturation.attach sock_saturation
-    c.inPorts.lightness.attach sock_lightness
-    c.inPorts.alpha.attach sock_alpha
-    c.outPorts.color.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakeColor', (err, instance) ->
+      return done err if err
+      c = instance
+      sock_hue = noflo.internalSocket.createSocket()
+      sock_saturation = noflo.internalSocket.createSocket()
+      sock_lightness = noflo.internalSocket.createSocket()
+      sock_alpha = noflo.internalSocket.createSocket()
+      out = noflo.internalSocket.createSocket()
+      c.inPorts.hue.attach sock_hue
+      c.inPorts.saturation.attach sock_saturation
+      c.inPorts.lightness.attach sock_lightness
+      c.inPorts.alpha.attach sock_alpha
+      c.outPorts.color.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have four input ports', ->

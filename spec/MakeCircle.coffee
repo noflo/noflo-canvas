@@ -1,27 +1,33 @@
 noflo = require 'noflo'
 
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
+  chai = require 'chai'
+  path = require 'path'
   sinon = require 'sinon' unless sinon
-  MakeCircle = require '../components/MakeCircle.coffee'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakeCircle = require 'noflo-canvas/components/MakeCircle.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
   c = null
   sock_center = null
   sock_radius = null
   out = null
-
-  beforeEach ->
-    c = MakeCircle.getComponent()
-    sock_center = noflo.internalSocket.createSocket()
-    sock_radius = noflo.internalSocket.createSocket()
-    out = noflo.internalSocket.createSocket()
-    c.inPorts.center.attach sock_center
-    c.inPorts.radius.attach sock_radius
-    c.outPorts.circle.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakeCircle', (err, instance) ->
+      return done err if err
+      c = instance
+      sock_center = noflo.internalSocket.createSocket()
+      sock_radius = noflo.internalSocket.createSocket()
+      out = noflo.internalSocket.createSocket()
+      c.inPorts.center.attach sock_center
+      c.inPorts.radius.attach sock_radius
+      c.outPorts.circle.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have two input ports', ->

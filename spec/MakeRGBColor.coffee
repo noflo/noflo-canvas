@@ -1,11 +1,11 @@
 noflo = require 'noflo'
 
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  MakeRGBColor = require '../components/MakeRGBColor.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakeRGBColor = require 'noflo-canvas/components/MakeRGBColor.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakeRGBColor component', ->
   c = null
@@ -14,19 +14,25 @@ describe 'MakeRGBColor component', ->
   sock_b = null
   sock_alpha = null
   out = null
-
-  beforeEach ->
-    c = MakeRGBColor.getComponent()
-    sock_r = noflo.internalSocket.createSocket()
-    sock_g = noflo.internalSocket.createSocket()
-    sock_b = noflo.internalSocket.createSocket()
-    sock_alpha = noflo.internalSocket.createSocket()
-    out = noflo.internalSocket.createSocket()
-    c.inPorts.red.attach sock_r
-    c.inPorts.green.attach sock_g
-    c.inPorts.blue.attach sock_b
-    c.inPorts.alpha.attach sock_alpha
-    c.outPorts.color.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakeRGBColor', (err, instance) ->
+      return done err if err
+      c = instance
+      sock_r = noflo.internalSocket.createSocket()
+      sock_g = noflo.internalSocket.createSocket()
+      sock_b = noflo.internalSocket.createSocket()
+      sock_alpha = noflo.internalSocket.createSocket()
+      out = noflo.internalSocket.createSocket()
+      c.inPorts.red.attach sock_r
+      c.inPorts.green.attach sock_g
+      c.inPorts.blue.attach sock_b
+      c.inPorts.alpha.attach sock_alpha
+      c.outPorts.color.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have four input ports', ->

@@ -1,26 +1,31 @@
 noflo = require 'noflo'
-
 unless noflo.isBrowser()
-  chai = require 'chai' unless chai
-  MakePoint = require '../components/MakePoint.coffee'
+  chai = require 'chai'
+  path = require 'path'
+  baseDir = path.resolve __dirname, '../'
 else
-  MakePoint = require 'noflo-canvas/components/MakePoint.js'
-
+  baseDir = 'noflo-canvas'
 
 describe 'MakePoint component', ->
   c = null
   sock_x = null
   sock_y = null
   out = null
-
-  beforeEach ->
-    c = MakePoint.getComponent()
-    sock_x = noflo.internalSocket.createSocket()
-    sock_y = noflo.internalSocket.createSocket()
-    out = noflo.internalSocket.createSocket()
-    c.inPorts.x.attach sock_x
-    c.inPorts.y.attach sock_y
-    c.outPorts.point.attach out
+  loader = null
+  before ->
+    loader = new noflo.ComponentLoader baseDir
+  beforeEach (done) ->
+    @timeout 4000
+    loader.load 'canvas/MakePoint', (err, instance) ->
+      return done err if err
+      c = instance
+      sock_x = noflo.internalSocket.createSocket()
+      sock_y = noflo.internalSocket.createSocket()
+      out = noflo.internalSocket.createSocket()
+      c.inPorts.x.attach sock_x
+      c.inPorts.y.attach sock_y
+      c.outPorts.point.attach out
+      done()
 
   describe 'when instantiated', ->
     it 'should have two input ports', ->
