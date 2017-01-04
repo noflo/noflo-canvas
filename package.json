@@ -17,12 +17,7 @@
     "type": "git",
     "url": "git://github.com/noflo/noflo-canvas.git"
   },
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "undefined/blob/master/LICENSE-MIT"
-    }
-  ],
+  "license": "MIT",
   "scripts": {
     "test": "grunt test"
   },
@@ -49,7 +44,7 @@
     "mocha": "^2.4.5",
     "sinon": "^1.17.2"
   },
-  "keywords": [],
+  "keywords": ["noflo"],
   "noflo": {
     "components": {
       "ClearRect": "components/ClearRect.coffee",
