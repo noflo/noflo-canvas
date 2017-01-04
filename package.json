@@ -32,19 +32,21 @@
   "devDependencies": {
     "chai": "^3.5.0",
     "grunt": "^1.0.1",
-    "grunt-cafe-mocha": "^0.1.13",
     "grunt-coffeelint": "^0.0.16",
     "grunt-contrib-coffee": "^1.0.0",
     "grunt-contrib-connect": "^1.0.0",
     "grunt-contrib-uglify": "^2.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-mocha-phantomjs": "^4.0.0",
+    "grunt-mocha-test": "^0.13.2",
     "grunt-noflo-browser": "^0.1.11",
     "grunt-noflo-manifest": "^0.1.12",
     "mocha": "^3.2.0",
     "sinon": "^1.17.2"
   },
-  "keywords": ["noflo"],
+  "keywords": [
+    "noflo"
+  ],
   "noflo": {
     "components": {
       "ClearRect": "components/ClearRect.coffee",
