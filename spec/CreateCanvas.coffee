@@ -15,7 +15,6 @@ unless noflo.isBrowser()
       it 'should be available', ->
         chai.expect(Canvas).to.be.a 'function'
       it 'should produce a valid canvas object', ->
-        chai.expect(can).to.be.an 'object'
         chai.expect(can.width).to.equal 10
         chai.expect(can.height).to.equal 10
 

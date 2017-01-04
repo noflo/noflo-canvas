@@ -37,7 +37,6 @@ describe 'ResizeCanvas component', ->
 
   describe 'when instantiated', ->
     it 'should have 3 input ports', ->
-      chai.expect(c.inPorts['in']).to.be.an 'object'
       chai.expect(c.inPorts.height).to.be.an 'object'
       chai.expect(c.inPorts.width).to.be.an 'object'
     it 'should have one output port', ->
@@ -48,7 +47,6 @@ describe 'ResizeCanvas component', ->
       @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
-        chai.expect(canvas).to.be.an 'object'
         chai.expect(canvas.width).to.equal 500
         chai.expect(canvas.height).to.equal 400
         done()
@@ -61,7 +59,6 @@ describe 'ResizeCanvas component', ->
       @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
-        chai.expect(canvas).to.be.an 'object'
         chai.expect(canvas.width).to.equal 533
         chai.expect(canvas.height).to.equal 400
         done()
@@ -74,7 +71,6 @@ describe 'ResizeCanvas component', ->
       @timeout 5000
       input = testutils.createCanvas 400, 300
       out.once "data", (canvas) ->
-        chai.expect(canvas).to.be.an 'object'
         chai.expect(canvas.width).to.equal 500
         chai.expect(canvas.height).to.equal 375
         done()

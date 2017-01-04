@@ -64,7 +64,6 @@ describe 'Draw component', ->
     ]
     it 'should draw the correct image', (done) ->
       so_canvas.once "data", (can) ->
-        chai.expect(can).to.be.an 'object'
         # Check pixels
         for command, index in commands
           context = can.getContext '2d'
