@@ -27,7 +27,7 @@
     "noflo-adapters": "~0.1.5",
     "noflo-core": "~0.2.2",
     "noflo-helper-arrayable": "~0.0.3",
-    "noflo-objects": "~0.2.0"
+    "noflo-objects": "~0.3.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",
