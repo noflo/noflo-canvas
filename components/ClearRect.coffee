@@ -17,6 +17,6 @@ class ClearRect extends noflo.Component
         datatype: 'number'
         required: true
     
-    ArrayableHelper @, 'clearRect', ports
+    ArrayableHelper @, 'clearrect', ports
 
 exports.getComponent = -> new ClearRect

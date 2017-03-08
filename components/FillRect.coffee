@@ -17,6 +17,6 @@ class FillRect extends noflo.Component
         datatype: 'number'
         required: true
     
-    ArrayableHelper @, 'fillRect', ports
+    ArrayableHelper @, 'fillrect', ports
 
   exports.getComponent = -> new FillRect
