@@ -17,6 +17,6 @@ class StrokeRect extends noflo.Component
         datatype: 'number'
         required: true
     
-    ArrayableHelper @, 'strokeRect', ports
+    ArrayableHelper @, 'strokerect', ports
 
   exports.getComponent = -> new StrokeRect
