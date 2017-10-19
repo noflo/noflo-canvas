@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "canvas": "~1.6.2",
-    "noflo": "0.x >= 0.5",
+    "noflo": "0.x >= 0.8",
     "noflo-adapters": "~0.2.0",
     "noflo-core": "~0.2.2",
     "noflo-helper-arrayable": "~0.0.4",
