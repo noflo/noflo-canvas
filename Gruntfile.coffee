@@ -18,14 +18,13 @@ module.exports = ->
     noflo_manifest:
       update:
         files:
-          'component.json': ['graphs/*', 'components/*']
           'package.json': ['graphs/*', 'components/*']
 
     # Browser build of NoFlo
     noflo_browser:
       build:
         files:
-          'browser/noflo-canvas.js': ['component.json']
+          'browser/noflo-canvas.js': ['package.json']
 
     # Automated recompilation and testing when developing
     watch:
