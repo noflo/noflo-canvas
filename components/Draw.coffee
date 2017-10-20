@@ -2,74 +2,13 @@ noflo = require 'noflo'
 
 TAU = Math.PI * 2
 
-class Draw extends noflo.Component
-  description: 'Draws received drawing commands'
-  icon: 'pencil'
-  constructor: ->
-    @drawevery = false
-    @clearevery = false
-    @canvas = null
-    @context = null
-    @commands = []
-    
-    @inPorts =
-      tick: new noflo.Port 'bang'
-      drawevery: new noflo.Port 'boolean'
-      clearevery: new noflo.Port 'boolean'
-      canvas: new noflo.Port 'object'
-      commands: new noflo.ArrayPort 'object'
+class DrawCommands
+  constructor: (@context, @canvas) ->
 
-    @outPorts = new noflo.OutPorts
-      canvas:
-        datatype: 'object'
-        required: false
-      error:
-        datatype: 'object'
-        required: false
-
-    @inPorts.tick.on 'data', (tick) =>
-      if @context
-        @parse @commands
-        return
-
-      @outPorts.error.send new Error 'Received commands but there is not 2d context attached.'
-
-    @inPorts.tick.on 'begingroup', (group) =>
-      @outPorts.canvas.beginGroup group
-    @inPorts.tick.on 'endgroup', () =>
-      @outPorts.canvas.endGroup()
-    @inPorts.tick.on 'disconnect', () =>
-      @outPorts.canvas.disconnect()
-
-
-    @inPorts.drawevery.on 'data', (data) =>
-      @drawevery = data
-
-    @inPorts.clearevery.on 'data', (data) =>
-      @clearevery = data
-
-    @inPorts.canvas.on 'data', (canvas) =>
-      @canvas = canvas
-      @context = canvas.getContext '2d'
-      
-    @inPorts.commands.on 'data', (commands, i) =>
-      @commands[i] = commands
-      if @drawevery
-        @parse @commands
-
-
-    # @inPorts.commands.on 'detach', (i) =>
-    #   @commands.splice i, 1
-    #   if @drawevery
-    #     @parse @commands
-
-
-  parse: (commands) =>
-    return unless @context
-    if @clearevery
+  parse: (commands, clearEvery = false) ->
+    if clearEvery
       @context.clearRect 0, 0, @canvas.width, @canvas.height
     @parseThing commands
-    @outPorts.canvas.send @canvas
 
   # Recursively parse things and arrays of things
   parseThing: (thing, before, after) =>
@@ -252,3 +191,99 @@ class Draw extends noflo.Component
     @context.drawImage drawimage.image, 0, 0
                   
 exports.getComponent = -> new Draw
+
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Draws received drawing commands'
+  c.icon = 'pencil'
+  c.inPorts.add 'canvas',
+    datatype: 'object'
+    control: true
+  c.inPorts.add 'commands',
+    datatype: 'object'
+    addressable: true
+  c.inPorts.add 'tick',
+    datatype: 'bang'
+  c.inPorts.add 'drawevery',
+    datatype: 'boolean'
+    default: false
+    control: true
+  c.inPorts.add 'clearevery',
+    datatype: 'boolean'
+    default: false
+    control: true
+  c.outPorts.add 'canvas',
+    datatype: 'object'
+  c.outPorts.add 'error',
+    datatype: 'object'
+
+  c.scopes = {}
+  c.tearDown = (callback) ->
+    c.scopes = {}
+    do callback
+  ensureScope = (scope, canvas) ->
+    if c.scopes[scope]
+      unless c.scopes[scope].canvas is canvas
+        # Canvas has changed for this context
+        c.scopes[scope].canvas = canvas
+        c.scopes[scope].context = canvas.getContext '2d'
+      return c.scopes[scope]
+    c.scopes[scope] =
+      commands: []
+      context: canvas.getContext '2d'
+      canvas: canvas
+    return c.scopes[scope]
+
+  c.forwardBrackets =
+    tick: ['canvas', 'error']
+  c.process (input, output) ->
+    # We always need a canvas to operate on
+    return unless input.hasData 'canvas'
+    # Check if options are expected
+    return if input.attached('drawevery').length and not input.hasData 'drawevery'
+    return if input.attached('clearevery').length and not input.hasData 'clearevery'
+
+    if input.hasData 'tick'
+      input.getData 'tick'
+      clearEvery = false
+      if input.hasData 'clearevery'
+        clearEvery = input.getData 'clearevery'
+      canvas = input.getData 'canvas'
+      scope = ensureScope input.scope, canvas
+      # Draw all commands out
+      draw = new DrawCommands scope.context, canvas
+      draw.parse scope.commands, clearEvery
+      output.sendDone
+        canvas: canvas
+      return
+
+    # Check if we've received drawing commands
+    indexesWithData = input.attached('commands').filter (idx) ->
+      input.hasData ['commands', idx]
+    return unless indexesWithData.length
+
+    drawEvery = false
+    if input.hasData 'drawevery'
+      drawEvery = input.getData 'drawevery'
+    clearEvery = false
+    if input.hasData 'clearevery'
+      clearEvery = input.getData 'clearevery'
+
+    canvas = input.getData 'canvas'
+    scope = ensureScope input.scope, canvas
+    indexesWithData.forEach (idx) ->
+      # Read commands into scope
+      scope.commands[idx] = input.getData ['commands', idx]
+
+    unless drawEvery
+      # drawevery not enabled, wait for tick
+      output.done()
+      return
+
+    # Draw the list of commands
+    draw = new DrawCommands scope.context, canvas
+    draw.parse scope.commands, clearEvery
+
+    output.sendDone
+      canvas: canvas
+    return

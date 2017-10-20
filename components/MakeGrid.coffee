@@ -14,13 +14,12 @@ class MakeGrid extends noflo.Component
         required: true
 
     # OVERRIDE default to make x and y dimensional
-    compute = (props) =>
-      if @outPorts.point.isAttached()
-        return unless props.x? and props.y?
-        # Expand to grid
-        if props.x instanceof Array or props.y instanceof Array
-          props = expandToArray props
-        @outPorts.point.send props
+    compute = (props) ->
+      return unless props.x? and props.y?
+      # Expand to grid
+      if props.x instanceof Array or props.y instanceof Array
+        props = expandToArray props
+      return props
 
     ArrayableHelper @, 'point', ports, {compute}
 

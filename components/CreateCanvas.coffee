@@ -3,37 +3,22 @@
 
 noflo = require 'noflo'
 
-class CreateCanvas extends noflo.Component
-  description: 'Makes a Canvas with given dimensions'
-  icon: 'pencil-square'
-  constructor: ->
-    @width = null
-    @height = null
-
-    @inPorts = new noflo.InPorts
-      width:
-        datatype: "int"
-      height:
-        datatype: "int"
-    @outPorts = new noflo.OutPorts
-      canvas:
-        datatype: 'object'
-
-    @inPorts.width.on 'data', (data) =>
-      @width = data
-      @create()
-
-    @inPorts.height.on 'data', (data) =>
-      @height = data
-      @create()
-
-  create: =>
-    return unless @width>0 and @height>0
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Makes a Canvas with given dimensions'
+  c.icon = 'pencil-square'
+  c.inPorts.add 'width',
+    datatype: 'int'
+  c.inPorts.add 'height',
+    datatype: 'int'
+  c.outPorts.add 'canvas',
+    datatype: 'object'
+  c.process (input, output) ->
+    return unless input.hasData 'width', 'height'
+    [width, height] = input.getData 'width', 'height'
     canvas = document.createElement 'canvas'
-    canvas.width = @width
-    canvas.height = @height
-
-    if @outPorts.canvas.isAttached()
-      @outPorts.canvas.send canvas
-
-exports.getComponent = -> new CreateCanvas
+    canvas.width = width
+    canvas.height = height
+    output.sendDone
+      canvas: canvas
+    return

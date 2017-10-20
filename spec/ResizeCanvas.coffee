@@ -32,8 +32,7 @@ describe 'ResizeCanvas component', ->
         c.inPorts.height.attach sock_height
         c.inPorts['in'].attach sock_canvas
         c.outPorts.out.attach out
-        c.network.start()
-        done()
+        c.network.start done
 
   describe 'when instantiated', ->
     it 'should have 3 input ports', ->

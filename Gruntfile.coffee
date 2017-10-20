@@ -14,18 +14,11 @@ module.exports = ->
         dest: 'spec'
         ext: '.js'
 
-    # Updating the package manifest files
-    noflo_manifest:
-      update:
-        files:
-          'component.json': ['graphs/*', 'components/*']
-          'package.json': ['graphs/*', 'components/*']
-
     # Browser build of NoFlo
     noflo_browser:
       build:
         files:
-          'browser/noflo-canvas.js': ['component.json']
+          'browser/noflo-canvas.js': ['package.json']
 
     # Automated recompilation and testing when developing
     watch:
@@ -44,6 +37,7 @@ module.exports = ->
         src: ['spec/*.coffee']
         options:
           reporter: 'spec'
+          grep: process.env.TESTS
 
     # BDD tests on browser
     mocha_phantomjs:
@@ -61,7 +55,6 @@ module.exports = ->
           'level': 'ignore'
 
   # Grunt plugins used for building
-  @loadNpmTasks 'grunt-noflo-manifest'
   @loadNpmTasks 'grunt-noflo-browser'
   @loadNpmTasks 'grunt-contrib-coffee'
 
@@ -74,7 +67,6 @@ module.exports = ->
 
   # Our local tasks
   @registerTask 'build', 'Build NoFlo for the chosen target platform', (target = 'all') =>
-    @task.run 'noflo_manifest'
     if target is 'all' or target is 'browser'
       @task.run 'noflo_browser'
 

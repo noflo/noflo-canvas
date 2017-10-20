@@ -16,7 +16,6 @@ class MakePath extends noflo.Component
 
     # OVERRIDE, discussion at noflo/noflo-canvas#24
     compute = (props) =>
-      return unless @outPorts.path.isAttached()
       out =
         type: 'path'
         items: []
@@ -39,8 +38,7 @@ class MakePath extends noflo.Component
         out.items = @expandToArray props.items
         out = @expandToArray out
 
-      if out
-        @outPorts.path.send out
+      return out
 
     ArrayableHelper @, 'path', ports, {compute}
 

@@ -1,21 +1,18 @@
 noflo = require 'noflo'
 
-class StrokeStyle extends noflo.Component
-  description: 'Sets the global stroke style'
-  icon: 'pencil-square-o'
-  constructor: ->
-    @strokestyle =
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Sets the global stroke style'
+  c.icon = 'pencil-square-o'
+  c.inPorts.add 'style',
+    datatype: 'string'
+  c.outPorts.add 'strokestyle',
+    datatype: 'object'
+  c.process (input, output) ->
+    return unless input.hasData 'style'
+    strokeStyle =
       type: 'strokeStyle'
-      value: null
-
-    @inPorts =
-      style: new noflo.Port 'string'
-    @outPorts =
-      strokestyle: new noflo.Port 'object'
-
-    @inPorts.style.on 'data', (data) =>
-      @strokestyle.value = data
-      if @outPorts.strokestyle.isAttached()
-        @outPorts.strokestyle.send @strokestyle
-
-exports.getComponent = -> new StrokeStyle
+      value: input.getData 'style'
+    output.sendDone
+      out: new noflo.IP 'data', strokeStyle
+    return
