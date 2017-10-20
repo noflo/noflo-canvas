@@ -13,7 +13,7 @@ exports.getComponent = ->
   c.inPorts.add 'height',
     datatype: 'int'
   c.outPorts.add 'canvas',
-    datatype: object
+    datatype: 'object'
   c.process (input, output) ->
     return unless input.hasData 'width', 'height'
     [width, height] = input.getData 'width', 'height'
