@@ -34,7 +34,6 @@ class MakeRGBColor extends noflo.Component
         required: false
 
     compute = (props) =>
-      return unless @outPorts.color.isAttached()
       return unless props.red? and props.green? and props.blue?
       color = props
       if (props.red instanceof Array or props.green instanceof Array or
@@ -43,7 +42,7 @@ class MakeRGBColor extends noflo.Component
         color = color.map colorToString
       else
         color = colorToString props
-      @outPorts.color.send color
+      return color
 
     ArrayableHelper @, 'color', ports, {compute}
 

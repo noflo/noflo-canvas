@@ -29,7 +29,6 @@ class MakeColor extends noflo.Component
         required: false
 
     compute = (props) =>
-      return unless @outPorts.color.isAttached()
       return unless props.hue? and props.saturation? and props.lightness?
       color = props
       if (props.hue instanceof Array or props.saturation instanceof Array or
@@ -38,7 +37,7 @@ class MakeColor extends noflo.Component
         color = color.map colorToString
       else
         color = colorToString props
-      @outPorts.color.send color
+      return color
 
     ArrayableHelper @, 'color', ports, {compute}
 
