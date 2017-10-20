@@ -13,7 +13,6 @@ class DrawImage extends noflo.Component
       destpoint:
         description: 'destination point (full size)'
         datatype: 'object'
-        type: 'noflo-canvas/point'
         default:
           x: 0
           y: 0
@@ -21,12 +20,10 @@ class DrawImage extends noflo.Component
       destrect:
         description: 'destination rect, to scale'
         datatype: 'object'
-        type: 'noflo-canvas/rectangle'
         required: false
       sourcerect:
         description: 'source rect, to scale'
         datatype: 'object'
-        type: 'noflo-canvas/rectangle'
         required: false
 
     ArrayableHelper @, 'drawimage', ports

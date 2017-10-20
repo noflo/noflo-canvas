@@ -1,21 +1,18 @@
 noflo = require 'noflo'
 
-class FillStyle extends noflo.Component
-  description: 'Sets the global fill style'
-  icon: 'pencil-square'
-  constructor: ->
-    @fillstyle =
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Sets the global fill style'
+  c.icon = 'pencil-square-o'
+  c.inPorts.add 'style',
+    datatype: 'string'
+  c.outPorts.add 'fillstyle',
+    datatype: 'object'
+  c.process (input, output) ->
+    return unless input.hasData 'style'
+    fillStyle =
       type: 'fillStyle'
-      value: null
-
-    @inPorts =
-      style: new noflo.Port 'string'
-    @outPorts =
-      fillstyle: new noflo.Port 'object'
-
-    @inPorts.style.on 'data', (data) =>
-      @fillstyle.value = data
-      if @outPorts.fillstyle.isAttached()
-        @outPorts.fillstyle.send @fillstyle
-
-exports.getComponent = -> new FillStyle
+      value: input.getData 'style'
+    output.sendDone
+      out: new noflo.IP 'data', fillStyle
+    return

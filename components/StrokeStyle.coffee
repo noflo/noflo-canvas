@@ -9,8 +9,8 @@ exports.getComponent = ->
   c.outPorts.add 'strokestyle',
     datatype: 'object'
   c.process (input, output) ->
-    return unless input.hasData
-    strokestyle =
+    return unless input.hasData 'style'
+    strokeStyle =
       type: 'strokeStyle'
       value: input.getData 'style'
     output.sendDone

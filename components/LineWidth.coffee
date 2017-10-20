@@ -1,21 +1,18 @@
 noflo = require 'noflo'
 
-class LineWidth extends noflo.Component
-  description: 'Sets the line width'
-  icon: 'pencil-square'
-  constructor: ->
-    @linewidth =
+exports.getComponent = ->
+  c = new noflo.Component
+  c.description = 'Sets the line width'
+  c.icon = 'pencil-square'
+  c.inPorts.add 'width',
+    datatype: 'number'
+  c.outPorts.add 'linewidth',
+    datatype: 'object'
+  c.process (input, output) ->
+    return unless input.hasData 'width'
+    linewidth =
       type: 'lineWidth'
-      value: null
-
-    @inPorts =
-      width: new noflo.Port 'number'
-    @outPorts =
-      linewidth: new noflo.Port 'object'
-
-    @inPorts.width.on 'data', (width) =>
-      @linewidth.value = width
-      if @outPorts.linewidth.isAttached()
-        @outPorts.linewidth.send @linewidth
-
-exports.getComponent = -> new LineWidth
+      value: input.getData 'width'
+    output.sendDone
+      out: new noflo.IP 'data', linewidth
+    return
