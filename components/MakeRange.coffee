@@ -1,6 +1,7 @@
 noflo = require 'noflo'
 
 exports.getComponent = ->
+  c = new noflo.Component
   description: 'Make an array of evenly-spaced numbers'
   icon: 'folder-o'
   c.inPorts.add 'from',
