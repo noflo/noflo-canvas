@@ -24,13 +24,12 @@ class MakeRectangleAspectRatio extends noflo.Component
         required: false
 
     compute = (props) =>
-      return unless @outPorts.rectangle.isAttached()
       return unless @hasAllProps(props)
       inputs = props
       out = @computeRectangle inputs
       out.type = 'rectangle'
       out.point = { type: 'point', x: 0, y: 0 }
-      @outPorts.rectangle.send out
+      return out
 
     ArrayableHelper @, 'rectangle', ports, {compute}
 
