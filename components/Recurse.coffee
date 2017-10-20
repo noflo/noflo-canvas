@@ -12,7 +12,7 @@ exports.getComponent = ->
   c.outPorts.add 'recurse',
     datatype: 'object'
   c.recurses = {}
-  c.tearDown (callback) ->
+  c.tearDown = (callback) ->
     c.recurses = {}
     do callback
   c.process (input, output) ->
