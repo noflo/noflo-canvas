@@ -10,7 +10,7 @@ exports.getComponent = ->
     datatype: 'number'
   c.inPorts.add 'count',
     datatype: 'int'
-  c.inPorts.add 'range',
+  c.outPorts.add 'range',
     datatype: 'array'
   c.process (input, output) ->
     return unless input.hasData 'from', 'to', 'count'
