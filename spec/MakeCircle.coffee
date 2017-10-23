@@ -64,7 +64,9 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
       expected = {type: 'circle', center, radius}
       out.once "data", (data) ->
         chai.expect(data).to.be.an 'object'
-        chai.expect(data).to.deep.equal expected
+        chai.expect(data.type).to.be.equal expected.type
+        chai.expect(data.center).to.be.equal expected.center
+        chai.expect(data.radius).to.be.equal expected.radius
         done()
       sock_center.send center
       sock_radius.send radius
@@ -82,7 +84,10 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
       out.once "data", (data) ->
         chai.expect(data).to.be.an 'array'
         chai.expect(data.length).to.equal 2
-        chai.expect(data).to.deep.equal expected
+        for expectedCircle, i in expected
+          chai.expect(data[i].type).to.be.equal expectedCircle.type
+          chai.expect(data[i].center).to.be.equal expectedCircle.center
+          chai.expect(data[i].radius).to.be.equal expectedCircle.radius
         done()
       sock_center.send center
       sock_radius.send radius
