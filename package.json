@@ -47,6 +47,9 @@
     "mocha": "^4.0.0",
     "sinon": "^4.0.0"
   },
+  "noflo": {
+    "icon": "paint-brush"
+  },
   "keywords": [
     "noflo"
   ]
