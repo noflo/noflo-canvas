@@ -5,6 +5,7 @@ class Transform extends noflo.Component
   description: 'Translate, rotate, and/or scale passed drawing commands.'
   icon: 'arrows'
   constructor: ->
+    super()
     ports =
       items:
         datatype: 'object'

@@ -5,6 +5,7 @@ class MakeRectangle extends noflo.Component
   description: 'Creates a rectangle or rectangles'
   icon: 'square-o'
   constructor: ->
+    super()
     ports =
       point:
         datatype: 'object'

@@ -10,6 +10,7 @@ class MakeColor extends noflo.Component
   description: 'Creates HSL or HSLA color or colors'
   icon: 'tint'
   constructor: ->
+    super()
     ports =
       hue:
         datatype: 'number'

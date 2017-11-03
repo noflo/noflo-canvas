@@ -5,6 +5,7 @@ class FillRect extends noflo.Component
   description: 'Fills a rectangle'
   icon: 'pencil-square'
   constructor: ->
+    super()
     ports =
       point:
         datatype: 'object'

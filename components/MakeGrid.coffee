@@ -5,6 +5,7 @@ class MakeGrid extends noflo.Component
   description: 'Creates a grid or line of points'
   icon: 'crosshairs'
   constructor: ->
+    super()
     ports =
       x:
         datatype: 'number'

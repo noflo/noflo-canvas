@@ -5,6 +5,7 @@ class StrokeRect extends noflo.Component
   description: 'Strokes a rectangle'
   icon: 'pencil-square-o'
   constructor: ->
+    super()
     ports =
       point:
         datatype: 'object'

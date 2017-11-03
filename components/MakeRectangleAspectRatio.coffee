@@ -5,6 +5,7 @@ class MakeRectangleAspectRatio extends noflo.Component
   description: 'Creates a rectangle, maintaining original aspect ratio'
   icon: 'square-o'
   constructor: ->
+    super()
     ports =
       width:
         datatype: 'number'

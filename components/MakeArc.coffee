@@ -5,6 +5,7 @@ class MakeArc extends noflo.Component
   description: 'Creates an arc or arcs'
   icon: 'power-off'
   constructor: ->
+    super()
     ports =
       center:
         datatype: 'object'
