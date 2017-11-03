@@ -26,7 +26,7 @@
     "noflo": "0.x >= 0.8",
     "noflo-adapters": ">=0.2.0",
     "noflo-core": ">=0.2.2",
-    "noflo-helper-arrayable": "~0.1.2",
+    "noflo-helper-arrayable": "~0.2.0",
     "noflo-objects": ">=0.2.0"
   },
   "devDependencies": {
