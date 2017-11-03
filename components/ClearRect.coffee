@@ -5,6 +5,7 @@ class ClearRect extends noflo.Component
   description: 'Clear rectangle'
   icon: 'eraser'
   constructor: ->
+    super()
     ports =
       point:
         datatype: 'object'

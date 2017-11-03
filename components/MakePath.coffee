@@ -7,6 +7,7 @@ class MakePath extends noflo.Component
   description: 'Makes a path given a number of points, curves, etc'
   icon: 'star-o'
   constructor: ->
+    super()
     ports =
       items:
         datatype: 'object'

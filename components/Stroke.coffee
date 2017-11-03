@@ -5,6 +5,7 @@ class Stroke extends noflo.Component
   description: 'Strokes lines for paths, rectangles, circles, and arcs'
   icon: 'square-o'
   constructor: ->
+    super()
     ports =
       items:
         datatype: 'object'

@@ -5,6 +5,7 @@ class MakePoint extends noflo.Component
   description: 'Creates a point or points'
   icon: 'crosshairs'
   constructor: ->
+    super()
     ports =
       x:
         datatype: 'number'

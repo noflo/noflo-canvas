@@ -5,6 +5,7 @@ class MakeBezierCurve extends noflo.Component
   description: 'Creates a Bezier curve'
   icon: 'pencil-square'
   constructor: ->
+    super()
     ports =
       control1:
         datatype: 'object'

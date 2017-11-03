@@ -5,6 +5,7 @@ class DrawImage extends noflo.Component
   description: 'Draws the specified image'
   icon: 'pencil-square'
   constructor: ->
+    super()
     ports =
       image:
         description: 'canvas, img, or video to draw'

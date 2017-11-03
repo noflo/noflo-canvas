@@ -5,6 +5,7 @@ class Fill extends noflo.Component
   description: 'Fills the received paths, rectangles, circles, and arcs'
   icon: 'square'
   constructor: ->
+    super()
     ports =
       items:
         datatype: 'object'

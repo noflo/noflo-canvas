@@ -5,6 +5,7 @@ class MakeCircle extends noflo.Component
   description: 'Creates a circle or circles'
   icon: 'circle-o'
   constructor: ->
+    super()
     ports =
       center:
         datatype: 'object'

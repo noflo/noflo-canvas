@@ -15,6 +15,7 @@ class MakeRGBColor extends noflo.Component
   description: 'Creates RGA or RGBA color or colors'
   icon: 'tint'
   constructor: ->
+    super()
     ports =
       red:
         datatype: 'int'
