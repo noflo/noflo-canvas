@@ -41,7 +41,7 @@
     "grunt-mocha-test": "^0.13.2",
     "grunt-noflo-browser": "^1.5.0",
     "mocha": "^5.0.0",
-    "sinon": "^6.0.0"
+    "sinon": "^8.1.0"
   },
   "noflo": {
     "icon": "paint-brush"
