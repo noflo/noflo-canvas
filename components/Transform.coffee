@@ -14,12 +14,12 @@ class Transform extends noflo.Component
         required: true
       translate:
         datatype: 'object'
-        type: 'noflo-canvas/point'
+        type: 'https://noflojs.org/#noflo-canvas/point'
         description: 'translate by this vector'
         required: false
       scale:
         datatype: 'object'
-        type: 'noflo-canvas/point'
+        type: 'https://noflojs.org/#noflo-canvas/point'
         description: 'stretch or mirror'
         required: false
       scaleboth:
@@ -28,7 +28,7 @@ class Transform extends noflo.Component
         required: false
       rotate:
         datatype: 'number'
-        type: 'noflo-canvas/angle'
+        type: 'https://noflojs.org/#noflo-canvas/angle'
         description: 'angle in radians'
         required: false
 

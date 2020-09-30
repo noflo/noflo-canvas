@@ -9,7 +9,7 @@ class MakeCircle extends noflo.Component
     ports =
       center:
         datatype: 'object'
-        type: 'noflo-canvas/point'
+        type: 'https://noflojs.org/#noflo-canvas/point'
         description: 'center point'
         required: true
       radius:
