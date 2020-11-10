@@ -11,10 +11,10 @@ unless noflo.isBrowser()
   describe 'node-canvas node module', ->
     can = null
     beforeEach ->
-      can = new Canvas 10, 10
+      can = new Canvas.Canvas 10, 10
     describe 'before starting', ->
       it 'should be available', ->
-        chai.expect(Canvas).to.be.a 'function'
+        chai.expect(Canvas.Canvas).to.be.a 'function'
       it 'should produce a valid canvas object', ->
         chai.expect(can.width).to.equal 10
         chai.expect(can.height).to.equal 10
