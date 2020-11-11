@@ -7,7 +7,7 @@ Canvas 2D to NoFlo.
 
 ## Changes
 
-* 0.4.2 (git master)
+* 0.4.2 (2020-11-11)
   - Updated to newer Node.js canvas library
 * 0.4.1 (2020-09-30)
   - Fixed input type schema declarations to be compatible with fbp-protocol
