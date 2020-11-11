@@ -9,5 +9,5 @@ ctx.createCanvas = createCanvas = (width, height) ->
     canvas.height = height
   else
     Canvas = require 'canvas'
-    canvas = new Canvas width, height
+    canvas = new Canvas.Canvas width, height
   return canvas

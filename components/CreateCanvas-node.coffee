@@ -17,7 +17,7 @@ exports.getComponent = ->
   c.process (input, output) ->
     return unless input.hasData 'width', 'height'
     [width, height] = input.getData 'width', 'height'
-    canvas = new Canvas width, height
+    canvas = new Canvas.Canvas width, height
     output.sendDone
       canvas: canvas
     return
