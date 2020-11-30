@@ -23,6 +23,7 @@
   },
   "dependencies": {
     "canvas": "^2.6.1",
+    "coffeescript": "^2.5.1",
     "noflo": "^1.0.0",
     "noflo-adapters": ">=0.2.0",
     "noflo-core": ">=0.2.2",
