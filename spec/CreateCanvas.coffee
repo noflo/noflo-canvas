@@ -32,6 +32,7 @@ describe 'CreateCanvas component', ->
       ins = noflo.internalSocket.createSocket()
       c.inPorts.width.attach ins
       done()
+    return
   beforeEach ->
     out = noflo.internalSocket.createSocket()
     c.outPorts.canvas.attach out

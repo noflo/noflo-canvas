@@ -33,6 +33,7 @@ describe 'MakeRectangleAspectRatio component', ->
       out = new noflo.internalSocket.createSocket()
       c.outPorts.rectangle.attach out
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have 4 input ports', ->

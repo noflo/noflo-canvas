@@ -33,6 +33,7 @@ describe 'MakeRGBColor component', ->
       c.inPorts.alpha.attach sock_alpha
       c.outPorts.color.attach out
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have four input ports', ->

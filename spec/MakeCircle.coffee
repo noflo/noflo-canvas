@@ -28,6 +28,7 @@ describe 'MakeCircle component (and all that inherit MakeCanvasPrimative)', ->
       c.inPorts.radius.attach sock_radius
       c.outPorts.circle.attach out
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have two input ports', ->
