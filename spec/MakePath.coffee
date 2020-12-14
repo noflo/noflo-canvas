@@ -26,6 +26,7 @@ describe 'MakePath component', ->
       c.inPorts.items.attach sock_1, 1
       c.outPorts.path.attach out
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have one input ports', ->

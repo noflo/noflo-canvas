@@ -29,6 +29,7 @@ describe 'MakeRectangle component', ->
       c.inPorts.point.attach sock_point
       c.outPorts.rectangle.attach out
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have two input ports', ->

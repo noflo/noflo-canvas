@@ -19,6 +19,7 @@ describe 'Draw component', ->
       return done err if err
       c = instance
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have an input port', ->

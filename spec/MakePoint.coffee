@@ -26,6 +26,7 @@ describe 'MakePoint component', ->
       c.inPorts.y.attach sock_y
       c.outPorts.point.attach out
       done()
+    return
 
   describe 'when instantiated', ->
     it 'should have two input ports', ->
