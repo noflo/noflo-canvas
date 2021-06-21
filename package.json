@@ -41,7 +41,7 @@
     "grunt-mocha-phantomjs": "^4.0.0",
     "grunt-mocha-test": "^0.13.2",
     "grunt-noflo-browser": "^2.0.2",
-    "mocha": "^8.1.3",
+    "mocha": "^9.0.1",
     "sinon": "^6.0.0"
   },
   "noflo": {
