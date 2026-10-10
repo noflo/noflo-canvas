@@ -53,7 +53,10 @@ const run = async (c, outPort, inputs, indexed = {}) => {
   const received = nextData(outSocket);
   /** @type {Record<string, import("@noflo/noflo").internalSocket.InternalSocket>} */
   const sockets = {};
-  for (const port of new Set([...Object.keys(inputs), ...Object.keys(indexed)])) {
+  for (const port of new Set([
+    ...Object.keys(inputs),
+    ...Object.keys(indexed),
+  ])) {
     const socket = noflo.internalSocket.createSocket();
     if (port in indexed) {
       c.inPorts[port].attach(socket, indexed[port]);
@@ -65,7 +68,11 @@ const run = async (c, outPort, inputs, indexed = {}) => {
   for (const [port, value] of Object.entries(inputs)) {
     if (port in indexed) {
       sockets[port].post(
-        new noflo.IP("data", value, /** @type {any} */ ({ index: indexed[port] })),
+        new noflo.IP(
+          "data",
+          value,
+          /** @type {any} */ ({ index: indexed[port] }),
+        ),
       );
     } else {
       sockets[port].post(new noflo.IP("data", value));
@@ -156,14 +163,26 @@ describe("Shape commands", () => {
     try {
       // Each item post is its own activation (synchronous bursts)
       const firstPath = nextData(outSocket);
-      first.post(new noflo.IP("data", { type: "point", x: 0, y: 0 }, /** @type {any} */ ({ index: 0 })));
+      first.post(
+        new noflo.IP(
+          "data",
+          { type: "point", x: 0, y: 0 },
+          /** @type {any} */ ({ index: 0 }),
+        ),
+      );
       const firstIp = await firstPath;
       assert.deepEqual(firstIp.data, {
         type: "path",
         items: [{ type: "point", x: 0, y: 0 }],
       });
       const secondPath = nextData(outSocket);
-      second.post(new noflo.IP("data", { type: "point", x: 5, y: 5 }, /** @type {any} */ ({ index: 1 })));
+      second.post(
+        new noflo.IP(
+          "data",
+          { type: "point", x: 5, y: 5 },
+          /** @type {any} */ ({ index: 1 }),
+        ),
+      );
       const secondIp = await secondPath;
       assert.deepEqual(secondIp.data, {
         type: "path",
@@ -220,11 +239,19 @@ describe("Shape commands", () => {
       // Controls first, then the completing item
       strokestyle.post(new noflo.IP("data", "blue"));
       closepath.post(new noflo.IP("data", true));
-      items.post(new noflo.IP("data", { type: "circle", center: { type: "point", x: 1, y: 1 }, radius: 2 }, /** @type {any} */ ({ index: 0 })));
+      items.post(
+        new noflo.IP(
+          "data",
+          { type: "circle", center: { type: "point", x: 1, y: 1 }, radius: 2 },
+          /** @type {any} */ ({ index: 0 }),
+        ),
+      );
       const ip = await received;
       assert.deepEqual(ip.data, {
         type: "stroke",
-        items: [{ type: "circle", center: { type: "point", x: 1, y: 1 }, radius: 2 }],
+        items: [
+          { type: "circle", center: { type: "point", x: 1, y: 1 }, radius: 2 },
+        ],
         strokestyle: "blue",
         closepath: true,
       });
@@ -246,7 +273,13 @@ describe("Transform and Recurse", () => {
     try {
       const received = nextData(outSocket);
       translate.post(new noflo.IP("data", { type: "point", x: 10, y: 20 }));
-      items.post(new noflo.IP("data", { type: "circle", radius: 1 }, /** @type {any} */ ({ index: 0 })));
+      items.post(
+        new noflo.IP(
+          "data",
+          { type: "circle", radius: 1 },
+          /** @type {any} */ ({ index: 0 }),
+        ),
+      );
       const ip = await received;
       assert.deepEqual(ip.data, {
         type: "transform",
@@ -267,12 +300,20 @@ describe("Transform and Recurse", () => {
     c.outPorts.recurse.attach(outSocket);
     try {
       const received = nextData(outSocket);
-      items.post(new noflo.IP("data", { type: "transform", translate: { type: "point", x: 1, y: 1 } }, /** @type {any} */ ({ index: 0 })));
+      items.post(
+        new noflo.IP(
+          "data",
+          { type: "transform", translate: { type: "point", x: 1, y: 1 } },
+          /** @type {any} */ ({ index: 0 }),
+        ),
+      );
       const ip = await received;
       // Emission on recursable arrival carries the null count, like 1.x
       assert.deepEqual(ip.data, {
         type: "recurse",
-        recursables: [{ type: "transform", translate: { type: "point", x: 1, y: 1 } }],
+        recursables: [
+          { type: "transform", translate: { type: "point", x: 1, y: 1 } },
+        ],
         count: null,
       });
       const onCount = nextData(outSocket);
@@ -280,7 +321,9 @@ describe("Transform and Recurse", () => {
       const countIp = await onCount;
       assert.deepEqual(countIp.data, {
         type: "recurse",
-        recursables: [{ type: "transform", translate: { type: "point", x: 1, y: 1 } }],
+        recursables: [
+          { type: "transform", translate: { type: "point", x: 1, y: 1 } },
+        ],
         count: 3,
       });
     } finally {
@@ -348,7 +391,11 @@ describe("DrawImage", () => {
     try {
       const data = await run(c, "drawimage", {
         destrect: { point: { type: "point", x: 0, y: 0 }, width: 8, height: 8 },
-        sourcerect: { point: { type: "point", x: 1, y: 1 }, width: 2, height: 2 },
+        sourcerect: {
+          point: { type: "point", x: 1, y: 1 },
+          width: 2,
+          height: 2,
+        },
         image: canvas,
       });
       assert.deepEqual(data, {
@@ -356,7 +403,11 @@ describe("DrawImage", () => {
         image: canvas,
         destpoint: { x: 0, y: 0 },
         destrect: { point: { type: "point", x: 0, y: 0 }, width: 8, height: 8 },
-        sourcerect: { point: { type: "point", x: 1, y: 1 }, width: 2, height: 2 },
+        sourcerect: {
+          point: { type: "point", x: 1, y: 1 },
+          width: 2,
+          height: 2,
+        },
       });
     } finally {
       await c.shutdown();
