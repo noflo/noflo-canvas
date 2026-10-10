@@ -301,7 +301,7 @@ describe("Transform and Recurse", () => {
         new noflo.IP(
           "data",
           { type: "transform", translate: { type: "point", x: 1, y: 1 } },
-          { index: 0, scope: "a" },
+          /** @type {any} */ ({ index: 0, scope: "a" }),
         ),
       );
       const ip = await received;
@@ -313,7 +313,7 @@ describe("Transform and Recurse", () => {
         new noflo.IP(
           "data",
           { type: "transform", translate: { type: "point", x: 2, y: 2 } },
-          { index: 0, scope: "b" },
+          /** @type {any} */ ({ index: 0, scope: "b" }),
         ),
       );
       const ipB = await receivedB;
