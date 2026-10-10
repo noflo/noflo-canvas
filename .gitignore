@@ -1,6 +1,2 @@
 /node_modules/
-/browser/
-/components/*/
-/spec/*.js
-/spec/*.xml
-out.*
+/fbp.json
