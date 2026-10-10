@@ -7,7 +7,7 @@
   "npm": "@noflo/canvas",
   "jsr": null,
   "source": "https://github.com/noflo/noflo-canvas",
-  "revision": "67e57a13646a29904277336b13ffd55ac3b712fc",
+  "revision": "873fd6751a3d6bd99fc5e7b8be15b328d1a8eb39",
   "loader": false,
   "namespaces": {},
   "components": [
@@ -1654,6 +1654,83 @@
             "datatype": "object",
             "addressable": false,
             "description": "Stroke style command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Transform",
+      "path": "components/Transform.js",
+      "type": "elementary",
+      "description": "Translate, rotate, and/or scale passed drawing commands",
+      "icon": "arrows",
+      "signature": {
+        "inports": [
+          {
+            "name": "items",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Fill and stroke commands to transform",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "translate",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Translate by this point",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "scale",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Scale by this point (stretch or mirror)",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "scaleboth",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Scale both x and y by this factor",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "rotate",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Rotate by this angle in radians",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "transform",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Transform command object",
             "required": false,
             "control": false
           },
