@@ -46,7 +46,7 @@ declare module "pureimage" {
       y: number,
       width: number,
       height: number,
-    ): { data: Uint8ClampedArray };
+    ): { data: Uint8ClampedArray; width: number; height: number };
     putImageData(
       imageData: { data: Uint8ClampedArray, width: number, height: number },
       dx: number,
