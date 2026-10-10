@@ -1,0 +1,1757 @@
+{
+  "format": "noflo-manifest",
+  "version": 1,
+  "id": "canvas",
+  "description": "Canvas 2D to NoFlo",
+  "icon": null,
+  "npm": "@noflo/canvas",
+  "jsr": null,
+  "source": "https://github.com/noflo/noflo-canvas",
+  "revision": "873fd6751a3d6bd99fc5e7b8be15b328d1a8eb39",
+  "loader": false,
+  "namespaces": {},
+  "components": [
+    {
+      "name": "canvas/ClearRect",
+      "path": "components/ClearRect.js",
+      "type": "elementary",
+      "description": "Clear rectangle",
+      "icon": "eraser",
+      "signature": {
+        "inports": [
+          {
+            "name": "point",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Top left point",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "width",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "height",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "clearrect",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Clear rectangle command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/ColorArrayToCss",
+      "path": "components/ColorArrayToCss.js",
+      "type": "elementary",
+      "description": "Convert an RGB array to a hex value",
+      "icon": "tint",
+      "signature": {
+        "inports": [
+          {
+            "name": "in",
+            "datatype": "array",
+            "addressable": false,
+            "description": "RGB triple, e.g. [255, 0, 0]",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "out",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS hex color string",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/CreateCanvas",
+      "path": "components/CreateCanvas.js",
+      "type": "elementary",
+      "description": "Makes a canvas with the given dimensions",
+      "icon": "pencil-square",
+      "signature": {
+        "inports": [
+          {
+            "name": "width",
+            "datatype": "int",
+            "addressable": false,
+            "description": "Canvas width in pixels",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "height",
+            "datatype": "int",
+            "addressable": false,
+            "description": "Canvas height in pixels",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "canvas",
+            "datatype": "object",
+            "addressable": false,
+            "description": "The created canvas",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Draw",
+      "path": "components/Draw.js",
+      "type": "elementary",
+      "description": "Draws received drawing commands",
+      "icon": "pencil",
+      "signature": {
+        "inports": [
+          {
+            "name": "canvas",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Canvas to draw onto",
+            "required": true,
+            "control": true
+          },
+          {
+            "name": "commands",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Drawing commands to buffer",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "tick",
+            "datatype": "bang",
+            "addressable": false,
+            "description": "Draw all buffered commands",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "drawevery",
+            "datatype": "boolean",
+            "addressable": false,
+            "description": "Draw on every command batch instead of waiting for tick",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "clearevery",
+            "datatype": "boolean",
+            "addressable": false,
+            "description": "Clear the canvas before each drawing pass",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "canvas",
+            "datatype": "object",
+            "addressable": false,
+            "description": "The drawn-upon canvas",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/DrawImage",
+      "path": "components/DrawImage.js",
+      "type": "elementary",
+      "description": "Draws the specified image",
+      "icon": "pencil-square",
+      "signature": {
+        "inports": [
+          {
+            "name": "image",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Canvas, image, or video to draw",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "destpoint",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Destination point (full size)",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "destrect",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Destination rect, to scale",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "sourcerect",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Source rect, to crop",
+            "required": false,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "drawimage",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Draw image command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Fill",
+      "path": "components/Fill.js",
+      "type": "elementary",
+      "description": "Fills the received paths, rectangles, circles, and arcs",
+      "icon": "square",
+      "signature": {
+        "inports": [
+          {
+            "name": "items",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Shapes (paths, circles, and rectangles) to fill",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "fillstyle",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS color string",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "fill",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Fill command object with the collected items",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/FillRect",
+      "path": "components/FillRect.js",
+      "type": "elementary",
+      "description": "Fills a rectangle",
+      "icon": "pencil-square",
+      "signature": {
+        "inports": [
+          {
+            "name": "point",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Top left point",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "width",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "height",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "fillrect",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Fill rectangle command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/FillStyle",
+      "path": "components/FillStyle.js",
+      "type": "elementary",
+      "description": "Sets the global fill style",
+      "icon": "pencil-square-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "style",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS color or style string",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "fillstyle",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Fill style command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Group",
+      "path": "components/Group.js",
+      "type": "elementary",
+      "description": "Group drawing commands or primitives into a flattened array",
+      "icon": "folder-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "items",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Drawing commands or primitives to group",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "group",
+            "datatype": "array",
+            "addressable": false,
+            "description": "Flattened array of items",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/LineWidth",
+      "path": "components/LineWidth.js",
+      "type": "elementary",
+      "description": "Sets the line width",
+      "icon": "pencil-square",
+      "signature": {
+        "inports": [
+          {
+            "name": "width",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Line width in pixels",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "linewidth",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Line width command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeArc",
+      "path": "components/MakeArc.js",
+      "type": "elementary",
+      "description": "Creates an arc",
+      "icon": "power-off",
+      "signature": {
+        "inports": [
+          {
+            "name": "center",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Point for center",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "radius",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "start",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Start angle in radians",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "end",
+            "datatype": "number",
+            "addressable": false,
+            "description": "End angle in radians",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "reverse",
+            "datatype": "boolean",
+            "addressable": false,
+            "description": "Draw the arc counterclockwise",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "arc",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Arc object with type, center, radius, and angles",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeBezierCurve",
+      "path": "components/MakeBezierCurve.js",
+      "type": "elementary",
+      "description": "Creates a Bezier curve",
+      "icon": "pencil-square",
+      "signature": {
+        "inports": [
+          {
+            "name": "control1",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Control point 1",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "control2",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Control point 2",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "end",
+            "datatype": "object",
+            "addressable": false,
+            "description": "End point",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "beziercurve",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Bezier curve object with type and control points",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeCircle",
+      "path": "components/MakeCircle.js",
+      "type": "elementary",
+      "description": "Creates a circle",
+      "icon": "circle-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "center",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Center point",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "radius",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "circle",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Circle object with type, center, and radius",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeColor",
+      "path": "components/MakeColor.js",
+      "type": "elementary",
+      "description": "Creates an HSL or HSLA color",
+      "icon": "tint",
+      "signature": {
+        "inports": [
+          {
+            "name": "hue",
+            "datatype": "number",
+            "addressable": false,
+            "description": "From 0 to 360",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "saturation",
+            "datatype": "number",
+            "addressable": false,
+            "description": "From 0 to 100",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "lightness",
+            "datatype": "number",
+            "addressable": false,
+            "description": "From 0 to 100",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "alpha",
+            "datatype": "number",
+            "addressable": false,
+            "description": "From 0 to 1.0",
+            "required": false,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "color",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS hsl() color string",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeGrid",
+      "path": "components/MakeGrid.js",
+      "type": "elementary",
+      "description": "Creates a grid of points from x and y coordinate arrays",
+      "icon": "crosshairs",
+      "signature": {
+        "inports": [
+          {
+            "name": "x",
+            "datatype": "array",
+            "addressable": false,
+            "description": "X coordinate array",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "y",
+            "datatype": "array",
+            "addressable": false,
+            "description": "Y coordinate array",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "points",
+            "datatype": "array",
+            "addressable": false,
+            "description": "Array of point objects, x times y",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeIncrement",
+      "path": "components/MakeIncrement.js",
+      "type": "elementary",
+      "description": "Make an array of numbers by increment",
+      "icon": "folder-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "from",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "to",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "increment",
+            "datatype": "int",
+            "addressable": false,
+            "description": "Step size",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "range",
+            "datatype": "array",
+            "addressable": false,
+            "description": "Array of numbers from `from` to `to`",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakePath",
+      "path": "components/MakePath.js",
+      "type": "elementary",
+      "description": "Makes a path given a number of points, curves, etc",
+      "icon": "star-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "items",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Points, arcs, and curves to combine to make path",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "path",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Path command object with the collected items",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakePoint",
+      "path": "components/MakePoint.js",
+      "type": "elementary",
+      "description": "Creates a point",
+      "icon": "crosshairs",
+      "signature": {
+        "inports": [
+          {
+            "name": "x",
+            "datatype": "number",
+            "addressable": false,
+            "description": "X coordinate",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "y",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Y coordinate",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "point",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Point object with type and coordinates",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeRGBColor",
+      "path": "components/MakeRGBColor.js",
+      "type": "elementary",
+      "description": "Creates an RGB or RGBA color",
+      "icon": "tint",
+      "signature": {
+        "inports": [
+          {
+            "name": "red",
+            "datatype": "int",
+            "addressable": false,
+            "description": "From 0 to 255",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "green",
+            "datatype": "int",
+            "addressable": false,
+            "description": "From 0 to 255",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "blue",
+            "datatype": "int",
+            "addressable": false,
+            "description": "From 0 to 255",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "alpha",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Optional, from 0 to 1.0",
+            "required": false,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "color",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS rgb() color string",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeRandom",
+      "path": "components/MakeRandom.js",
+      "type": "elementary",
+      "description": "Make an array of random numbers",
+      "icon": "random",
+      "signature": {
+        "inports": [
+          {
+            "name": "min",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "max",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "count",
+            "datatype": "int",
+            "addressable": false,
+            "description": "How many numbers to generate",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "numbers",
+            "datatype": "array",
+            "addressable": false,
+            "description": "Array of random numbers",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeRange",
+      "path": "components/MakeRange.js",
+      "type": "elementary",
+      "description": "Make an array of evenly-spaced numbers",
+      "icon": "folder-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "from",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "to",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "count",
+            "datatype": "int",
+            "addressable": false,
+            "description": "How many numbers to generate",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "range",
+            "datatype": "array",
+            "addressable": false,
+            "description": "Array of evenly-spaced numbers",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeRectangle",
+      "path": "components/MakeRectangle.js",
+      "type": "elementary",
+      "description": "Creates a rectangle",
+      "icon": "square-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "point",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Top left point",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "width",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "height",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "rectangle",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Rectangle object with type, point, and dimensions",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/MakeRectangleAspectRatio",
+      "path": "components/MakeRectangleAspectRatio.js",
+      "type": "elementary",
+      "description": "Creates a rectangle, maintaining original aspect ratio",
+      "icon": "square-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "width",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Target width; negative for don't-care",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "height",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Target height; negative for don't-care",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "origwidth",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Original width",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "origheight",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Original height",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "rectangle",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Rectangle object anchored at the origin",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Recurse",
+      "path": "components/Recurse.js",
+      "type": "elementary",
+      "description": "Makes a translation recursive",
+      "icon": "retweet",
+      "signature": {
+        "inports": [
+          {
+            "name": "recursables",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Only transform is recursable",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "count",
+            "datatype": "number",
+            "addressable": false,
+            "description": "How many times to recurse",
+            "required": false,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "recurse",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Recurse command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/SaveJPEG",
+      "path": "components/SaveJPEG.js",
+      "type": "elementary",
+      "description": "Encodes a canvas to JPEG bytes",
+      "icon": "file-image-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "canvas",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Canvas to encode",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "jpeg",
+            "datatype": "all",
+            "addressable": false,
+            "description": "JPEG image bytes",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/SavePNG",
+      "path": "components/SavePNG.js",
+      "type": "elementary",
+      "description": "Encodes a canvas to PNG bytes",
+      "icon": "file-image-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "canvas",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Canvas to encode",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "png",
+            "datatype": "all",
+            "addressable": false,
+            "description": "PNG image bytes",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Stroke",
+      "path": "components/Stroke.js",
+      "type": "elementary",
+      "description": "Strokes lines for paths, rectangles, circles, and arcs",
+      "icon": "square-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "items",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Shapes (paths, circles, and rectangles) to stroke",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "strokestyle",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS color string or canvas style",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "linewidth",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Stroke width in pixels",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "closepath",
+            "datatype": "boolean",
+            "addressable": false,
+            "description": "Draw line back to start point",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "stroke",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Stroke command object with the collected items",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/StrokeRect",
+      "path": "components/StrokeRect.js",
+      "type": "elementary",
+      "description": "Strokes a rectangle",
+      "icon": "pencil-square-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "point",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Top left point",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "width",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "height",
+            "datatype": "number",
+            "addressable": false,
+            "description": "",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "strokerect",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Stroke rectangle command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/StrokeStyle",
+      "path": "components/StrokeStyle.js",
+      "type": "elementary",
+      "description": "Sets the global stroke style",
+      "icon": "pencil-square-o",
+      "signature": {
+        "inports": [
+          {
+            "name": "style",
+            "datatype": "string",
+            "addressable": false,
+            "description": "CSS color or style string",
+            "required": true,
+            "control": false
+          }
+        ],
+        "outports": [
+          {
+            "name": "strokestyle",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Stroke style command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    },
+    {
+      "name": "canvas/Transform",
+      "path": "components/Transform.js",
+      "type": "elementary",
+      "description": "Translate, rotate, and/or scale passed drawing commands",
+      "icon": "arrows",
+      "signature": {
+        "inports": [
+          {
+            "name": "items",
+            "datatype": "object",
+            "addressable": true,
+            "description": "Fill and stroke commands to transform",
+            "required": true,
+            "control": false
+          },
+          {
+            "name": "translate",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Translate by this point",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "scale",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Scale by this point (stretch or mirror)",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "scaleboth",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Scale both x and y by this factor",
+            "required": false,
+            "control": true
+          },
+          {
+            "name": "rotate",
+            "datatype": "number",
+            "addressable": false,
+            "description": "Rotate by this angle in radians",
+            "required": false,
+            "control": true
+          }
+        ],
+        "outports": [
+          {
+            "name": "transform",
+            "datatype": "object",
+            "addressable": false,
+            "description": "Transform command object",
+            "required": false,
+            "control": false
+          },
+          {
+            "name": "error",
+            "datatype": "object",
+            "addressable": false,
+            "description": "",
+            "required": false,
+            "control": false
+          }
+        ]
+      },
+      "spec": null,
+      "assembly": false,
+      "platforms": [
+        "browser",
+        "node",
+        "deno",
+        "bun"
+      ]
+    }
+  ]
+}

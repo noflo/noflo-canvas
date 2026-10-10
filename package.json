@@ -1,7 +1,7 @@
 {
-  "name": "noflo-canvas",
-  "description": "Canvas 2D to NoFlo.",
-  "version": "0.4.2",
+  "name": "@noflo/canvas",
+  "description": "Canvas 2D to NoFlo",
+  "version": "2.0.0-alpha.1",
   "contributors": [
     {
       "name": "Forrest Oliphant",
@@ -15,39 +15,51 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/noflo/noflo-canvas.git"
+    "url": "git+https://github.com/noflo/noflo-canvas.git"
   },
   "license": "MIT",
-  "scripts": {
-    "test": "grunt test"
-  },
   "dependencies": {
-    "canvas": "^2.6.1",
-    "coffeescript": "^2.5.1",
-    "noflo": "^1.0.0",
-    "noflo-adapters": ">=0.2.0",
-    "noflo-core": ">=0.2.2",
-    "noflo-helper-arrayable": "^0.3.0",
-    "noflo-objects": ">=0.2.0"
+    "@noflo/noflo": "^2.0.0-alpha.3",
+    "pureimage": "^0.4.0"
   },
   "devDependencies": {
-    "chai": "^4.0.0",
-    "grunt": "^1.0.1",
-    "grunt-coffeelint": "^0.0.16",
-    "grunt-contrib-coffee": "^2.0.0",
-    "grunt-contrib-connect": "^3.0.0",
-    "grunt-contrib-uglify": "^5.0.0",
-    "grunt-contrib-watch": "^1.0.0",
-    "grunt-mocha-phantomjs": "^4.0.0",
-    "grunt-mocha-test": "^0.13.2",
-    "grunt-noflo-browser": "^2.0.2",
-    "mocha": "^8.1.3",
-    "sinon": "^6.0.0"
-  },
-  "noflo": {
-    "icon": "paint-brush"
+    "@biomejs/biome": "^2.0.0",
+    "@noflo/fbp-spec-runner": "^2.0.0-alpha.3",
+    "@noflo/loader-node": "^2.0.0-alpha.3",
+    "@types/node": "^24.0.0",
+    "typescript": "^5.0.0"
   },
   "keywords": [
     "noflo"
+  ],
+  "scripts": {
+    "lint": "npx @biomejs/biome check --use-editorconfig=true components/ lib/ spec/ test/",
+    "format": "npx @biomejs/biome check --use-editorconfig=true --write components/ lib/ spec/ test/",
+    "types": "tsc -p tsconfig.json",
+    "test": "npm run types && npm run lint && npm run test:spec && npm run test:node",
+    "test:spec": "node \"$(node -p \"require.resolve('@noflo/fbp-spec-runner/src/cli.js')\")\" spec/",
+    "test:node": "node --test test/*.test.js",
+    "test:bun": "bun test test/*.test.js",
+    "test:deno": "deno test --allow-all --no-check test/*.test.js"
+  },
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "exports": {
+    "./engine": {
+      "browser": "./lib/engines/browser.js",
+      "node": "./lib/engines/node.js"
+    }
+  },
+  "files": [
+    "components/",
+    "graphs/",
+    "lib/",
+    "spec/",
+    "test/",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
   ]
 }
