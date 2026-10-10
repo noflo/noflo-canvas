@@ -1,0 +1,127 @@
+topic: canvas/MakePoint
+cases:
+  - name: creating a point
+    assertion: should produce a typed point
+    inputs:
+      x: 5
+      y: 10
+    expect:
+      point:
+        equals:
+          type: point
+          x: 5
+          y: 10
+---
+topic: canvas/MakeRectangle
+cases:
+  - name: creating a rectangle
+    assertion: should produce a typed rectangle
+    inputs:
+      point:
+        type: point
+        x: 1
+        y: 2
+      width: 10
+      height: 20
+    expect:
+      rectangle:
+        equals:
+          type: rectangle
+          point:
+            type: point
+            x: 1
+            y: 2
+          width: 10
+          height: 20
+---
+topic: canvas/MakeCircle
+cases:
+  - name: creating a circle
+    assertion: should produce a typed circle
+    inputs:
+      center:
+        type: point
+        x: 5
+        y: 5
+      radius: 3
+    expect:
+      circle:
+        equals:
+          type: circle
+          center:
+            type: point
+            x: 5
+            y: 5
+          radius: 3
+---
+topic: canvas/MakeColor
+cases:
+  - name: creating an HSL color
+    assertion: should produce the CSS color string
+    inputs:
+      hue: 120
+      saturation: 50
+      lightness: 40
+    expect:
+      color:
+        equals: 'hsl(120, 50%, 40%)'
+---
+topic: canvas/MakeRGBColor
+cases:
+  - name: creating an RGB color
+    assertion: should produce the CSS color string
+    inputs:
+      red: 10
+      green: 20
+      blue: 30
+    expect:
+      color:
+        equals: 'rgb(10, 20, 30)'
+---
+topic: canvas/ColorArrayToCss
+cases:
+  - name: converting an RGB array
+    assertion: should produce the hex string
+    inputs:
+      in: [255, 0, 15]
+    expect:
+      out:
+        equals: '#ff000f'
+---
+topic: canvas/MakeRange
+cases:
+  - name: spreading evenly
+    assertion: should produce the range
+    inputs:
+      from: 0
+      to: 10
+      count: 3
+    expect:
+      range:
+        equals: [0, 5, 10]
+---
+topic: canvas/FillStyle
+cases:
+  - name: creating the command
+    assertion: should produce a typed fill style command
+    inputs:
+      style: red
+    expect:
+      fillstyle:
+        equals:
+          type: fillStyle
+          value: red
+---
+topic: canvas/LineWidth
+cases:
+  - name: creating the command
+    assertion: should produce a typed line width command
+    inputs:
+      width: 4
+    expect:
+      linewidth:
+        equals:
+          type: lineWidth
+          value: 4
+---
+topic: canvas/FillStyle
