@@ -1,33 +1,25 @@
-name: Node CI
+name: Test
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+      - master
+  pull_request:
 
 jobs:
   test:
-    name: Run test suite
+    name: Node.js ${{ matrix.node-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version:
+          - "22.x"
+          - "24.x"
     steps:
-    - uses: actions/checkout@v2.3.4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v2.1.5
-      with:
-        node-version: ${{ matrix.node-version }}
-    - name: install build dependencies
-      run: |
-        sudo apt-get install -y build-essential g++-4.8 libcairo2-dev libjpeg8-dev libpango1.0-dev libgif-dev
-    - run: npm install
-    - run: npm test
-      env:
-        CI: true
-  merge-me:
-    name: Auto-merge dependency updates
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-    - uses: ridedott/merge-me-action@v2.2.7
-      with:
-        GITHUB_LOGIN: 'dependabot[bot]'
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
