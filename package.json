@@ -27,7 +27,7 @@
     "@noflo/fbp-spec-runner": "^2.0.0-alpha.3",
     "@noflo/loader-node": "^2.0.0-alpha.3",
     "@types/node": "^24.0.0",
-    "typescript": "^5.0.0"
+    "typescript": "^7.0.2"
   },
   "keywords": [
     "noflo"
